@@ -390,7 +390,6 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/mailCheck") // 비밀번호찾기 인증메일
     public String mailCheck(String email) {
-
         String authNumber = service.joinEmail(email);
         if (authNumber != null) {
             return authNumber;
@@ -402,7 +401,7 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/existEmail") // 비밀번호찾기 -> 해당 이메일의 계정이 존재하는지
     public String exsistEmail(String email) throws Exception {
-        int rs = service.emailCheck(email);
+		int rs = service.emailCheck(email);
         if (rs == 0) {
             return "nope";
         }

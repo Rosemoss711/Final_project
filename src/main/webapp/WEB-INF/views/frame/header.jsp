@@ -78,6 +78,12 @@
 							<p>${loginSession.member_nickname} 님,<br> 안녕하세요 
 							<i class="fa-solid fa-paw" id="msgIcon"></i></p>
 						</div>
+						<script>
+							document.getElementById("logout").onclick = function(){
+								alert("로그아웃 되었습니다.");
+								location.href="/member/logout";
+							}
+						</script>
 					</c:when>
 					<c:otherwise>
 						<a href="/member/toLoginPage"><i class="fa-regular fa-user userIcon"></i></a>
@@ -145,10 +151,7 @@
 			}
 		}
 		
-		document.getElementById("logout").onclick = function(){
-			alert("로그아웃 되었습니다.");
-			location.href="/member/logout";
-		}
+
 	</script>
 </body>
 </html>

@@ -66,7 +66,11 @@
 			<mvc:exclude-mapping path="/member/findToEmail"/> <!-- 아이디찾기 (이메일) -->
 			<mvc:exclude-mapping path="/member/findToPhone"/> <!-- 아이디찾기 (전화번호) -->
 			<mvc:exclude-mapping path="/member/toFindPwPage"/> <!-- 비밀번호 찾기 -->
-			
+			<mvc:exclude-mapping path="/member/mailCheck"/> <!-- 비밀번호 찾기 메일 검증 -->
+			<mvc:exclude-mapping path="/member/existEmail"/> <!-- 비밀번호 찾기 메일 검증 -->
+			<mvc:exclude-mapping path="/member/changePw"/>
+
+
 			<mvc:exclude-mapping path="/board/toBoard"/> <!-- 게시판 목록 -->
 			<mvc:exclude-mapping path="/board/detailPost"/> <!-- 상세보기페이지 -->
 			
