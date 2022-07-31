@@ -171,6 +171,11 @@ public class MemberService {
 	// 사업자번호 중복확인
 	public int brnCheck(String member_brn) throws Exception {
 		return dao.brnCheck(member_brn);
+  }
+	
+  // 닉네임 중복확인
+	public int nicknameCheck(String nickname) throws Exception {
+		return dao.nicknameCheck(nickname);
 	}
 	
 	// 일반회원 회원가입
@@ -183,6 +188,10 @@ public class MemberService {
 	public void signupBusiness(MemberDTO dto) throws Exception {
 		dto.setMember_pw(EncryptionUtils.getSHA512(dto.getMember_pw()));
 		dao.signupBusiness(dto);
+	}
+	
+	public void updateMember(MemberDTO dto) throws Exception{
+		dao.updateMember(dto);
 	}
 	
 	// 로그인 요청
@@ -257,5 +266,9 @@ public class MemberService {
 		System.out.println(map);
 		dao.changePw(map);
 		
+	}
+	
+	public void deleteMember(String member_id) throws Exception{
+		dao.deleteMember(member_id);
 	}
 }
