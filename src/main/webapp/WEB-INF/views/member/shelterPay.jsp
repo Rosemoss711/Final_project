@@ -215,6 +215,13 @@
                                         </c:forEach>
                                    </c:otherwise>
                                 </c:choose>
+
+
+                                <c:if test="${!empty list}" >
+                                    <tr style="border-top: 2px solid black;">
+                                        <td colspan="7" id="totalMoney">총 금액&nbsp; : &nbsp; &#8361;</td>
+                                    </tr>
+                                </c:if>
                                 
                             </tbody>
                         </table>
@@ -310,6 +317,12 @@
                 sessionStorage.removeItem("referrer"); 
                 location.href = referrer || '/';
             })
+
+            if(document.getElementById('totalMoney')){
+                if('${etcMap.searchMoney}'){
+                    document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+                }
+            }
         </script>
 
         </html>

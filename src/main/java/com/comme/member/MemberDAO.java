@@ -44,6 +44,10 @@ public interface MemberDAO {
 	
 	List<Map<String, Object>> myPayList(Map<String, Object> map);
 	
+	Integer searchMoney(Map<String, Object> map);
+	
+	Integer searchMoney2(String member_id);
+	
 	int idCheck(String id); // 아이디 중복확인 
 	
 	int emailCheck(String email); // 이메일 중복확인

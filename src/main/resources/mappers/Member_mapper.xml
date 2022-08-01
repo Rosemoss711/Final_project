@@ -338,4 +338,24 @@
 	<select id="blackList" parameterType="string" resultType="BlackListDTO">
 		select * from blacklist where member_id = #{member_id}
 	</select>
+	
+	<!-- 조회 된 결과에 따른 보호소가 받은 총 금액 -->
+	<select id="searchMoney" parameterType="map" resultType="int">
+		select sum(pay_money) from pay p, support_board S
+	    where P.seq_board = S.seq_BOARD
+	    and s.member_id = #{member_id}
+	    <if test="search_type == 'board_title'">
+         		and s.${search_type} LIKE '%'|| #{search_keyword} ||'%'
+        </if>
+        <if test="search_type == 'member_id'">
+         		and p.${search_type} LIKE '%'|| #{search_keyword} ||'%'
+         </if>
+	</select>
+	
+	<!-- 조회 된 결과에 따른 사용자가 후원 한 총 금액 -->
+	<select id="searchMoney2" parameterType="string" resultType="int">
+		select sum(pay_money) from pay p, support_board S
+	    where P.seq_board = S.seq_BOARD
+	    and p.member_id = #{member_id}
+	</select>
 </mapper>
