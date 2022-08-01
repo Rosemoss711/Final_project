@@ -18,7 +18,7 @@
 				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 			<script src="https://code.jquery.com/jquery-3.6.0.js"
 				integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-			<title>회원관리</title>
+			<title>회원관리 - Comme</title>
 			<style>
 				#titleSpan {
 					font-size: 1.6em;

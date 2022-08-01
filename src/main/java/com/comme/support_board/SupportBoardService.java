@@ -74,4 +74,9 @@ public class SupportBoardService implements SupportBoardDAO {
 
         return map;
     }
+
+	@Override
+	public void PostHide(int seq_board) throws Exception {
+		supportBoardDAO.PostHide(seq_board);
+	}
 }

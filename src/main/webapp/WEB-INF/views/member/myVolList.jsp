@@ -54,6 +54,11 @@
 
             #boardBox a{
                 color: black;
+                text-decoration: none;
+            }
+
+            #boardBox a:hover{
+                text-decoration: underline;
             }
 
             .written_date,

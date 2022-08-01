@@ -159,10 +159,14 @@
 	border-radius: 2px;
 }
 
+.margin{
+    margin: 0 12vw 0 12vw;
+}
+
 </style>
 </head>
 <body>
-	<div class="content">
+	<div class="content margin">
 		<div class="row body justify-content-center">
 			<div class="row title">
 				<div class="col-5 d-none d-md-flex">

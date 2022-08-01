@@ -88,12 +88,12 @@ public class SupportBoardController {
         return "pay/payment";
     }
 
-    @PostMapping("/delete")
-    public String delete(int seq_board, @RequestParam("file_name") List<String> file_name) throws Exception {
-        supportBoardService.delete(seq_board);
-        String path = httpSession.getServletContext().getRealPath("");
-        fileService.delete_file(file_name, path);
-
+    @GetMapping (value = "/delete")
+	public String delete(int seq_board /* , @RequestParam("file_name") List<String> file_name */) throws Exception {
+//        supportBoardService.delete(seq_board);
+//        String path = httpSession.getServletContext().getRealPath("");
+//        fileService.delete_file(file_name, path);
+    	supportBoardService.PostHide(seq_board);
         return "redirect:/supportBoard/lists";
     }
 

@@ -238,10 +238,14 @@
             gap: 20px;
             justify-content: flex-end;
         }
+
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
 </head>
 <body>
-<div class="content">
+<div class="content margin">
     <div class="row title-body">
         <div class="col board-title">
             <h3>실종 게시판</h3>
@@ -394,7 +398,6 @@
             },
             success: function (data) {
                 if (data === "success") {
-                    alert("댓글 등록에 성공했습니다.");
                     showComment();
                 }
             },
@@ -439,7 +442,6 @@
                 , success: function (data) {
                     console.log(data);
                     if (data === "success") {
-                        alert("댓글이 수정되었습니다.");
                         showComment();
                         <%--location.href = "/miss/toDetail?seq_board=" + ${map.MissingBoardDTO.seq_board};--%>
                     }
@@ -459,7 +461,6 @@
                     , type: "post"
                     , success: function (data) {
                         if (data === "success") {
-                            alert("댓글이 삭제되었습니다.");
                             showComment();
                         }
                     }, error: function (e) {
