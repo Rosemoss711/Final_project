@@ -23,9 +23,7 @@
         }
 
         .content {
-            margin-top : 50px;
-            padding-left: 90px;
-            padding-right: 90px;
+            margin: 0 12vw 0 12vw;
         }
 
         .content_header {
@@ -228,6 +226,7 @@
             .content {
                 padding-right: 5px;
                 padding-left: 5px;
+                margin: 0 0 0 0;
             }
             .content_header {
                 flex-direction: column;

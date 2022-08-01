@@ -28,10 +28,7 @@
 	margin-bottom: 20px;
 }
 
-.content {
-	margin-top: 50px;
-	padding: 0 7%;
-}
+
 /*실종 게시판 타이틀*/
 .title {
 	border-bottom: 1px solid black;

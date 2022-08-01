@@ -35,10 +35,7 @@
         }
 
         .content {
-            margin-top : 50px;
-            padding-left: 90px;
-            padding-right: 90px;
-
+            margin: 0 12vw 0 12vw;
         }
 
         .content_header {
@@ -188,8 +185,7 @@
 
         @media screen and (max-width: 960px) {
             .content {
-                padding-left: 10px;
-                padding-right: 10px;
+                margin: 0 0 0 0;
             }
             .board_header .title {
                 grid-area: 1/1/2/7;

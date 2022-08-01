@@ -148,7 +148,7 @@
         .board_footer button {
             width: 60px;
         }
-    
+
         .margin{
             margin: 0 12vw 0 12vw;
         }
