@@ -205,6 +205,7 @@
 
             .content {
                 margin: 0 0 0 0;
+                padding : 0 10vw 0 10vw;
             }
 
         }

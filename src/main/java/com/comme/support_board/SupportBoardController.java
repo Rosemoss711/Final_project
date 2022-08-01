@@ -60,7 +60,7 @@ public class SupportBoardController {
 
         fileService.insert_file(seq_board,files_name,temp_files,path,"support_files");
 
-        return "redirect:/supportBoard/lists";
+        return "redirect:/supportBoard/view?seq_board="+seq_board;
     }
     @GetMapping("/view")
     public String detail(@RequestParam(value = "seq_board") int seq_board, Model model) throws Exception {
