@@ -88,7 +88,7 @@ public class SupportBoardController {
         return "pay/payment";
     }
 
-    @GetMapping (value = "/delete")
+    @PostMapping (value = "/delete")
 	public String delete(int seq_board /* , @RequestParam("file_name") List<String> file_name */) throws Exception {
 //        supportBoardService.delete(seq_board);
 //        String path = httpSession.getServletContext().getRealPath("");

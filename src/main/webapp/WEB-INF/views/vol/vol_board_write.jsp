@@ -148,7 +148,7 @@
         .board_footer button {
             width: 60px;
         }
-    
+
         .margin{
             margin: 0 12vw 0 12vw;
         }
@@ -227,12 +227,12 @@
                            oninput="this.setCustomValidity('')">
                 </label>
                 <textarea name="board_content" id="board_content"></textarea>
+            </div>
+            <div class="board_footer">
+                <button id="list" type="button">목록</button>
                 <button type="submit" id="write">작성</button>
             </div>
         </form>
-        <div class="board_footer">
-            <button id="list" type="button">목록</button>
-        </div>
     </div>
 </div>
 

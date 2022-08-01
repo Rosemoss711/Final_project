@@ -86,13 +86,13 @@
 }
 #loginLabel, #mypageLabel, #logout {
 	cursor: pointer;
-	width: 80px;
+	width: 60px !important;
 	font-size: 13px;
 	text-align: end;
 }
 
 #mypageLabel, #logout {
-	width: 60px;
+	width: 70px;
 	margin: 0px;
 }
 
@@ -243,4 +243,8 @@ i {
 .userIconSm {
 	font-size: larger;
     margin-top: 5px;
+}
+
+.mainP-Header label {
+	font-weight: normal !important;
 }

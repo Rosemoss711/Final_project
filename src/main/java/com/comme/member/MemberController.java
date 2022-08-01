@@ -157,7 +157,9 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/brnCheck") // 사업자번호 중복확인
     public String brnCheck(String member_brn) throws Exception {
-    	
+		System.out.println(member_brn);
+    	member_brn = member_brn.substring(0,3)+"-"+member_brn.substring(3,5)+"-"+member_brn.substring(5);
+		System.out.println(member_brn);
     	int rs = service.brnCheck(member_brn);
       
       if (rs == 0) {

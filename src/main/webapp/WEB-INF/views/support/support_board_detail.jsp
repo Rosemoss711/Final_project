@@ -29,11 +29,9 @@
         }
 
         .content {
-            min-height: 1400px;
-            margin-top: 50px;
-            padding-left: 90px;
-            padding-right: 90px;
+            margin: 0 12vw 0 12vw;
         }
+
         .content_header {
             flex-direction: column;
             align-items: flex-start;
@@ -54,7 +52,7 @@
         }
 
         .board {
-            margin-top : 20px;
+            margin-top: 20px;
             border-bottom: 1px solid var(--sil);
             margin-bottom: 20px;
 
@@ -200,15 +198,17 @@
             color: white;
         }
 
-        @media screen and (max-width: 640px){
+        @media screen and (max-width: 960px) {
             .board_header {
                 flex-direction: column;
             }
+
+            .content {
+                margin: 0 0 0 0;
+            }
+
         }
 
-        .margin{
-            margin: 0 12vw 0 12vw;
-        }
     </style>
 </head>
 <link rel="stylesheet"
@@ -216,7 +216,7 @@
       crossorigin="anonymous">
 <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        rel="stylesheet" />
+        rel="stylesheet"/>
 <script
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
 <script
@@ -228,80 +228,124 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <body>
-    <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 
-    <div class="content margin">
-        <div class="content_header">
-            <h3>후원 게시판</h3>
-        </div>
-        <div class="board">
-            <div class="board_header">
-                <div class="representativeImg">
-                    <c:if test="${not empty map.files_sys}">
-                        <img src="/files/support/${map.files_sys}">
-                    </c:if>
-                    <c:if test="${empty map.files_sys}">
-                        <img src="/resources/images/No_image.png">
+<div class="content margin">
+    <div class="content_header">
+        <h3>후원 게시판</h3>
+    </div>
+    <div class="board">
+        <div class="board_header">
+            <div class="representativeImg">
+                <c:if test="${not empty map.files_sys}">
+                    <img src="/files/support/${map.files_sys}">
+                </c:if>
+                <c:if test="${empty map.files_sys}">
+                    <img src="/resources/images/No_image.png">
+                </c:if>
+            </div>
+            <form class="orderForm" action="/supportBoard/order">
+                <div class="shelter">
+                    <span><c:out value="${map.writer_nickname}"/> </span>
+                </div>
+                <div class="title">
+                    <c:out value="${map.board_title}"/>
+                    <c:if test="${loginSession.member_id eq map.member_id || loginSession.member_grade=='4'}">
+                        <c:if test="${map.hide == 'N'}">
+                            <div class="boardButton">
+                                <button type="button" id="modify">수정하기</button>
+                                <button type="button" id="delete">삭제하기</button>
+                            </div>
+                            <script>
+                                document.querySelector("#delete").addEventListener("click", e => {
+                                    let check = confirm("정말로 삭제하시겠습니까?");
+                                    if (check) {
+                                        let form = document.createElement("form");
+                                        form.method = "post";
+                                        form.action = "/supportBoard/delete";
+
+                                        let input = document.createElement("input");
+                                        input.value = ${map.seq_board};
+                                        input.type = "hidden";
+                                        input.name = "seq_board";
+
+                                        // let arr = [];
+                                        // let imgs = document.querySelectorAll(".board_content img");
+                                        // imgs.forEach(e => arr.push(decodeURI(e.src)));
+
+                                        // let file = document.createElement("input");
+                                        // file.type = "hidden";
+                                        // file.name = "file_name";
+                                        // file.value = arr;
+
+                                        form.append(input);
+                                        // form.append(file);
+                                        document.body.append(form);
+                                        form.submit();
+                                    }
+                                });
+
+                                document.querySelector("#modify").addEventListener("click", () => {
+                                    location.href = "/supportBoard/modify?seq_board=${map.seq_board}"
+                                });
+                            </script>
+                        </c:if>
                     </c:if>
                 </div>
-                <form class="orderForm" action="/supportBoard/order">
-                    <div class="shelter">
-                        <span><c:out value="${map.writer_nickname}"/> </span>
+                <div class="order_number">
+                    <div class="order_number1">
+                        <span>수량</span>
                     </div>
-                    <div class="title">
-                        <c:out value="${map.board_title}"/>
-                        <c:if test="${loginSession.member_id eq map.member_id || map.member_grade=='4'}">
-                            <c:if test="${map.hide == 'N'}" >
-                                <div class="boardButton">
-                                    <button type="button" id="modify">수정하기</button>
-                                    <button type="button" id="delete">삭제하기</button>
-                                </div>
-                            </c:if>
-                        </c:if>
-                    </div>
-                    <div class="order_number">
-                        <div class="order_number1">
-                            <span>수량</span>
+                    <div class="order_number2">
+                        <div class="selection">
+                            <button type="button" id="minus">-</button>
+                            <input type="number" id="order_number" name="order_number" required="required" min="1">
+                            <input type="hidden" id="price" name="price">
+                            <input type="hidden" name="seq_board" value="${map.seq_board}">
+                            <button type="button" id="plus">+</button>
                         </div>
-                        <div class="order_number2">
-                            <div class="selection">
-                                <button type="button" id="minus">-</button>
-                                <input type="number" id="order_number" name="order_number" required="required" min="1">
-                                <input type="hidden" id="price" name ="price">
-                                <input type="hidden" name ="seq_board" value="${map.seq_board}">
-                                <button type="button" id="plus">+</button>
-                            </div>
-                            <span> </span>
-                        </div>
+                        <span> </span>
                     </div>
-                    <div class="total">
-                        <span>총 상품금액</span>
-                        <span id="total">원</span>
-                    </div>
-                    <div class="order">
-                        <c:choose>
-                           <c:when test="${map.hide == 'Y'}">
+                </div>
+                <div class="total">
+                    <span>총 상품금액</span>
+                    <span id="total">원</span>
+                </div>
+                <div class="order">
+                    <c:choose>
+                        <c:when test="${map.hide == 'Y'}">
                             <button type="submit" id="order" disabled>후원이 중지 되었습니다.</button>
-                           </c:when>
-                        
-                           <c:otherwise>
+                        </c:when>
+
+                        <c:otherwise>
                             <button type="submit" id="order">신청(후원)하기</button>
-                           </c:otherwise>
-                        </c:choose>
-                    </div>
-                </form>
-            </div>
-            <div class="info">상세 정보</div>
-            <div class="board_content">
-                ${map.board_content}
-            </div>
-            
-            <div class="board_footer">
-                <button id="list" type="button">목록</button>
-                <button id="write" type="button">글쓰기</button>
-            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </form>
         </div>
+        <div class="info">상세 정보</div>
+        <div class="board_content">
+            ${map.board_content}
+        </div>
+
+        <div class="board_footer">
+            <button id="list" type="button">목록</button>
+            <c:if test="${loginSession.member_grade==2}">
+                <button type="button" id="write">글쓰기</button>
+                <script>
+                    document.querySelector("#write").addEventListener("click", () => {
+                        let brn = "${loginSession.member_grade}";
+                        if (brn === "2") {
+                            location.href = "/supportBoard/write"
+                        } else {
+                            alert("기관 회원만 이용할 수 있는 기능입니다.");
+                        }
+                    })
+                </script>
+            </c:if></div>
     </div>
+</div>
 
 
 <script>
@@ -312,85 +356,48 @@
     const price = 1000;
     let sum = 0;
 
-    plus.addEventListener("click", ()=>{
+    plus.addEventListener("click", () => {
         order_number.value++;
         changeTotal();
     });
 
-    minus.addEventListener("click", ()=>{
+    minus.addEventListener("click", () => {
         order_number.value--;
         changeTotal();
     });
 
 
-    order_number.addEventListener("input",()=>{
+    order_number.addEventListener("input", () => {
         changeTotal();
     })
 
-    document.querySelector(".order_number2> span:last-child").innerHTML = price.toLocaleString("ko-KR")+ " 원";
+    document.querySelector(".order_number2> span:last-child").innerHTML = price.toLocaleString("ko-KR") + " 원";
     document.querySelector("#price").value = price;
 
-    function changeTotal () {
-        if(order_number.value>0){
+    function changeTotal() {
+        if (order_number.value > 0) {
             sum = (order_number.value * price).toLocaleString("ko-KR");
             total.innerHTML = sum + "원";
-        } else total.innerHTML = "원";
+        } else {
+            order_number.value = 0;
+            total.innerHTML = "원";
+        }
 
     }
 
-    document.querySelector(".orderForm").addEventListener("submit", (e)=>{
+    document.querySelector(".orderForm").addEventListener("submit", (e) => {
         let loginSession = "${loginSession}";
-        if(loginSession===null || loginSession===""){
+        if (loginSession === null || loginSession === "") {
             e.preventDefault();
             alert("회원만 이용할 수 있는 컨텐츠입니다.");
         }
     });
 
-    document.querySelector("#delete").addEventListener("click", e=>{
-        let check = confirm("정말로 삭제하시겠습니까?");
-        if (check) {
-            location.href = "/supportBoard/delete?seq_board=" + '${map.seq_board}';
-            // let form = document.createElement("form");
-            // form.method = "post";
-            // form.action = "/supportBoard/delete";
 
-            // let input = document.createElement("input");
-            // input.value = ${map.seq_board};
-            // input.type = "hidden";
-            // input.name = "seq_board";
-
-            // let arr = [];
-            // let imgs = document.querySelectorAll(".board_content img");
-            // imgs.forEach(e => arr.push(decodeURI(e.src)));
-
-            // let file = document.createElement("input");
-            // file.type = "hidden";
-            // file.name = "file_name";
-            // file.value = arr;
-
-            // form.append(input);
-            // form.append(file);
-            // document.body.append(form);
-            // form.submit();
-        }
-    });
-
-    document.querySelector("#modify").addEventListener("click",()=>{
-        location.href = "/supportBoard/modify?seq_board=${map.seq_board}"
-    });
-
-    document.querySelector("#list").addEventListener("click",()=>{
+    document.querySelector("#list").addEventListener("click", () => {
         location.href = "/supportBoard/lists";
     });
 
-    document.querySelector("#write").addEventListener("click",()=>{
-        let brn = "${loginSession.member_grade}";
-        if(brn==="2"){
-            location.href = "/supportBoard/write"
-        } else{
-            alert("기관 회원만 이용할 수 있는 기능입니다.");
-        }
-    })
 
 </script>
 </body>
