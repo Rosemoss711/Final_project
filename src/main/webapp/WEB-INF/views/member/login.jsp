@@ -145,11 +145,12 @@
 
     </div>
 <script>
-	// 이전에 있던 페이지에 대한 세션값 셋팅
-	if(!sessionStorage.getItem('referrer')){
-		sessionStorage.setItem("referrer", document.referrer);
+
+	let referrer = document.referrer;
+
+	if (referrer.indexOf('toSignupPage') < 0 && referrer.indexOf('toFindIdPage') < 0 && referrer.indexOf('toFindPwPage') < 0 && referrer.indexOf('toLoginPage') < 0){
+			sessionStorage.setItem("referrer", document.referrer);
 	}
-	
 
 
 	// 일반 로그인
@@ -187,6 +188,8 @@
 					alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
 				} else if (data === "await") {
 					alert("관리자의 승인이 필요합니다.");
+				} else if (data === 'black'){
+					alert('차단된 사용자입니다. 사이트로 문의 부탁드립니다.');
 				}
 			}, error: function (e) {
 				console.log(e);

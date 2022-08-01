@@ -62,9 +62,11 @@ public interface MemberDAO {
 	
 	String findToEmail(String member_email); // 아이디찾기 (이메일)
 	
-	String findToPhone(String member_phone); // 아이디찾기 (전화번호)
+	List<String> findToPhone(String member_phone); // 아이디찾기 (전화번호)
 	
 	void changePw(Map<String, Object> map); // 비밀번호찾기 -> 비밀번호변경
 	
 	void deleteMember(String member_id); // 회원탈퇴
+	
+	BlackListDTO blackList(String member_id); // 블랙리스트 여부 조회
 }

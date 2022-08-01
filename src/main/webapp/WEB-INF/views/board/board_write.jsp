@@ -97,6 +97,8 @@
       const imgSrc = new Array();
 
       document.getElementById('registerBtn').addEventListener('click', function(){
+        window.removeEventListener('beforeunload', cancle);
+
         const imgs = document.querySelectorAll(".note-editable img"); // 게시물에 찐막으로 남아잇는 이미지태그
 
         // console.log("src : " + imgs[0].getAttribute('src'));
@@ -192,6 +194,17 @@
         
             return obj;
         };
+
+
+    function cancle(event){
+        // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+        event.preventDefault();
+        
+        // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+        event.returnValue = '';
+    } 
+    
+    window.addEventListener('beforeunload', cancle);
 
 
 

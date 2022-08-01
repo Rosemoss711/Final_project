@@ -1,8 +1,10 @@
 package com.comme.member;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.comme.board.BoardService;
 import com.comme.utils.PagingVO;
+import com.google.gson.Gson;
 
 @RequestMapping(value = "/member")
 @Controller
@@ -37,13 +40,14 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/loginProc") // 로그인 버튼을 눌렀을 때
     public String loginProc(String member_id, String member_pw) throws Exception {
-        // System.out.println("id : " + member_id + " / pw : " + member_pw);
         MemberDTO dto = service.loginProc(member_id, member_pw);
-
+        BlackListDTO black = service.blackList(member_id);
 
         if (dto != null) {
             if (dto.getMember_grade().equals("3")) {
                 return "await";
+            }else if(black != null) {
+            	return "black";
             }
             session.setAttribute("loginSession", dto);
             return "success";
@@ -52,10 +56,11 @@ public class MemberController {
     }
     
     @RequestMapping(value="/logout") // 로그아웃
-    public String logout() throws Exception{
+    public String logout(HttpServletRequest request) throws Exception{
     	session.invalidate();
     	System.out.println("로그아웃");
-    	return "redirect:/";
+    	String referer = request.getHeader("Referer");
+    	return "redirect:"+ referer;
     }
     
     @RequestMapping(value = "/deleteMember") // 회원탈퇴
@@ -205,21 +210,27 @@ public class MemberController {
 
     @ResponseBody
     @RequestMapping(value = "/findToEmail") // 아이디찾기 (이메일)
-    public String findToEmail(String member_email) throws Exception {
+    public String findToEmail(String member_email, HttpServletResponse response) throws Exception {
         String member_id = service.findToEmail(member_email);
-        return member_id;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/findToPhone") // 아이디찾기 (전화번호)
-    public String findToPhone(String member_phone, HttpServletResponse response) throws Exception {
-        System.out.println(member_phone);
-        String member_id = service.findToPhone(member_phone);
-        
         if (member_id == null) {
         	response.setStatus( HttpServletResponse.SC_BAD_REQUEST  );
         }
         return member_id;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findToPhone" , produces = "application/json; charset=UTF-8") // 아이디찾기 (전화번호)
+    public String findToPhone(String member_phone, HttpServletResponse response) throws Exception {
+        System.out.println(member_phone);
+        System.out.println(service.findToPhone(member_phone));
+        if (service.findToPhone(member_phone).size() < 1) {
+        	response.setStatus( HttpServletResponse.SC_BAD_REQUEST  );
+        }
+        
+        Gson gson = new Gson();
+        String listJson = gson.toJson(service.findToPhone(member_phone)).toString();
+        
+        return listJson;
     }
 
     @RequestMapping(value = "/toFindPwPage") // 비밀번호 찾기 페이지 요청
@@ -470,7 +481,6 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/mailCheck") // 비밀번호찾기 인증메일
     public String mailCheck(String email) {
-
         String authNumber = service.joinEmail(email);
         if (authNumber != null) {
             return authNumber;
@@ -482,7 +492,7 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/existEmail") // 비밀번호찾기 -> 해당 이메일의 계정이 존재하는지
     public String exsistEmail(String email) throws Exception {
-        int rs = service.emailCheck(email);
+		int rs = service.emailCheck(email);
         if (rs == 0) {
             return "nope";
         }

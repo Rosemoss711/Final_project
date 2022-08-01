@@ -209,7 +209,7 @@ public class MemberService {
 	}
 	
 	// 아이디찾기(전화번호)
-	public String findToPhone(String member_phone) throws Exception {
+	public List<String> findToPhone(String member_phone) throws Exception {
 		return dao.findToPhone(member_phone);
 	}
 	
@@ -231,7 +231,7 @@ public class MemberService {
 		String toMail = email;
 		String title = "비밀번호 찾기 인증 이메일입니다."; // 이메일 제목 
 		String content = 
-				"Comme 비밀번호 찾기 인증 이메일입니다.." + 
+				"Comme 비밀번호 찾기 인증 이메일입니다." +
 		        "<br><br>" + 
 			    "인증 번호는 " + authNumber + " 입니다." + 
 			    "<br>" + 
@@ -270,5 +270,9 @@ public class MemberService {
 	
 	public void deleteMember(String member_id) throws Exception{
 		dao.deleteMember(member_id);
+	}
+	
+	public BlackListDTO blackList(String member_id) throws Exception{
+		return dao.blackList(member_id);
 	}
 }

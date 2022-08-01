@@ -85,6 +85,12 @@
 							</a>
 								<label id="logout">로그아웃</label>
 						</div>
+						<script>
+							document.getElementById("logout").onclick = function(){
+								alert("로그아웃 되었습니다.");
+								location.href="/member/logout";
+							}
+						</script>
 					</c:when>
 					<c:otherwise>
 						<a href="/member/toLoginPage">
@@ -170,7 +176,7 @@
 		
 		document.getElementById("logout").onclick = function(){
 			alert("로그아웃 되었습니다.");
-			location.href="/member/logout";
+			location.href = "/member/logout";
 		}
 	</script>
 </body>
