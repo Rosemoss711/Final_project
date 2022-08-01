@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 <html lang="en">
@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>후원게시판 - 글 작성</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -145,7 +145,9 @@
             width: 60px;
         }
 
-
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -173,7 +175,9 @@
 </head>
 <body>
 
-    <div class="content">
+    <jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
+    <div class="content margin">
         <div class="content_header">
             <h3>후원 게시판</h3>
         </div>

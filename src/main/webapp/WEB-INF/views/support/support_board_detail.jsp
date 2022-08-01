@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>${map.board_title} - 후원게시판</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -205,6 +205,10 @@
                 flex-direction: column;
             }
         }
+
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
 </head>
 <link rel="stylesheet"
@@ -224,7 +228,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <body>
-    <div class="content">
+    <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+
+    <div class="content margin">
         <div class="content_header">
             <h3>후원 게시판</h3>
         </div>
@@ -244,11 +250,13 @@
                     </div>
                     <div class="title">
                         <c:out value="${map.board_title}"/>
-                        <c:if test="${loginSession.member_id eq map.member_id||map.member_grade=='4'}">
-                            <div class="boardButton">
-                                <button type="button" id="modify">수정하기</button>
-                                <button type="button" id="delete">삭제하기</button>
-                            </div>
+                        <c:if test="${loginSession.member_id eq map.member_id || map.member_grade=='4'}">
+                            <c:if test="${map.hide == 'N'}" >
+                                <div class="boardButton">
+                                    <button type="button" id="modify">수정하기</button>
+                                    <button type="button" id="delete">삭제하기</button>
+                                </div>
+                            </c:if>
                         </c:if>
                     </div>
                     <div class="order_number">
@@ -271,7 +279,15 @@
                         <span id="total">원</span>
                     </div>
                     <div class="order">
-                        <button type="submit" id="order">신청(후원)하기</button>
+                        <c:choose>
+                           <c:when test="${map.hide == 'Y'}">
+                            <button type="submit" id="order" disabled>후원이 중지 되었습니다.</button>
+                           </c:when>
+                        
+                           <c:otherwise>
+                            <button type="submit" id="order">신청(후원)하기</button>
+                           </c:otherwise>
+                        </c:choose>
                     </div>
                 </form>
             </div>
@@ -279,6 +295,7 @@
             <div class="board_content">
                 ${map.board_content}
             </div>
+            
             <div class="board_footer">
                 <button id="list" type="button">목록</button>
                 <button id="write" type="button">글쓰기</button>
@@ -332,28 +349,29 @@
     document.querySelector("#delete").addEventListener("click", e=>{
         let check = confirm("정말로 삭제하시겠습니까?");
         if (check) {
-            let form = document.createElement("form");
-            form.method = "post";
-            form.action = "/supportBoard/delete";
+            location.href = "/supportBoard/delete?seq_board=" + '${map.seq_board}';
+            // let form = document.createElement("form");
+            // form.method = "post";
+            // form.action = "/supportBoard/delete";
 
-            let input = document.createElement("input");
-            input.value = ${map.seq_board};
-            input.type = "hidden";
-            input.name = "seq_board";
+            // let input = document.createElement("input");
+            // input.value = ${map.seq_board};
+            // input.type = "hidden";
+            // input.name = "seq_board";
 
-            let arr = [];
-            let imgs = document.querySelectorAll(".board_content img");
-            imgs.forEach(e => arr.push(decodeURI(e.src)));
+            // let arr = [];
+            // let imgs = document.querySelectorAll(".board_content img");
+            // imgs.forEach(e => arr.push(decodeURI(e.src)));
 
-            let file = document.createElement("input");
-            file.type = "hidden";
-            file.name = "file_name";
-            file.value = arr;
+            // let file = document.createElement("input");
+            // file.type = "hidden";
+            // file.name = "file_name";
+            // file.value = arr;
 
-            form.append(input);
-            form.append(file);
-            document.body.append(form);
-            form.submit();
+            // form.append(input);
+            // form.append(file);
+            // document.body.append(form);
+            // form.submit();
         }
     });
 

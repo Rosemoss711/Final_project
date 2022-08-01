@@ -84,6 +84,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     margin-right: 10px;
 }
 
+.margin{
+    margin: 0 12vw 0 12vw;
+}
+
 </style>
 <body>
     <div class="">
@@ -91,7 +95,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
         </div>
 
-        <div class="body">
+        <div class="body margin">
             <div class="bodyTitle">
                 <div class="row">
                     <div class="col d-flex justify-content-center">
@@ -107,7 +111,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
             <div class="bodyContent">
 
-                <div class="row rowInput">
+                <div class="row rowInput margin">
                     <div class="col d-flex justify-content-center">
                         <div class="cls-findBox">
                             <div class="row cls-label">
@@ -125,7 +129,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                     </div>
                 </div>
 
-                <div class="row rowInput">
+                <div class="row rowInput margin">
                     <div class="col d-flex justify-content-center">
                         <div class="cls-findBox">
                             <div class="row cls-label">
@@ -176,7 +180,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                     </div>
                 </div>
 
-                <div class="row buttonRow">
+                <div class="row buttonRow margin">
                     <div class="col d-flex justify-content-center">
                         <button type="button" class="btn btn-light" id="btnFindId">아이디 찾기</button>
                         <button type="button" class="btn btn-light" id="returnBtn">돌아가기</button>

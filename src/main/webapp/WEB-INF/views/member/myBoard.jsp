@@ -232,6 +232,10 @@
                                                    <c:when test="${dto.CATEGORY_NAME eq '문의'}">
                                                     <a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}&category_name=${dto.CATEGORY_NAME}"> 
                                                    </c:when>
+                                                    <c:when test="${dto.CATEGORY_PK eq null}" >
+                                                    <a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.SEQ_CATEGORY}&small_category=${dto.SEQ_CATEGORY}"> 
+                                                    </c:when>
+
                                                    <c:otherwise>
                                                     <a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}"> 
                                                    </c:otherwise>
@@ -251,6 +255,9 @@
                                                 <c:choose>
                                                    <c:when test="${dto.CATEGORY_NAME eq '문의'}">
                                                    <a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.BOARD_TITLE}</a>
+                                                   </c:when>
+                                                   <c:when test="${dto.CATEGORY_PK eq null}" >
+                                                   <a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.SEQ_CATEGORY}">${dto.BOARD_TITLE}</a>
                                                    </c:when>
                                                 
                                                    <c:otherwise>

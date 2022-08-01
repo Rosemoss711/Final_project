@@ -8,7 +8,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -210,6 +210,10 @@
             }
         }
 
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
+
     </style>
 </head>
 <link rel="stylesheet"
@@ -236,8 +240,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <body>
+<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
-<div class="content">
+<div class="content margin">
     <div class="patronage_container">
         <div class="content_header">
             <span>후원 정보</span>

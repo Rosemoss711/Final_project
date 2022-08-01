@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 
@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>${map.board_title} - 봉사게시판</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -186,6 +186,9 @@
             width: 60px;
         }
 
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
 </head>
 <link rel="stylesheet"
@@ -205,9 +208,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <body>
+    <jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
-
-    <div class="content">
+    <div class="content margin">
         <div class="content_header">
             <h3>봉사 게시판</h3>
         </div>
@@ -314,6 +317,8 @@
         </div>
     </div>
 
+    <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+
     <script>
 
     // 봉사활동 유효기간 확인
@@ -400,4 +405,4 @@
 </script>
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+

@@ -121,9 +121,6 @@
                 padding: 5px;
                 font-size: 13px;
             }
-            i{
-                color: rgb(43, 133, 250);
-            }
 
             #search, #searchBtn, #search_type{
                 position: relative;
@@ -153,15 +150,22 @@
                 cursor: pointer;
             }
 
+            .margin{
+                margin: 0 12vw 0 12vw;
+            }
+            
+            .fa-solid{
+                color: rgb(41, 184, 250);
+            }
+
         </style>
 
         <body>
-            <div>
-                
                 <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 
+            <div class="margin">
                 <div class="row mt-5">
-                    <div class="col" style="padding: 0 10vw 0 10vw;">
+                    <div class="col">
                         <h5 style="display: inline-block; font-size: 17;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}"><strong>${etcMap.bigCategory}</strong> </a></h5>
                         <ul style="display: inline-block; margin-bottom: 0;">
                             <li><a class="category" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${etcMap.category}&category_name=${etcMap.category_name}" id="${etcMap.category}">공지</a></li>
@@ -175,7 +179,7 @@
 
                 <!-- 게시물 뿌려주기 -->
                 <div class="row">
-                    <div class="col" style="padding: 0 10vw 0 10vw;">
+                    <div class="col">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -238,7 +242,7 @@
 
                 <div class="row">
                     <!-- 검색박스부분 -->
-                    <div class="col" style="padding: 0 10vw 0 10vw;">
+                    <div class="col">
                         <form action="/board/toBoard" method="get">
                         <span class="searchBox">
                             <input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
@@ -257,7 +261,7 @@
                         </form>
                     </div>
                     <c:if test="${not empty loginSession}" >
-                        <div class="col" style="padding: 0 10vw 0 10vw;">
+                        <div class="col">
                             <button type="button" id="write" ><i class="fa-solid fa-pen"></i>  쓰기</button>
                         </div>
                     </c:if>
@@ -298,11 +302,11 @@
                         </c:choose>
                     </div>
                 </div>
+            </div>
 
                 	<!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 
-            </div>
 
             <!--top버튼-->
 	        <a id="topBtn"><img src="/resources/mainImg/DIEALRIGHT.png"></a>

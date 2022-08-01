@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>봉사게시판 - Comme</title>
     <style>
         :root {
             --bro: #CFB988;
@@ -79,7 +79,7 @@
             transform: translateY(-50%);
             width: 100%;
             height: 40px;
-            padding-left: 50px;
+            padding-left: 20px;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
             border : 1px solid var(--sil);
@@ -310,6 +310,10 @@
                 border-radius: 2px;
             }
         }
+
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
 </head>
 <link rel="stylesheet"
@@ -329,7 +333,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <body>
 
-<div class="content">
+<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
+<div class="content margin">
     <div class="content_header">
         <h3>봉사 게시판</h3>
         <form action="/volBoard/search" id="search_form">

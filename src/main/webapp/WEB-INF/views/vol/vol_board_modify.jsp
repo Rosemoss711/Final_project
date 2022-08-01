@@ -10,7 +10,7 @@
 <%
     request.setCharacterEncoding("UTF-8");
 %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 <html lang="en">
@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>봉사게시판 - Comme</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -154,7 +154,9 @@
             width: 60px;
         }
 
-
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
     <!--  jQuery, bootstrap -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -181,8 +183,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
-<div class="content">
+<div class="content margin">
     <div class="content_header">
         <h3>봉사 게시판</h3>
     </div>

@@ -321,9 +321,12 @@
                 totalMoney += parseInt(e.getAttribute('data-value'));
             })
 
-            if('${etcMap.searchMoney}'){
-                document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+            if(document.getElementById('totalMoney')){
+                if('${etcMap.searchMoney}'){
+                    document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+                }
             }
+            
             
             let referrer = document.referrer;
 

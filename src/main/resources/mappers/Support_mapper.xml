@@ -13,6 +13,7 @@
         <result property="support_bank" column="support_bank"/>
         <result property="member_brn" column="member_brn"/>
         <result property="files_sys" column="files_sys"/>
+        <result property="hide" column="hide"/>
     </resultMap>
 
     <select id="selectList" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap" parameterType="int">
@@ -22,7 +23,8 @@
                 where b.SEQ_BOARD = SEQ_BOARD
                   and rownum = 1) as files_sys
         from (select a.*, rownum as num
-              from (select * from SUPPORT_BOARD order by 1 desc) a
+              from (select * from SUPPORT_BOARD
+              where hide = 'N' order by 1 desc) a
               where rownum <![CDATA[<=]]> #{end}) b
         where num <![CDATA[>=]]> #{start}
     </select>
@@ -39,7 +41,7 @@
             select seq_board.nextval from dual
         </selectKey>
         insert into support_board values
-        (#{seq_board},#{board_title},#{board_content},#{member_id},#{writer_nickname},sysdate,#{support_bank},#{member_brn})
+        (#{seq_board},#{board_title},#{board_content},#{member_id},#{writer_nickname},sysdate,#{support_bank},#{member_brn}, default)
     </insert>
     <select id="select" parameterType="int" resultMap="BoardResult">
         select a.*,
@@ -50,11 +52,21 @@
         from SUPPORT_BOARD a
         where SEQ_BOARD = #{seq_board}
     </select>
-    <delete id="delete" parameterType="int">
+    
+    <!-- 기존 후원 글 삭제 구문 -->
+    <!-- <delete id="delete" parameterType="int">
         delete
         from SUPPORT_BOARD
         where seq_board = #{seq_board}
-    </delete>
+    </delete> -->
+    
+    <!-- 후원 글 삭제 버튼 클릭시 감추기 -->
+    <update id="PostHide" parameterType="int">
+        update SUPPORT_BOARD
+        set hide = 'Y'
+        where SEQ_BOARD = #{seq_board}
+    </update>
+    
     <update id="update" parameterType="VolBoardDTO">
         update SUPPORT_BOARD
         set board_title   = #{board_title},
@@ -62,6 +74,7 @@
             SUPPORT_BANK  = #{support_bank}
         where SEQ_BOARD = #{seq_board}
     </update>
+    
     <select id="search" parameterType="map" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
         select b.*,
                (select FILES_SYS
@@ -78,4 +91,5 @@
               where rownum <![CDATA[<=]]> 30) b
         where num <![CDATA[>=]]> 1
     </select>
+    
 </mapper>

@@ -23,7 +23,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-<title>메인 페이지</title>
+<title>Comme - 유기동물 커뮤니티</title>
 <script>
 	document.addEventListener("DOMContentLoaded", function(){
 
@@ -220,6 +220,10 @@
 	background-color: transparent;
 	padding: 10px;
 	border-radius: 30px;
+}
+
+.margin{
+		margin: 0 12vw 0 12vw;
 }
 </style>
 </head>

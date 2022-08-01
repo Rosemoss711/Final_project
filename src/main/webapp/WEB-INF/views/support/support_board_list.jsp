@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>후원게시판 - Comme</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -78,7 +78,7 @@
             transform: translateY(-50%);
             width: 100%;
             height: 40px;
-            padding-left: 50px;
+            padding-left: 20px;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
             border : 1px solid var(--sil);
@@ -285,6 +285,12 @@
                 border-radius: 2px;
             }
 
+            
+
+        }
+        
+        .margin{
+            margin: 0 12vw 0 12vw;
         }
     </style>
 </head>
@@ -306,7 +312,9 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <body>
 
-    <div class="content">
+    <jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
+    <div class="content margin">
         <div class="content_header">
             <h3>후원 게시판</h3>
             <form action="/supportBoard/search" id="search_form">

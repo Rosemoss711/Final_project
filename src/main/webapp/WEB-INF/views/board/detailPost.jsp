@@ -125,7 +125,6 @@
                 border: 1px solid lightgray;
                 border-radius: 5px;
                 padding: 10px;
-                margin-right: 12px;
             }
 
             #replyWrite{
@@ -133,7 +132,6 @@
                 border: 1px solid lightgray;
                 border-radius: 5px;
                 padding: 15px;
-                margin: 0 0 40px 0;
             }
 
             #comment_content{
@@ -197,12 +195,6 @@
             .postInfo{
                 margin-right: 10px;
             }
-
-            #commentList{
-                margin: 0 10vw 0 10vw;
-            }
-
-            
 
             #first, #last{
                 color: black;
@@ -286,16 +278,24 @@
                 z-index: 999;
                 cursor: pointer;
             }
+
+            .margin{
+                margin: 0 12vw 0 12vw;
+            }
+
+            .fa-solid{
+                color: rgb(41, 184, 250);
+            }
+
         </style>
 
         <body>
-            <div>
 
                 <!-- header -->
 		        <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
-
+            <div class="margin">
                 <div class="row mt-3">
-                    <div class="col" style="margin: 0 10vw 0 10vw;"> <!-- 상단에 큰 분류 카테고리 이름이랑 소분류 카테고리 출력 -->
+                    <div class="col"> <!-- 상단에 큰 분류 카테고리 이름이랑 소분류 카테고리 출력 -->
                         <span style="font-size: 17px;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}" style="color: #555;"><strong>${etcMap.bigCategory}</strong> </a></span>
                         <span style="margin-left: 10px; padding: 0 10px 0 10px ;border-left: 1px solid lightgray; border-right: 1px solid lightgray;">
                             <a id="tap" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${post.seq_category}&category_name=${etcMap.category_name}">
@@ -313,7 +313,7 @@
                 </div>
 
                 <div class="row mt-2" style="margin-left: 0px;">
-                    <div class="col postBar" style="margin: 0 10vw 0 10vw;"> <!-- 글 제목이랑 시간 나타내기 -->
+                    <div class="col postBar"> <!-- 글 제목이랑 시간 나타내기 -->
                         <span id="title"><strong><c:out value="${post.board_title}" /> </strong></span>
                         <span class="postInfo"><fmt:formatDate value="${post.written_date}" pattern="yyyy.MM.dd HH:mm"/></span>
                     </div>
@@ -321,26 +321,26 @@
                 </div>
 
                 <div class="row" style="margin-left: 0px;">
-                    <div class="col postBar2" style="margin: 0 10vw 0 10vw;"> <!-- 조회 수랑 댓글 수 나타내기 -->
+                    <div class="col postBar2"> <!-- 조회 수랑 댓글 수 나타내기 -->
                         <span style="font-size: 12px;">${post.writer_nickname}</span>
                         <span class="postInfo">댓글 <strong id="commentNum2">${post.cm_count}</strong>  </span>
                         <span class="postInfo">조회 수 <strong>${post.view_count}</strong> </span>
                     </div>
                 </div>
 
-                <div class="row mt-3 mb-5"> <!-- 게시물 내용 -->
-                    <div class="col" style="margin: 10px 10vw 10px 10vw; font-size: 13px;">
+                <div class="row mt-3 mb-5" style="padding-left: 10px;"> <!-- 게시물 내용 -->
+                    <div class="col" style="font-size: 13px;">
                         <c:out value="${post.board_content}" escapeXml="false" />
                     </div>
                 </div>
 
-                <div class="row mb-4 mt-5" style="margin: 0 10vw 0 10vw;">
+                <div class="row mb-4 mt-5">
                     <div class="col pb-3" style="text-align: center; border-bottom: 1px solid lightgray; margin: 0 12px 0 12px;">
                         <button type="button" id="listBtn">목록으로 </button>
                     </div>
                 </div>
 
-                <div class="row" style="margin: 0 10vw 0 10vw;" id>
+                <div class="row" id>
                     <c:if test="${loginSession.member_id eq post.member_id || loginSession.member_grade eq 4}" >
                         <div class="col"> <!-- 게시물 수정 삭제 버튼 -->
                             <button type="button" id="removePost"><i class="fa-solid fa-xmark"></i>  삭제</button>
@@ -351,7 +351,7 @@
 
                 <c:if test="${post.cm_count != 0}" > <!-- 댓글이 존재할 시 나오는 댓글갯수 나타내는 박스 -->
                     <div class="row mt-5" >
-                        <div class="col" id="replyNumDiv" style="margin: 0 10vw 0 10vw;">
+                        <div class="col" id="replyNumDiv">
                             댓글 <strong id="commentNum">${post.cm_count}</strong>  개
                         </div>
                     </div>
@@ -381,7 +381,7 @@
 
                 
                 <!-- 댓글 쓰는거 인풋 히든으로 글번호 보내줌 -->
-                <div class="row mt-4" id="replyWrite" style="margin: 0 10vw 0 10vw;">
+                <div class="row mt-4" id="replyWrite">
                     <div class="col-12"> 
                         <label for="comment_content" style="margin-bottom: 10px;">
                             <strong>댓글 쓰기</strong> </label>
@@ -406,7 +406,7 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col" style="margin: 0 10vw 0 10vw;"> <!-- 이하부터는 board.jsp 그대로 출력하는거라서 주석 안달음 -->
+                    <div class="col"> <!-- 이하부터는 board.jsp 그대로 출력하는거라서 주석 안달음 -->
                         <h5 style="display: inline-block; font-size: 17;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}"><strong>${etcMap.bigCategory}</strong> </a></h5>
                         <ul style="display: inline-block; margin-bottom: 0;">
                             <li><a class="category" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${etcMap.category}&category_name=${etcMap.category_name}" id="${etcMap.category}">공지</a></li>
@@ -418,7 +418,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col" style="margin: 0 10vw 0 10vw;">
+                    <div class="col">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -477,10 +477,10 @@
                         </table>
                     </div>
                 </div>
-                
+            
 
                 <div class="row">
-                    <div class="col" style="margin: 0 10vw 0 10vw;">
+                    <div class="col">
                         <form action="/board/toBoard" method="get">
                         <span class="searchBox">
                             <input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
@@ -499,7 +499,7 @@
                         </form>
                     </div>
                     <c:if test="${not empty loginSession}" >
-                        <div class="col" style="margin: 0 10vw 0 10vw;">
+                        <div class="col">
                             <button type="button" id="write" ><i class="fa-solid fa-pen"></i>  쓰기</button>
                         </div>
                     </c:if>
@@ -543,11 +543,11 @@
                         </c:choose>
                     </div>
                 </div>
+            </div>
 
                 	<!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 
-            </div>
 
             <!--top버튼-->
 	        <a id="topBtn"><img src="/resources/mainImg/DIEALRIGHT.png"></a>
@@ -725,7 +725,7 @@
                         const now = new Date();
 
                         if(!document.getElementById('replyNumDiv')){
-                            let div1 = $('<div>').attr('class', 'row mt-5').css('margin', '0 10vw 0 10vw');
+                            let div1 = $('<div>').attr('class', 'row mt-5');
                             let div2 = $('<div>').attr({
                             class: 'col',
                             id: 'replyNumDiv'
