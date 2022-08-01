@@ -244,7 +244,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     					$("#clsResultId").html(data);
 
     				}, error : function(e) {
-    					console.log(e);
+    					$("#clsResultTitle").html("아이디가 존재하지 않습니다.");
     				}
     			});
     			
@@ -264,7 +264,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     				, success : function(data) {
     					console.log(data);
     					$("#clsResultTitle").html("회원님의 아이디");
-    					$("#clsResultId").html(data);
+    					// $("#clsResultId").html(data);
+                        for(let dto of data){
+                            let span = $('<span>').append(dto.MEMBER_ID);
+                            let br = $('<br>');
+                            span.append(br);
+                            span.appendTo("#clsResultId");
+                        }
     				}, error : function(e) {
     					$("#clsResultTitle").html("아이디가 존재하지 않습니다.");
     				}

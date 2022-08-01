@@ -165,7 +165,6 @@
                             <li><a href="/member/toMyComment">내 댓글</a></li>
                             <li><a href="/member/toMySupport">후원 글 조회</a></li>
                             <li><a href="/member/toMyPay">후원 내역 조회</a></li>
-                            <li><a href="/">홈으로</a></li>
                             <li><a href="#" id="return">돌아가기</a></li>
                         </ul>
                     </div>
@@ -362,12 +361,16 @@
             };
             
 
-            if (!sessionStorage.getItem('referrer')){
+            let referrer = document.referrer;
+
+            if (referrer.indexOf('toMyPage') < 0 && referrer.indexOf('toShelterVolList') < 0 && referrer.indexOf('toMyBoard') < 0 && referrer.indexOf('toMyComment') < 0 &&
+                referrer.indexOf('toMySupport') < 0 && referrer.indexOf('toMyPay') < 0 && referrer.indexOf('memberList') < 0 && referrer.indexOf('toBlackList') < 0 && referrer.indexOf('toInquiryList') < 0
+                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0){
                 sessionStorage.setItem("referrer", document.referrer);
             }
 
             document.getElementById('return').addEventListener('click', () =>{
-                const referrer = sessionStorage.getItem('referrer');
+                let referrer = sessionStorage.getItem('referrer');
                 sessionStorage.removeItem("referrer"); 
                 location.href = referrer || '/';
             })
