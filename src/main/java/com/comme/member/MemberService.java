@@ -168,7 +168,12 @@ public class MemberService {
 		return dao.emailCheck(email);
 	}
 	
-	// 닉네임 중복확인
+	// 사업자번호 중복확인
+	public int brnCheck(String member_brn) throws Exception {
+		return dao.brnCheck(member_brn);
+  }
+	
+  // 닉네임 중복확인
 	public int nicknameCheck(String nickname) throws Exception {
 		return dao.nicknameCheck(nickname);
 	}

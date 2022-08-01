@@ -622,6 +622,7 @@
 					if (this.style.display != "none") {
 						for (let i = 0; i < listTr.length; i++) {
 							listTr[i].style.background = "none";
+
 						}
 						$(this).parent(".listTr").css("background-color", "#dee2e6");
 					}

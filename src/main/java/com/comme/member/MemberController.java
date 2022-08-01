@@ -143,7 +143,6 @@ public class MemberController {
         }
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/emailCheck") // 이메일 중복확인
     public String emailCheck(String email) throws Exception {
@@ -157,6 +156,18 @@ public class MemberController {
     }
     
     @ResponseBody
+    @RequestMapping(value = "/brnCheck") // 사업자번호 중복확인
+    public String brnCheck(String member_brn) throws Exception {
+    	
+    	int rs = service.brnCheck(member_brn);
+      
+      if (rs == 0) {
+    		return "ok";
+    	} else {
+    		return "nope";
+    	}
+    }
+
     @RequestMapping(value = "/nicknameCheck") // 닉네임 중복확인
     public String nicknameCheck(String nickname) throws Exception {
     	int rs = service.nicknameCheck(nickname);
@@ -166,7 +177,6 @@ public class MemberController {
     		return "nope";
     	}
     }
-
 
     @RequestMapping(value = "/signupGeneral") // 일반회원 회원가입
     public String signupGeneral(MemberDTO dto) throws Exception {
