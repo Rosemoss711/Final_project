@@ -171,6 +171,11 @@ public class MemberService {
 	// 사업자번호 중복확인
 	public int brnCheck(String member_brn) throws Exception {
 		return dao.brnCheck(member_brn);
+  }
+	
+  // 닉네임 중복확인
+	public int nicknameCheck(String nickname) throws Exception {
+		return dao.nicknameCheck(nickname);
 	}
 	
 	// 일반회원 회원가입
@@ -183,6 +188,10 @@ public class MemberService {
 	public void signupBusiness(MemberDTO dto) throws Exception {
 		dto.setMember_pw(EncryptionUtils.getSHA512(dto.getMember_pw()));
 		dao.signupBusiness(dto);
+	}
+	
+	public void updateMember(MemberDTO dto) throws Exception{
+		dao.updateMember(dto);
 	}
 	
 	// 로그인 요청
@@ -200,7 +209,7 @@ public class MemberService {
 	}
 	
 	// 아이디찾기(전화번호)
-	public String findToPhone(String member_phone) throws Exception {
+	public List<String> findToPhone(String member_phone) throws Exception {
 		return dao.findToPhone(member_phone);
 	}
 	
@@ -222,7 +231,7 @@ public class MemberService {
 		String toMail = email;
 		String title = "비밀번호 찾기 인증 이메일입니다."; // 이메일 제목 
 		String content = 
-				"Comme 비밀번호 찾기 인증 이메일입니다.." + 
+				"Comme 비밀번호 찾기 인증 이메일입니다." +
 		        "<br><br>" + 
 			    "인증 번호는 " + authNumber + " 입니다." + 
 			    "<br>" + 
@@ -257,5 +266,13 @@ public class MemberService {
 		System.out.println(map);
 		dao.changePw(map);
 		
+	}
+	
+	public void deleteMember(String member_id) throws Exception{
+		dao.deleteMember(member_id);
+	}
+	
+	public BlackListDTO blackList(String member_id) throws Exception{
+		return dao.blackList(member_id);
 	}
 }

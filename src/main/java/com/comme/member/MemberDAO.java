@@ -50,15 +50,23 @@ public interface MemberDAO {
 	
 	int brnCheck(String member_brn); // 사업자번호 중복확인
 	
+  int nicknameCheck(String nickname); // 닉네임 중복확인
+	
 	void signupGeneral(MemberDTO dto); // 일반회원 회원가입
 	
 	void signupBusiness(MemberDTO dto); // 기관회원 회원가입
+	
+	void updateMember(MemberDTO dto); // 회원 정보 수정
 	
 	MemberDTO loginProc(Map<String, Object> map); // 로그인
 	
 	String findToEmail(String member_email); // 아이디찾기 (이메일)
 	
-	String findToPhone(String member_phone); // 아이디찾기 (전화번호)
+	List<String> findToPhone(String member_phone); // 아이디찾기 (전화번호)
 	
 	void changePw(Map<String, Object> map); // 비밀번호찾기 -> 비밀번호변경
+	
+	void deleteMember(String member_id); // 회원탈퇴
+	
+	BlackListDTO blackList(String member_id); // 블랙리스트 여부 조회
 }

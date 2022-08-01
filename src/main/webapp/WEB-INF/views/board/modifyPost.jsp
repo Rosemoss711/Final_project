@@ -100,6 +100,8 @@
       const imgSrc = new Array();
 
       document.getElementById('registerBtn').addEventListener('click', function(){ // 등록 버튼 누를시 이벤트
+        window.removeEventListener('beforeunload', cancle);
+
         const imgs = document.querySelectorAll(".note-editable>p img"); // 게시물에 존재하는 이미지 태그
 
         imgs.forEach(imgs=>{ // 게시물에 존재하는 이미지 태그 src값을 빈배열에 담아줌 
@@ -191,7 +193,15 @@
             return obj;
         };
 
-
+    function cancle(event){
+        // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+        event.preventDefault();
+        
+        // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
+        event.returnValue = '';
+    } 
+    
+    window.addEventListener('beforeunload', cancle);
 
 });
     </script>
