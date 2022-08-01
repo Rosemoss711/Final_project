@@ -168,7 +168,8 @@ public class MemberController {
     		return "nope";
     	}
     }
-
+    
+    @ResponseBody
     @RequestMapping(value = "/nicknameCheck") // 닉네임 중복확인
     public String nicknameCheck(String nickname) throws Exception {
     	int rs = service.nicknameCheck(nickname);
