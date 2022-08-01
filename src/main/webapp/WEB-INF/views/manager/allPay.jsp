@@ -315,12 +315,6 @@
                 }
             };
 
-            let payMoney = document.querySelectorAll('.payMoney');
-            let totalMoney = 0;
-            payMoney.forEach(e=>{
-                totalMoney += parseInt(e.getAttribute('data-value'));
-            })
-
             if(document.getElementById('totalMoney')){
                 if('${etcMap.searchMoney}'){
                     document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
