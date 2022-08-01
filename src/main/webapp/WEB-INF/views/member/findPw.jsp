@@ -193,7 +193,6 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			}
 			
 			new Promise((succ, fail)=>{ // 첫번째로 실행될 ajax
-				
 				// 해당 이메일이 member table에 존재하는지 검사
 				$.ajax({
 					url : "/member/existEmail"

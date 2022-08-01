@@ -226,7 +226,7 @@ public class MemberService {
 		String toMail = email;
 		String title = "비밀번호 찾기 인증 이메일입니다."; // 이메일 제목 
 		String content = 
-				"Comme 비밀번호 찾기 인증 이메일입니다.." + 
+				"Comme 비밀번호 찾기 인증 이메일입니다." +
 		        "<br><br>" + 
 			    "인증 번호는 " + authNumber + " 입니다." + 
 			    "<br>" + 
