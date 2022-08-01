@@ -136,13 +136,13 @@
                     <div class="col">
                         <ul id="profileTap">
                             <li><a href="/member/toMyPage">회원정보</a></li>
-                            <li><a href="/manager/memberList?curPage=1">전체 회원 목록</a></li>
-                            <li><a href="/manager/toBlackList?curPage=1">블랙리스트 관리</a></li>
-                            <li><a href="/manager/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
-                            <li><a href="/manager/toCategoryCM">카테고리 관리</a></li>
+                            <li><a href="/admin/memberList?curPage=1">전체 회원 목록</a></li>
+                            <li><a href="/admin/toBlackList?curPage=1">블랙리스트 관리</a></li>
+                            <li><a href="/admin/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
+                            <li><a href="/admin/toCategoryCM">카테고리 관리</a></li>
                             <li><a href="/member/toMyBoard">내 글</a></li>
                             <li><a href="/member/toMyComment">내 댓글</a></li>
-                            <li><a href="/manager/toAllPay">사용자 후원 내역 조회</a></li>
+                            <li><a href="/admin/toAllPay">사용자 후원 내역 조회</a></li>
                             <li><a href="#" id="return">돌아가기</a></li>
                         </ul>
                     </div>
@@ -174,7 +174,7 @@
                                 <tr id="mainCategoryBox">
                                     <td colspan="2">
                                         <span class="inputBox">
-                                            <form action="/manager/addMainCategory" method="get">
+                                            <form action="/admin/addMainCategory" method="get">
                                                 <input type="text" id="mainCategory" name="category_name" placeholder="카테고리명을 입력해주세요." required>
                                                 <button type="submit" id="addCategory">추가</button>
                                             </form>
@@ -217,7 +217,7 @@
 
             function addSubCategory(e){
                 $.ajax({
-                    url: '/manager/addSubCategory',
+                    url: '/admin/addSubCategory',
                     type: "get",
                     data: {category_name: document.getElementById('subCategory').value, category_pk: document.getElementById('category_pk').value},
                     success: function (data) {
@@ -272,7 +272,7 @@
             document.addEventListener('click', function(e){
                 if(e.target.className == 'selectCategory'){
                     $.ajax({
-                        url: '/manager/selectCategory',
+                        url: '/admin/selectCategory',
                         type: "get",
                         data: {seq_category: e.target.value},
                         success: function (data) {
@@ -331,7 +331,7 @@
                             let td2 = $('<td>').attr('colspan' , '2');
                             let span = $('<span>').attr('class', 'inputBox');
                             let form = $('<form>').attr({
-                                action: '/manager/addSubCategory',
+                                action: '/admin/addSubCategory',
                                 method: 'get'
                             })
                             let input = $('<input>').attr({
@@ -363,7 +363,7 @@
                 }else if(e.target.className === 'category_delete'){
                     let check = confirm('해당 카테고리를 삭제하시겠습니까?');
                     if(check){
-                        location.href = '/manager/deleteMainCategory?seq_category=' + e.target.value;
+                        location.href = '/admin/deleteMainCategory?seq_category=' + e.target.value;
                     }
                 }else if(e.target.className === 'category_modify'){
                     let input = e.target.closest('tr').querySelector('input');
@@ -375,7 +375,7 @@
                     registerBtn.className = 'registerBtn';
                 }else if(e.target.className === 'registerBtn'){
                     let input = e.target.closest('tr').querySelector('input');
-                    location.href = '/manager/mofidyMainCategory?seq_category=' + e.target.value + '&category_name=' + input.value;
+                    location.href = '/admin/mofidyMainCategory?seq_category=' + e.target.value + '&category_name=' + input.value;
                 }else if(e.target.className === 'subCategory'){
 
                 }else if(e.target.id === 'addSubCategory'){
@@ -388,7 +388,7 @@
                     let check = confirm('해당 카테고리를 삭제하시겠습니까?');
                     if(check){
                         $.ajax({
-                            url: '/manager/deleteSubCategory',
+                            url: '/admin/deleteSubCategory',
                             type: "get",
                             data: {seq_category: e.target.value},
                             success: function (data) {
@@ -410,7 +410,7 @@
                 }else if(e.target.className === 'subRegisterBtn'){
                     let input = e.target.closest('tr').querySelector('input');
                     $.ajax({
-                        url: '/manager/mofidySubCategory',
+                        url: '/admin/mofidySubCategory',
                         type: "get",
                         data: {seq_category: e.target.value, category_name: input.value},
                         success: function (data) {

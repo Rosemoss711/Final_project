@@ -24,18 +24,16 @@
 
         .content {
             margin-top : 50px;
-            height: 1px;
-            min-height: 1200px;
             padding-left: 90px;
             padding-right: 90px;
         }
 
         .content_header {
-            height: 4%;
+            height: 50px;
         }
 
         .content_footer {
-            height: 4%;
+            height: 50px;
             margin-bottom: 50px;
         }
 
@@ -154,8 +152,9 @@
             flex-basis: 25%;
             width: 80%;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 6px;
         }
 
         .board_content span {
@@ -168,21 +167,32 @@
 
         }
 
-        .board_content .count,
         .board_content .title {
             color: black;
             font-size: 1.0em;
         }
 
         .board_content .count,
-        .board_content .vol_date,
-        .board_content .written_date {
+        .board_content .vol_date{
             text-align: end;
         }
 
-        .board_content span:nth-child(5) {
-            grid-column: 2/3;
+        .board_content span:nth-child(1) {
+            grid-area: 1/1/2/4;
         }
+        .board_content span:nth-child(3) {
+            grid-area: 2/1/3/4;
+        }
+        .board_content span:nth-child(5) {
+            grid-area: 3/1/4/4;
+        }
+        .board_content span:nth-child(2) {
+            grid-area: 4/1/5/4;
+        }
+        .board_content span:nth-child(4) {
+            grid-area: 5/1/6/4;
+        }
+
 
         .content_footer {
             border-top: 1px solid var(--sil);
@@ -208,11 +218,17 @@
             background-color: var(--sil);
         }
 
+        .noResult {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         @media screen and (max-width: 960px) {
             .content {
-                min-height: 3600px;
+                padding-right: 5px;
+                padding-left: 5px;
             }
-
             .content_header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -228,7 +244,7 @@
 
             .boardList {
                 grid-template-columns: none;
-                grid-template-rows: repeat(12, 250px);
+                grid-template-rows: repeat(12, 1fr);
                 gap: 10px;
             }
 
@@ -356,29 +372,34 @@
         </form>
     </div>
     <div class="boardList">
-        <c:forEach items="${map.list}" var="i">
-            <a href="/volBoard/view?seq_board=${i.seq_board}">
-                <div class="board">
-                    <div class="board_img">
-                        <c:if test="${empty i.files_sys}">
-                            <img src="/resources/images/No_image.png">
-                        </c:if>
-                        <c:if test="${not empty i.files_sys}">
-                            <img src="/files/vol/${i.files_sys}">
-                        </c:if>
+        <c:if test="${not empty map.list}">
+            <c:forEach items="${map.list}" var="i">
+                <a href="/volBoard/view?seq_board=${i.seq_board}">
+                    <div class="board">
+                        <div class="board_img">
+                            <c:if test="${empty i.files_sys}">
+                                <img src="/resources/images/No_image.png">
+                            </c:if>
+                            <c:if test="${not empty i.files_sys}">
+                                <img src="/files/vol/${i.files_sys}">
+                            </c:if>
+                        </div>
+                        <div class="board_content">
+                            <span class="title"><c:out value="${i.board_title}"/></span>
+                            <span class="count">정원 :  <c:out value="${i.cur}"/> / <c:out value="${i.vol_count}"/> </span>
+                            <span class="nickname"><c:out value="${i.writer_nickname}"/></span>
+                            <span class="vol_date">봉사활동일 : <fmt:formatDate value="${i.vol_deadline}"
+                                                                   pattern="yyyy-MM-dd"/> </span>
+                            <span class="written_date"><fmt:formatDate value="${i.written_date}"
+                                                                       pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                        </div>
                     </div>
-                    <div class="board_content">
-                        <span class="title"><c:out value="${i.board_title}"/></span>
-                        <span class="count"><c:out value="${i.cur}"/> / <c:out value="${i.vol_count}"/> </span>
-                        <span class="nickname"><c:out value="${i.writer_nickname}"/></span>
-                        <span class="vol_date"><fmt:formatDate value="${i.deadLine}"
-                                                               pattern="yyyy-MM-dd HH:mm:ss"/> </span>
-                        <span class="written_date"><fmt:formatDate value="${i.written_date}"
-                                                                   pattern="yyyy-MM-dd HH:mm:ss"/></span>
-                    </div>
-                </div>
-            </a>
-        </c:forEach>
+                </a>
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty map.list}">
+            <div class = "noResult"><span>조회된 게시글이 없습니다.</span></div>
+        </c:if>
     </div>
     <div class="content_footer">
         <div class="page">
@@ -421,7 +442,19 @@
                 </c:if>
             </c:if>
         </div>
-        <button type="button" id="write">글쓰기</button>
+        <c:if test="${loginSession.member_grade =='2'}">
+            <button id="write" type="button">글쓰기</button>
+            <script>
+                document.querySelector("#write").addEventListener("click",()=>{
+                    let brn = "${loginSession.member_grade}";
+                    if(brn==="2"){
+                        location.href = "/volBoard/write"
+                    } else{
+                        alert("기관 회원만 이용할 수 있는 기능입니다.");
+                    }
+                })
+            </script>
+        </c:if>
     </div>
 </div>
 

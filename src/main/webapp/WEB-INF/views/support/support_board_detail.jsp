@@ -200,9 +200,13 @@
             color: white;
         }
 
-        @media screen and (max-width: 640px){
+        @media screen and (max-width: 960px){
             .board_header {
                 flex-direction: column;
+            }
+            .content {
+                padding-right: 5px;
+                padding-left: 5px;
             }
         }
 
@@ -250,12 +254,45 @@
                     </div>
                     <div class="title">
                         <c:out value="${map.board_title}"/>
-                        <c:if test="${loginSession.member_id eq map.member_id || map.member_grade=='4'}">
+                        <c:if test="${loginSession.member_id eq map.member_id || loginSession.member_grade=='4'}">
                             <c:if test="${map.hide == 'N'}" >
                                 <div class="boardButton">
                                     <button type="button" id="modify">수정하기</button>
                                     <button type="button" id="delete">삭제하기</button>
                                 </div>
+                                <script>
+                                    document.querySelector("#delete").addEventListener("click", e=>{
+                                        let check = confirm("정말로 삭제하시겠습니까?");
+                                        if (check) {
+                                            let form = document.createElement("form");
+                                            form.method = "post";
+                                            form.action = "/supportBoard/delete";
+
+                                            let input = document.createElement("input");
+                                            input.value = ${map.seq_board};
+                                            input.type = "hidden";
+                                            input.name = "seq_board";
+
+                                            // let arr = [];
+                                            // let imgs = document.querySelectorAll(".board_content img");
+                                            // imgs.forEach(e => arr.push(decodeURI(e.src)));
+
+                                            // let file = document.createElement("input");
+                                            // file.type = "hidden";
+                                            // file.name = "file_name";
+                                            // file.value = arr;
+
+                                            form.append(input);
+                                            // form.append(file);
+                                            document.body.append(form);
+                                            form.submit();
+                                        }
+                                    });
+
+                                    document.querySelector("#modify").addEventListener("click",()=>{
+                                        location.href = "/supportBoard/modify?seq_board=${map.seq_board}"
+                                    });
+                                </script>
                             </c:if>
                         </c:if>
                     </div>
@@ -298,8 +335,19 @@
             
             <div class="board_footer">
                 <button id="list" type="button">목록</button>
-                <button id="write" type="button">글쓰기</button>
-            </div>
+                <c:if test="${loginSession.member_grade==2}">
+                    <button type="button" id="write">글쓰기</button>
+                    <script>
+                        document.querySelector("#write").addEventListener("click",()=>{
+                            let brn = "${loginSession.member_grade}";
+                            if(brn==="2"){
+                                location.href = "/supportBoard/write"
+                            } else{
+                                alert("기관 회원만 이용할 수 있는 기능입니다.");
+                            }
+                        })
+                    </script>
+                </c:if>            </div>
         </div>
     </div>
 
@@ -334,7 +382,10 @@
         if(order_number.value>0){
             sum = (order_number.value * price).toLocaleString("ko-KR");
             total.innerHTML = sum + "원";
-        } else total.innerHTML = "원";
+        } else {
+            order_number.value = 0;
+            total.innerHTML = "원";
+        }
 
     }
 
@@ -346,51 +397,11 @@
         }
     });
 
-    document.querySelector("#delete").addEventListener("click", e=>{
-        let check = confirm("정말로 삭제하시겠습니까?");
-        if (check) {
-            location.href = "/supportBoard/delete?seq_board=" + '${map.seq_board}';
-            // let form = document.createElement("form");
-            // form.method = "post";
-            // form.action = "/supportBoard/delete";
-
-            // let input = document.createElement("input");
-            // input.value = ${map.seq_board};
-            // input.type = "hidden";
-            // input.name = "seq_board";
-
-            // let arr = [];
-            // let imgs = document.querySelectorAll(".board_content img");
-            // imgs.forEach(e => arr.push(decodeURI(e.src)));
-
-            // let file = document.createElement("input");
-            // file.type = "hidden";
-            // file.name = "file_name";
-            // file.value = arr;
-
-            // form.append(input);
-            // form.append(file);
-            // document.body.append(form);
-            // form.submit();
-        }
-    });
-
-    document.querySelector("#modify").addEventListener("click",()=>{
-        location.href = "/supportBoard/modify?seq_board=${map.seq_board}"
-    });
 
     document.querySelector("#list").addEventListener("click",()=>{
         location.href = "/supportBoard/lists";
     });
 
-    document.querySelector("#write").addEventListener("click",()=>{
-        let brn = "${loginSession.member_grade}";
-        if(brn==="2"){
-            location.href = "/supportBoard/write"
-        } else{
-            alert("기관 회원만 이용할 수 있는 기능입니다.");
-        }
-    })
 
 </script>
 </body>

@@ -24,18 +24,16 @@
 
         .content {
             margin-top : 50px;
-            height: 1px;
-            min-height: 1200px;
             padding-left: 90px;
             padding-right: 90px;
         }
 
         .content_header {
-            height: 4%;
+            height: 50px;
         }
 
         .content_footer {
-            height: 4%;
+            height: 50px;
         }
 
         .boardList {
@@ -173,10 +171,15 @@
             color: black;
             font-size: 1.0em;
         }
+        .board_content span:first-child {
+            grid-area: 1/1/2/3;
+        }
+        .board_content span:nth-child(2) {
+            grid-area: 2/1/3/3;
+        }
 
-
-        .board_content span:nth-child(5) {
-            grid-column: 2/3;
+        .board_content span:nth-child(3) {
+            grid-area: 3/1/4/3;
         }
 
         .content_footer {
@@ -203,9 +206,16 @@
             background-color: var(--sil);
         }
 
+        .noResult {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         @media screen and (max-width: 960px) {
             .content {
-                min-height: 3600px;
+                padding-right: 5px;
+                padding-left: 5px;
             }
 
             .content_header {
@@ -223,7 +233,7 @@
 
             .boardList {
                 grid-template-columns: none;
-                grid-template-rows: repeat(12, 250px);
+                grid-template-rows: repeat(12, 1fr);
                 gap: 10px;
             }
 
@@ -335,25 +345,30 @@
             </form>
         </div>
         <div class="boardList">
-            <c:forEach items="${map.list}" var="i">
-                <a href="/supportBoard/view?seq_board=${i.seq_board}">
-                    <div class="board">
-                        <div class="board_img">
-                            <c:if test="${empty i.files_sys}">
-                                <img src="/resources/images/No_image.png">
-                            </c:if>
-                            <c:if test="${not empty i.files_sys}">
-                                <img src="/files/support/${i.files_sys}">
-                            </c:if>
+            <c:if test="${empty map.list}">
+                <div class = "noResult"><span>조회된 게시글이 없습니다.</span></div>
+            </c:if>
+            <c:if test="${not empty map.list}">
+                <c:forEach items="${map.list}" var="i">
+                    <a href="/supportBoard/view?seq_board=${i.seq_board}">
+                        <div class="board">
+                            <div class="board_img">
+                                <c:if test="${empty i.files_sys}">
+                                    <img src="/resources/images/No_image.png">
+                                </c:if>
+                                <c:if test="${not empty i.files_sys}">
+                                    <img src="/files/support/${i.files_sys}">
+                                </c:if>
+                            </div>
+                            <div class="board_content">
+                                <span class="title"><c:out value="${i.board_title}"/></span>
+                                <span class="nickname"><c:out value="${i.writer_nickname}"/></span>
+                                <span class="written_date"><fmt:formatDate value="${i.written_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                            </div>
                         </div>
-                        <div class="board_content">
-                            <span class="title"><c:out value="${i.board_title}"/></span>
-                            <span class="nickname"><c:out value="${i.writer_nickname}"/></span>
-                            <span class="written_date"><fmt:formatDate value="${i.written_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
-                        </div>
-                    </div>
-                </a>
-            </c:forEach>
+                    </a>
+                </c:forEach>
+            </c:if>
         </div>
         <div class="content_footer">
             <div class="page">
@@ -396,7 +411,19 @@
                     </c:if>
                 </c:if>
             </div>
-            <button type="button" id="write">글쓰기</button>
+            <c:if test="${loginSession.member_grade==2}">
+                <button type="button" id="write">글쓰기</button>
+                <script>
+                    document.querySelector("#write").addEventListener("click",()=>{
+                        let brn = "${loginSession.member_grade}";
+                        if(brn==="2"){
+                            location.href = "/supportBoard/write"
+                        } else{
+                            alert("기관 회원만 이용할 수 있는 기능입니다.");
+                        }
+                    })
+                </script>
+            </c:if>
         </div>
     </div>
 
@@ -418,14 +445,7 @@
         target.style.borderRadius = "2px";
 
     }))
-    document.querySelector("#write").addEventListener("click",()=>{
-        let brn = "${loginSession.member_grade}";
-        if(brn==="2"){
-            location.href = "/supportBoard/write"
-        } else{
-            alert("기관 회원만 이용할 수 있는 기능입니다.");
-        }
-    })
+
 
 </script>
 </html>

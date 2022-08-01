@@ -266,7 +266,7 @@
                     <!--로그인 세션으로 글쓴이 비교할것-->
                     <%-- <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id}"> --%>
                     <div class="col writerBtn">
-                        <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id||loginSession.member_grade == '4'}">
+                        <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id || loginSession.member_grade == '4'}">
                             <span class="writingModify">글 수정</span>
                             <span class="writingDelete"> / 삭제</span>
                             <script>
@@ -330,7 +330,7 @@
                             <div class="comment_header">
                                 <span class="nick">${commentDTO.comment_nickname}</span>
                                 <span>${commentDTO.comment_date}</span>
-                                <c:if test="${loginSession.member_id eq commentDTO.comment_id}">
+                                <c:if test="${loginSession.member_id eq commentDTO.comment_id|| loginSession.member_grade=='4'}">
                                     <div class="col commentBtn">
                                         <span class="commentModify">수정</span>
                                         <span class="commentModifyOk d-none"
@@ -501,22 +501,25 @@
                         commentBtn.classList.add("commentBtn");
                         commentBtn.classList.add("col");
 
-                        let commentModify = document.createElement("span");
-                        commentModify.innerHTML = "수정"
-                        commentModify.classList.add("commentModify");
+                        if("${loginSession.member_id}"===e.querySelector("comment_id").innerHTML||${loginSession.member_grade == '4'}){
+                            let commentModify = document.createElement("span");
+                            commentModify.innerHTML = "수정"
+                            commentModify.classList.add("commentModify");
 
-                        let commentModifyOk = document.createElement("span");
-                        commentModifyOk.classList.add("commentModifyOk");
-                        commentModifyOk.classList.add("d-none");
-                        commentModifyOk.innerHTML = "수정완료"
-                        commentModifyOk.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
+                            let commentModifyOk = document.createElement("span");
+                            commentModifyOk.classList.add("commentModifyOk");
+                            commentModifyOk.classList.add("d-none");
+                            commentModifyOk.innerHTML = "수정완료"
+                            commentModifyOk.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
 
-                        let commentDelete = document.createElement("span");
-                        commentDelete.classList.add("commentDelete");
-                        commentDelete.innerHTML = "삭제"
-                        commentDelete.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
+                            let commentDelete = document.createElement("span");
+                            commentDelete.classList.add("commentDelete");
+                            commentDelete.innerHTML = "삭제"
+                            commentDelete.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
 
-                        commentBtn.append(commentModify, commentModifyOk, commentDelete);
+                            commentBtn.append(commentModify, commentModifyOk, commentDelete);
+
+                        }
                         comment_header.append(nick, date, commentBtn);
 
                         let input = document.createElement("input");
@@ -533,6 +536,7 @@
 
                     }
                 )
+                document.querySelector("comment-title> span").innerHTML = 'Comment('+item.length+')';
             },
             error: (error) => {
                 console.log(error);

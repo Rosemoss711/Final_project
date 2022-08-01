@@ -335,13 +335,13 @@
 					<div class="col">
 						<ul id="profileTap">
 							<li><a href="/member/toMyPage">회원정보</a></li>
-							<li><a href="/manager/memberList?curPage=1">전체 회원 목록</a></li>
-							<li><a href="/manager/toBlackList?curPage=1">블랙리스트 관리</a></li>
-							<li><a href="/manager/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
-							<li><a href="/manager/toCategoryCM">카테고리 관리</a></li>
+							<li><a href="/admin/memberList?curPage=1">전체 회원 목록</a></li>
+							<li><a href="/admin/toBlackList?curPage=1">블랙리스트 관리</a></li>
+							<li><a href="/admin/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
+							<li><a href="/admin/toCategoryCM">카테고리 관리</a></li>
 							<li><a href="/member/toMyBoard">내 글</a></li>
 							<li><a href="/member/toMyComment">내 댓글</a></li>
-							<li><a href="/manager/toAllPay">사용자 후원 내역 조회</a></li>
+							<li><a href="/admin/toAllPay">사용자 후원 내역 조회</a></li>
 							<li><a href="#" id="return">돌아가기</a></li>
 						</ul>
 					</div>
@@ -368,7 +368,7 @@
 						</div>
 							
 
-							<form id="searchForm" action="/manager/toSearch" method="get">
+							<form id="searchForm" action="/admin/toSearch" method="get">
 								<div class="col" id="inputDiv">
 									<div class="input-group mb-3" id="inputGroup">
 										<select class="form-select" name="category" id="selectKeyword">
@@ -387,7 +387,7 @@
 								</div>
 							</form>
 
-						<form id="list" action="/manager/toModify" method="get">
+						<form id="list" action="/admin/toModify" method="get">
 
 								<table class="table align-middle text-center mt-2">
 									<thead>
@@ -493,15 +493,15 @@
 										<ul class="pagination justify-content-center mt-5">
 											<c:if test="${curPageMap.needPrev eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/memberList?curPage=${curPageMap.startNavi-1}">&raquo;</a></li>
+														href="/admin/memberList?curPage=${curPageMap.startNavi-1}">&raquo;</a></li>
 											</c:if>
 											<c:forEach var="pageNum" begin="${curPageMap.startNavi}" end="${curPageMap.endNavi}" step="1">
 												<li class="page-item"><a class="page-link"
-														href="/manager/memberList?curPage=${pageNum}">${pageNum}</a></li>
+														href="/admin/memberList?curPage=${pageNum}">${pageNum}</a></li>
 											</c:forEach>
 											<c:if test="${curPageMap.needNext eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/memberList?curPage=${curPageMap.endNavi+1}">&raquo;</a></li>
+														href="/admin/memberList?curPage=${curPageMap.endNavi+1}">&raquo;</a></li>
 											</c:if>
 										</ul>
 									</nav>
@@ -514,18 +514,18 @@
 										<ul class="pagination justify-content-center mt-5">
 											<c:if test="${curPageMapSearch.needPrev eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearch?category=${category}&keyword=${keyword}&curPage1=${curPageMapSearch.startNavi-1}">&raquo;</a>
+														href="/admin/toSearch?category=${category}&keyword=${keyword}&curPage1=${curPageMapSearch.startNavi-1}">&raquo;</a>
 												</li>
 											</c:if>
 											<c:forEach var="pageNum" begin="${curPageMapSearch.startNavi}" end="${curPageMapSearch.endNavi}"
 												step="1">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearch?category=${category}&keyword=${keyword}&curPage1=${pageNum}">${pageNum}</a>
+														href="/admin/toSearch?category=${category}&keyword=${keyword}&curPage1=${pageNum}">${pageNum}</a>
 												</li>
 											</c:forEach>
 											<c:if test="${curPageMapSearch.needNext eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearch?category=${category}&keyword=${keyword}&curPage1=${curPageMapSearch.endNavi+1}">&raquo;</a>
+														href="/admin/toSearch?category=${category}&keyword=${keyword}&curPage1=${curPageMapSearch.endNavi+1}">&raquo;</a>
 												</li>
 											</c:if>
 										</ul>
@@ -539,18 +539,18 @@
 										<ul class="pagination justify-content-center mt-5">
 											<c:if test="${curPageMapGrade.needPrev eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearchGrade?member_grade=${member_grade}&curPage=${curPageMapGrade.startNavi-1}">&raquo;</a>
+														href="/admin/toSearchGrade?member_grade=${member_grade}&curPage=${curPageMapGrade.startNavi-1}">&raquo;</a>
 												</li>
 											</c:if>
 											<c:forEach var="pageNum" begin="${curPageMapGrade.startNavi}" end="${curPageMapGrade.endNavi}"
 												step="1">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearchGrade?member_grade=${member_grade}&curPage=${pageNum}">${pageNum}</a>
+														href="/admin/toSearchGrade?member_grade=${member_grade}&curPage=${pageNum}">${pageNum}</a>
 												</li>
 											</c:forEach>
 											<c:if test="${curPageMapGrade.needNext eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toSearchGrade?member_grade=${member_grade}&curPage=${curPageMapGrade.endNavi+1}">&raquo;</a>
+														href="/admin/toSearchGrade?member_grade=${member_grade}&curPage=${curPageMapGrade.endNavi+1}">&raquo;</a>
 												</li>
 											</c:if>
 										</ul>
@@ -564,16 +564,16 @@
 										<ul class="pagination justify-content-center mt-5">
 											<c:if test="${curPageMapBlack.needPrev eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toBlackList?curPage=${curPageMapBlack.startNavi-1}">&raquo;</a></li>
+														href="/admin/toBlackList?curPage=${curPageMapBlack.startNavi-1}">&raquo;</a></li>
 											</c:if>
 											<c:forEach var="pageNum" begin="${curPageMapBlack.startNavi}" end="${curPageMapBlack.endNavi}"
 												step="1">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toBlackList?curPage=${pageNum}">${pageNum}</a></li>
+														href="/admin/toBlackList?curPage=${pageNum}">${pageNum}</a></li>
 											</c:forEach>
 											<c:if test="${curPageMapBlack.needNext eq true}">
 												<li class="page-item"><a class="page-link"
-														href="/manager/toBlackList?curPage=${curPageMapBlack.endNavi+1}">&raquo;</a></li>
+														href="/admin/toBlackList?curPage=${curPageMapBlack.endNavi+1}">&raquo;</a></li>
 											</c:if>
 										</ul>
 									</nav>
@@ -680,7 +680,7 @@
 									}
 
 									$.ajax({
-										url: "/manager/toModify",
+										url: "/admin/toModify",
 										data: {
 											member_id: member_id, member_grade: member_grade,
 											blackListChk: blackListChk, blackListCtt: blackListCtt
@@ -736,9 +736,9 @@
 				$("#selectGrade").on("change", function () {
 					let rs = $("#selectGrade").val();
 					if (rs > 0) {
-						location.href = "/manager/toSearchGrade?member_grade=" + rs + "&curPage=1";
+						location.href = "/admin/toSearchGrade?member_grade=" + rs + "&curPage=1";
 					} else {
-						location.href = "/manager/memberList?curPage=1";
+						location.href = "/admin/memberList?curPage=1";
 					}
 				})
 
