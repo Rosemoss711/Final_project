@@ -48,6 +48,9 @@
   </script>
 <style>
 /*콘텐츠 시작*/
+/*#mainBodyMd{
+	padding: 0% 10%;
+}*/
 /*함께하면 더 즐거운 유기동물 봉사 사진*/
 .mainContent-1 {
 	position: relative;
@@ -87,18 +90,28 @@
 .card-body {
 	justify-content: center;
 	height: 200px;
-	display: flex;
     align-items: center;
-    overflow-wrap: anywhere;
+    display: flex;
 }
 
 .card-body h4 {
 	text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    margin-bottom: 0px;
 }
 
-.fa-solid{
+.card-title i{
 	font-size: medium;
 	vertical-align: super;
+	display: inline;
+}
+
+.fa-quote-left {
+	float: left;
 }
 
 /*멀리서도 마음만은 늘 가까이 사진*/
@@ -209,8 +222,7 @@
 }
 
 .mainContent-sm-5 {
-	padding:40px;
-	margin-left: 30px;
+	padding:20px;
 }
 
 .mainContent-sm-5 button {
@@ -231,110 +243,113 @@
 		<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 		<!--body 컨텐츠 영역-->
 		<div class="mainP-Body">
+			<!-- 비반응형 -->
+			<div id="mainBodyMd">
 			<!--비반응형(md) 첫번째 콘텐츠(강아지발가락튀어나온사진) 봉사-->
 			<div class="row content-1">
 				<div class="col d-none d-sm-block mainContent-1">
 					<img src="/resources/mainImg/content-md-1.png">
-					<button type="button" class = "volunteer">
-						&nbsp;&nbsp; <strong >봉사 신청하기</strong> &nbsp;&nbsp;
-					</button>
-				</div>
-				<!--반응형(sm) 첫번째 콘텐츠(캐로셀 사진들) 이미지-->
-				<div class="col-12 d-block d-sm-none">
-					<div id="carouselExampleControls" class="carousel slide"
-						data-bs-ride="carousel">
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="/resources/mainImg/carousel-sm-3.png" class="d-block" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/resources/mainImg/carousel-sm-2.png" class="d-block" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/resources/mainImg/carousel-sm-1.png" class="d-block" alt="...">
-							</div>
-						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#carouselExampleControls" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
+					<div id="btnBox">
+						<button type="button" class="volunteer">
+							&nbsp;&nbsp; <strong >봉사 신청하기</strong> &nbsp;&nbsp;
 						</button>
 					</div>
 				</div>
 			</div>
-
 			<!--비반응형(md) 두번째 콘텐츠 봉사 후기 1~3위 카드-->
 			<div class="row">
 				<div class="col d-none d-sm-block">
 					<div class="card-deck">
 						<c:forEach items="${list}" var="list" begin="0" end="2">
-						<div class="card cardImg">
-							<a href="/board/detailPost?nowPage=1&seq_board=${list.seq_board}&seq_category=1&small_category=2"><img class="card-img-top" src="/files/${list.files_sys}"
-								alt="Card image cap"></a>
-							<div class="card-body">
-								<h4 class="card-title"><i class="fa-solid fa-quote-left"></i>&nbsp;${list.board_title}&nbsp;<i class="fa-solid fa-quote-right"></i></h4>
-								
+							<div class="card cardImg">
+								<a href="/board/detailPost?nowPage=1&seq_board=${list.seq_board}&seq_category=1&small_category=2"><img class="card-img-top" src="/files/${list.files_sys}" alt="Card image cap"></a>
+								<div class="card-body">
+									<h4 class="card-title">
+										<i class="fa-solid fa-quote-left"></i>
+										<span>&nbsp;${list.board_title}&nbsp;</span>
+										<i class="fa-solid fa-quote-right"></i></h4>
+								</div>
 							</div>
-						</div>
 						</c:forEach>
 					</div>
 				</div>
-
-				<!--반응형 글귀 이미지-->
-				<div class="row">
-					<div class="col d-block d-sm-none mainContent-sm-1">
-						<img src="/resources/mainImg/content-sm-1.png">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col d-block d-sm-none mainContent-sm-2">
-						<button type="button" class="volunteer">시작하기</button>
-					</div>
-				</div>
-
 			</div>
-
 			<div class="row">
 				<!--비반응형 멀리서도 마음만은 늘 가까이~ 후원-->
 				<div class="col d-none d-sm-block mainContent-2">
 					<img src="/resources/mainImg/content-md-2.png">
-					<button id="shelterAnimalBtn" type="button" class = "patron">
+					<button id="shelterAnimalBtn" type="button" class="patron">
 						&nbsp;&nbsp; <strong>자세히 알아보기</strong> &nbsp;&nbsp;
 					</button>
 				</div>
-
-				<!--반응형 빨리오개~ 이미지-->
-				<div class="col d-block d-sm-none mainContent-sm-2">
-					<img src="/resources/mainImg/content-sm-2.png">
-				</div>
 			</div>
-
 			<div class="row">
-				<!--일생을 함께할 또하나의가족 ~입양-->
+			<!-- 비반응형 일생을 함께할 또하나의가족 ~입양-->
 				<div class="col d-none d-sm-block mainContent-3">
 					<img src="/resources/mainImg/content-md-3.png">
 					<button type="button" class="adopt">
 						&nbsp;&nbsp; <strong>자세히 알아보기</strong> &nbsp;&nbsp;
 					</button>
 				</div>
-				<!---반응형 멀리서도 마음만은 늘 가까이~ 후원 -->
+			</div>
+			</div>
+			<!-- 반응형 -->
+			<div id="mainBodySm">
+			<!--반응형(sm) 첫번째 콘텐츠(캐로셀 사진들) 이미지-->
+			<div class="col-12 d-block d-sm-none">
+				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="/resources/mainImg/carousel-sm-3.png" class="d-block" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="/resources/mainImg/carousel-sm-2.png" class="d-block" alt="...">
+						</div>
+						<div class="carousel-item">
+							<img src="/resources/mainImg/carousel-sm-1.png" class="d-block" alt="...">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+
+			<!--반응형 글귀 이미지-->
+			<div class="d-flex">
+				<div class="col d-block d-sm-none mainContent-sm-1">
+					<img src="/resources/mainImg/content-sm-1.png">
+				</div>
+			</div>
+			<div class="d-flex">
+				<div class="col d-block d-sm-none mainContent-sm-2">
+					<button type="button" class="volunteer">시작하기</button>
+				</div>
+			</div>
+			<!--반응형 빨리오개~ 이미지-->
+			<div class="row">
+				<div class="col d-block d-sm-none mainContent-sm-2">
+					<img src="/resources/mainImg/content-sm-2.png">
+				</div>
+			</div>
+			<!---반응형 멀리서도 마음만은 늘 가까이~ 후원 -->
+			<div class="row">
 				<div class="col d-block d-sm-none mainContent-sm-3">
 					<img src="/resources/mainImg/content-sm-3.png">
 					<button type="button" class="patron">자세히 알아보기</button>
 				</div>
 			</div>
+			<!--반응형 또하나의 가족 반려동물 ~ 입양-->
 			<div class="row">
-				<!--반응형 또하나의 가족 반려동물 ~ 입양-->
 				<div class="col d-block d-sm-none mainContent-sm-3">
 					<img src="/resources/mainImg/content-sm-4.png">
 				</div>
 			</div>
-
 			<div class="row mainContent-sm-5">
 				<div class="col-12 d-block d-sm-none">
 					<img src="/resources/mainImg/content-sm-5.png">
@@ -344,11 +359,9 @@
 				</div>
 			</div>
 		</div>
-		
+		</div>
 		<!-- footer -->
-	<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-
-		
+		<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	</div>
 
 	<!--top버튼-->

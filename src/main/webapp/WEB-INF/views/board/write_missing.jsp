@@ -106,13 +106,13 @@
         <div class="row">
             <div class="col">
                 <p> *정확한 정보를 입력하지 않을시에 대한 책임은 본인에게 있습니다.*</p>
-                <label class="textForm">실종날짜 :&nbsp </label>
-                &nbsp<input type="date" class="m_date"><br>
-                <label class="textForm">실종지역 :&nbsp</label>
-                &nbsp<input type="text" placeholder="예)00시/00구/00동" class="miss_area" name="miss_area">
+                <label class="textForm">실종날짜 :&nbsp; </label>
+                &nbsp;<input type="date" class="m_date"><br>
+                <label class="textForm">실종지역 :&nbsp;</label>
+                &nbsp;<input type="text" placeholder="예)00시/00구/00동" class="miss_area" name="miss_area">
                 <br>
-                <label class="textForm">동물종류 :&nbsp</label>
-                &nbsp<input type="text" placeholder="예)푸들" class="animal_kind" name="animal_kind">
+                <label class="textForm">동물종류 :&nbsp;</label>
+                &nbsp;<input type="text" placeholder="예)푸들" class="animal_kind" name="animal_kind">
             </div>
             <div class="col d-none">
                 <%-- <input type="text" name="member_id" value="${logionSession.id}">"

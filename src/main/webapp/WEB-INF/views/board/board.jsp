@@ -53,7 +53,7 @@
             	table-layout: fixed;
             }
             
-            table .titleTd { /* 반응형 */
+            table .titleTd, .smContentRow { /* 반응형 */
             	text-overflow: ellipsis;
     			overflow: hidden;
     			white-space: nowrap;
@@ -175,7 +175,7 @@
 
                 <!-- 게시물 뿌려주기 -->
                 <div class="row">
-                    <div class="col" style="padding: 0 10vw 0 10vw;">
+                    <div class="col d-none d-md-block" style="padding: 0 10vw 0 10vw;">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -233,6 +233,79 @@
                             </tbody>
                         </table>
                     </div>
+                    <%-- sm사이즈 --%>
+                    <div class="col d-md-none" style="padding: 0 10vw 0 10vw;">
+                        <table class="table table-hover">
+                            <thead style="border-top: 1px solid lightgray;">
+                                <tr>
+                                    <th scope="col" class="">자유게시판</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:choose>
+                                   <c:when test="${empty list}">
+                                    <tr>
+                                        <td colspan="5">등록 된 글이 없습니다.</td>
+                                    </tr>
+                                   </c:when>
+                                
+                                   <c:otherwise>
+                                        <c:forEach items="${list}" var="dto">
+                                            <tr>
+                                                <td> 
+                                                	<div class="col d-flex">
+                                                		<div class="col-2 smContentHigh">
+                                                			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${dto.SEQ_CATEGORY}&category_name=${etcMap.category_name}"> <!-- 카테고리 번호에 따라서 탭 뿌려주기 대분류는 공지로 변환 -->
+                                                    			<c:choose>
+                                                       				<c:when test="${dto.SEQ_CATEGORY eq etcMap.category}">
+                                                        				공지
+                                                       				</c:when>
+                                                       				<c:otherwise>
+                                                        				${dto.CATEGORY_NAME}
+                                                       				</c:otherwise>
+                                                    			</c:choose> 
+                                                    		</a>
+                                                    	</div>
+                                                    	<div class="col-1 smContentHigh">|</div>
+                                                    	<!-- 검색어가 존재하는지에 대한 여부에 따라 타이틀에 넘겨주는 정보를 달리함 이렇게 안하고 편하게 갈 수 잇엇을거 같은데 실수한듯 돌이키기는 좀 그럼 -->
+                                                    <c:choose> 
+                                                        <c:when test="${etcMap.search_type eq null}">
+                                                        	<div class="col titleTd smContentHigh">
+                                                        		<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="col titleTd smContentHigh">
+                                                            	<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </div>
+                                                    <div class="row">
+                                                    	<div class="col-3 smContentRow">${dto.WRITER_NICKNAME}</div>
+                                                		<div class="col-3 smContentRow"><fmt:formatDate value="${dto.WRITTEN_DATE}" pattern="yy.MM.dd"/></div>
+                                                		<div class="col-3 smContentRow">
+                                                			댓글&nbsp;:&nbsp;
+                                                			<c:choose>
+                                                				<c:when test="${dto.CM_COUNT != 0}">
+                                                					<span style="font-size: 6px; font-weight: bold;">${dto.CM_COUNT}</span>
+                                                				</c:when>
+                                                				<c:otherwise>
+                                                					<span style="font-size: 6px; font-weight: bold;">0</span>
+                                                				</c:otherwise>
+                                                			</c:choose>
+                                                        </div>
+                                                		<div class="col-3 smContentRow">조회수&nbsp;:&nbsp;${dto.VIEW_COUNT}</div>
+                                                	</div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 
 
@@ -264,7 +337,7 @@
                 </div>
 
                 <!-- 페이지네이션 이녀석도 마찬가지로 검색 유무에 따라서 길에 주소로 정보를 보냇는데.. 흠 더러워 진걸 보니 100% 옳은 방향은 아닌듯 -->
-                <div class="page_wrap mb-5">
+                <div class="page_wrap mb-5 mt-2">
                     <div  class="page_nation">	
                         <c:choose>
                            <c:when test="${etcMap.search_type eq null}">
