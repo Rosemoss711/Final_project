@@ -305,7 +305,7 @@
 	
 	
 	<!-- 아이디찾기 (전화번호) -->
-	<select id="findToPhone" parameterType="string" resultType="string">
+	<select id="findToPhone" parameterType="string" resultType="map">
 		select member_id from member where member_phone = #{member_phone}
 	</select>
 	
@@ -330,4 +330,9 @@
         </if>
         where member_id = #{member_id}
 	</update>
+	
+	<!-- 블랙리스트 멤버 조회 -->
+	<select id="blackList" parameterType="string" resultType="BlackListDTO">
+		select * from blacklist where member_id = #{member_id}
+	</select>
 </mapper>

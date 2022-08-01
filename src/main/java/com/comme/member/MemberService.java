@@ -204,7 +204,7 @@ public class MemberService {
 	}
 	
 	// 아이디찾기(전화번호)
-	public String findToPhone(String member_phone) throws Exception {
+	public List<String> findToPhone(String member_phone) throws Exception {
 		return dao.findToPhone(member_phone);
 	}
 	
@@ -265,5 +265,9 @@ public class MemberService {
 	
 	public void deleteMember(String member_id) throws Exception{
 		dao.deleteMember(member_id);
+	}
+	
+	public BlackListDTO blackList(String member_id) throws Exception{
+		return dao.blackList(member_id);
 	}
 }

@@ -251,7 +251,7 @@ public class ManagerController {
 		System.out.println("search_keyword : " + search_keyword);
 		System.out.println("search_type : " + search_type);
 		
-		int total = service.countPay(search_type, search_keyword); // 뿌려 줄 댓글의 총 갯수
+		int total = service.countPay(search_type, search_keyword); 
 		
 		if (nowPage == null && cntPerPage == null) { // 처음 게시판에 접속하면 얻게 되는 기본 페이지 값 cntPerPage 조절하면 몇개뿌릴지 선택가능함
 			nowPage = "1";
@@ -266,7 +266,10 @@ public class ManagerController {
 		Map<String, Object> etcMap = new HashMap<>();
 		etcMap.put("search_keyword", search_keyword); // 검색 키워드
 		etcMap.put("search_type", search_type); // 검색 타입
-		etcMap.put("searchMoney", service.searchMoney(search_type, search_keyword)); // 검색 타입
+		
+		if(total > 0) {
+			etcMap.put("searchMoney", service.searchMoney(search_type, search_keyword)); // 검색 타입
+		}
 		
 		model.addAttribute("mainCategory", boardService.mainCategory());
 		model.addAttribute("inquiry", boardService.inquiryCategory());

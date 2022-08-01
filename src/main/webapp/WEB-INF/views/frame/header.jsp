@@ -147,7 +147,7 @@
 		
 		document.getElementById("logout").onclick = function(){
 			alert("로그아웃 되었습니다.");
-			location.href="/member/logout";
+			location.href = "/member/logout";
 		}
 	</script>
 </body>
