@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
-<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,17 +25,19 @@
     <style>
         .content {
             margin-top: 50px;
-            padding-left: 90px;
-            padding-right: 90px;
         }
-
+        
+        /*실종 게시판 타이틀*/
         .board-title {
             display: flex;
             align-items: center;
+            border-bottom: 1px solid lightgray;
+			align-items: baseline;
+			color: rgb(207, 147, 111);
         }
 
-        .board-title, .titleBox {
-            margin-bottom: 10px;
+        .titleBox {
+            margin: 10px 0px;
             border-bottom: 1px solid black;
         }
 
@@ -48,6 +48,26 @@
         #summernote {
             resize: none
         }
+        
+        /* form-control */
+		.form-control:focus {
+			box-shadow: none;
+			border: 1px solid #ced4da;
+		}
+		
+		/* 버튼 */
+		.btn {
+			color: #cf936f;
+			border: 1px solid #cf936f;
+			padding: 3px 8px;
+   		 	font-size: small;
+    		border-radius: 8px;
+		}
+		
+		.btn:hover {
+			color: #cf936f;
+			background-color: #fff0dd;
+		}
 
         /* 실종관련 정보 받는 폼  */
         .textForm {
@@ -85,15 +105,24 @@
         .btns2 {
             margin-top: 20px;
         }
+        
+        .margin{
+    		margin: 0 12vw 0 12vw;
+		}
     </style>
 </head>
 
 <body>
-<div class="content">
-    <div class="row board-title">
-        <div class="col">
-            <h3>실종 게시판</h3>
-        </div>
+	<!-- header -->
+	<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
+<div class="content margin">
+    <div class="row board-title mt-5">
+        <div class="col-5 d-none d-md-flex">
+			<h5><strong>실종 게시판</strong></h5>
+		</div>
+		<div class="col d-md-none text-center">
+			<h5><strong>실종 게시판</strong></h5>
+		</div>
     </div>
     <form id="modifyForm" method="post" action="/miss/modify">
         <div class="row titleBox">
@@ -131,14 +160,10 @@
             </div>
             <div class="row">
                 <div class="col btns1">
-                    <button type="button" id="backBtn" class="btn btn-outline-light" style="background-color: #cfb988;">
-                        목록
-                    </button>
+                    <button type="button" id="backBtn" class="btn">목록</button>
                 </div>
                 <div class="col btns2 d-flex justify-content-end">
-                    <button type="button" id="writeOk" class="btn btn-outline-light" style="background-color: #cfb988;">
-                        수정 완료
-                    </button>
+                    <button type="button" id="writeOk" class="btn">수정 완료</button>
                 </div>
             </div>
         </div>

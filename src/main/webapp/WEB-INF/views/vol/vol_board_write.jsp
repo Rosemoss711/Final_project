@@ -9,7 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -153,10 +152,16 @@
             margin: 0 12vw 0 12vw;
         }
     </style>
-    <!--  jQuery, bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <!--  jQuery, bootstrap
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+     -->
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           crossorigin="anonymous">
@@ -165,14 +170,8 @@
             rel="stylesheet" />
     <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
+	<!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-
     <!-- summernote css/js-->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
@@ -235,7 +234,7 @@
         </form>
     </div>
 </div>
-
+<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 <script>
     let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
     document.querySelector("#vol_deadLine").value = date;
@@ -364,8 +363,8 @@
     );
 
 
+
 </script>
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 

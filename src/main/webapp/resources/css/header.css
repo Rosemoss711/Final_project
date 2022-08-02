@@ -9,6 +9,10 @@
 	font-style: normal;
 }
 
+html {
+	overflow-x: hidden;
+}
+
 * {
 	box-sizing: border-box;
 	font-family: 'IBMPlexSansKR-Regular';
@@ -94,6 +98,9 @@
 #mypageLabel, #logout {
 	width: 70px;
 	margin: 0px;
+}
+#logout {
+	padding-right: 10px;
 }
 
 #loginLabel:hover, #mypageLabel:hover, #logout:hover {
@@ -221,14 +228,12 @@ i {
 
 /*반응형 유저 아이콘*/
 .header-myIcon{
-	padding-left:0px;
-	padding-right:0px;
+	padding: 0px 10px 0px 0px;
 	text-align: end;
 }
 .header-myIcon i{
 	vertical-align: baseline;
 	font-size: larger;
-    padding-left: 10px;
 }
 .header-myIcon i:hover{
 	vertical-align: baseline;
@@ -243,6 +248,12 @@ i {
 .userIconSm {
 	font-size: larger;
     margin-top: 5px;
+}
+
+.logoutIcon {
+	float: right;
+	margin-top: 5px;
+	padding-left: 10px;
 }
 
 .mainP-Header label {

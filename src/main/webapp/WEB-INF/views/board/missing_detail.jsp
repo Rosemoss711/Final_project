@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -16,7 +17,7 @@
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <title>실종게시판_상세보기</title>
+    <title>실종게시판 상세보기</title>
     <style>
         * {
             box-sizing: border-box;
@@ -38,16 +39,18 @@
         /* 타이틀 */
         .title-body {
             margin-top: 20px;
+            color: rgb(207, 147, 111);
+			border-bottom: 1px solid lightgray;
         }
 
         .content-title {
             margin-top: 20px;
         }
-
+		
+		/* 글쓴이 등 */
         .writer {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 20px;
+            margin-top: 10px;
+            font-size: 14px;
         }
         .writer span {
             display: block;
@@ -56,31 +59,27 @@
             white-space: nowrap;
         }
 
-        .writer > span:first-child {
+        /*.writer > span:first-child {
             grid-area: 1/1/2/3;
         }
         .writer > span:nth-child(2) {
             grid-area: 1/5/2/7;
-            color: var(--sil);
         }
 
         .writer > span:nth-child(3) {
-            grid-area: 1/8/2/10;
-            color: var(--sil);
-        }
+            grid-area: 1/8/2/9;
+        }*/
 
         .writer > .writerBtn {
             grid-area: 1/9/2/11;
             display: flex;
         }
-
-        /* 글수정 / 삭제 커서*/
-        .writerBtn span {
-            cursor: pointer;
-            color: #cf936f;
-            font-weight: bold;
-            min-width: 60px;
-        }
+		
+		/* form-control */
+		.form-control:focus {
+			box-shadow: none;
+			border: 1px solid #ced4da;
+		}
 
         .content-box {
             margin-top: 20px;
@@ -112,10 +111,7 @@
             gap: 20px;
 
         }
-
-
-
-
+        
         /* 글 내용 이미지 크기 조절 */
         .content-box img {
             max-width: 90%;
@@ -131,18 +127,8 @@
             border-bottom: 1px solid black;
         }
 
-
-        .writingModify {
+        .writingModify, .writingDelete {
             margin-bottom: 10px;
-        }
-
-        /* 글쓴이 등 */
-        .writer {
-            margin-top: 10px;
-        }
-
-        .writer span {
-            padding-bottom: 10px;
         }
 
         /* 댓글타이틀 이미지 */
@@ -164,6 +150,7 @@
 
         .comment-body, .comment-text {
             margin-top: 20px;
+            font-size: 14px;
         }
 
         #commentBtn {
@@ -175,6 +162,19 @@
             margin-top: 20px;
         }
 
+		/* 버튼 */
+		.btn {
+			color: #cf936f;
+			border: 1px solid #cf936f;
+			padding: 3px 8px;
+   		 	font-size: small;
+    		border-radius: 8px;
+		}
+		
+		.btn:hover {
+			color: #cf936f;
+			background-color: #fff0dd;
+		}
         /* 댓글 입력  */
         .commentWrite {
             border-bottom: 1px solid black;
@@ -191,6 +191,7 @@
             width: 100%;
             height: 100px;
             resize: none;
+            font-size: 14px;
         }
 
         #writeBtn {
@@ -240,53 +241,35 @@
         .margin{
             margin: 0 12vw 0 12vw;
         }
-
-        @media screen and (max-width: 960px) {
-            .writer {
-                grid-template-rows: repeat(2, 1fr);
-            }
-            .writer > span:first-child {
-                grid-area: 1/1/2/4;
-            }
-            .writer > span:nth-child(3) {
-                grid-area: 2/1/3/4;
-            }
-            .writer > span:nth-child(2) {
-                grid-area: 2/5/3/10;
-                text-align: right;
-            }
-            .writer > div:nth-child(4){
-                grid-area: 1/7/2/10;
-            }
-
-        }
     </style>
 </head>
 <body>
 <div class="content margin">
-    <div class="row title-body">
-        <div class="col board-title">
-            <h3>실종 게시판</h3>
-        </div>
+    <div class="row title-body mt-5">
+        <div class="col-5 d-none d-md-flex">
+			<h5><strong>실종 게시판</strong></h5>
+		</div>
+		<div class="col d-md-none text-center">
+			<h5><strong>실종 게시판</strong></h5>
+		</div>
     </div>
     <div class="row content-body">
         <div class="col content-title">
             <div class="row">
-                <h5>[<c:out value="${map.MissingBoardDTO.miss_area}"/>] <c:out
-                        value="${map.MissingBoardDTO.board_title}"/></h5>
+                <h5>[<c:out value="${map.MissingBoardDTO.miss_area}"/>] <c:out value="${map.MissingBoardDTO.board_title}"/></h5>
             </div>
             <div class="row">
-                <div class="col writer">
-                    <span><c:out value="${map.MissingBoardDTO.writer_nickname}"/> </span>
+                <div class="col d-flex writer">
+                    <span class="col-3"><c:out value="${map.MissingBoardDTO.writer_nickname}"/> </span>
                     <c:set var="TextDate" value="${map.MissingBoardDTO.written_date}"/>
-                    <span>작성일 : ${fn:substring(TextDate, 0, 10)}</span>
-                    <span>조회수 : ${map.MissingBoardDTO.view_count}</span>
+                    <span class="col-3">작성일 : ${fn:substring(TextDate, 0, 10)}</span>
+                    <span class="col-3">조회수 : ${map.MissingBoardDTO.view_count}</span>
                     <!--로그인 세션으로 글쓴이 비교할것-->
                     <%-- <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id}"> --%>
-                    <div class="col writerBtn">
-                        <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id || loginSession.member_grade == '4'}">
-                            <span class="writingModify">글 수정</span>
-                            <span class="writingDelete"> / 삭제</span>
+                    <div class="col-3 writerBtn justify-content-end">
+                        <c:if test="${loginSession.member_id eq map.MissingBoardDTO.member_id||loginSession.member_grade == '4'}">
+                            <button type="button" class="btn writingModify" style="margin-right: 10px;">수정</button>
+                            <button type="button" class="btn writingDelete">삭제</button>
                             <script>
                                 // 글 삭제
                                 $(".writingDelete").click(function () {
@@ -306,7 +289,7 @@
                 </div>
             </div>
         </div>
-        <div class="row content-box">
+        <div class="content-box">
             <div>
                 <div class="imgContainer">
                     <c:if test="${not empty map.files}">
@@ -332,7 +315,7 @@
     </div>
     <div class="row comment">
         <div class="col comment-title">
-            <img src="/resources/images/chat.png">
+            <i class="fa-regular fa-comments"></i>
             <span>Comment(${map.commentCount})</span>
         </div>
         <div class="row comment-body">
@@ -347,18 +330,16 @@
                         <div class="comment">
                             <div class="comment_header">
                                 <span class="nick">${commentDTO.comment_nickname}</span>
-                                <span class="date">${commentDTO.comment_date}</span>
+                                <span>${commentDTO.comment_date}</span>
                                 <c:if test="${loginSession.member_id eq commentDTO.comment_id|| loginSession.member_grade=='4'}">
                                     <div class="col commentBtn">
                                         <span class="commentModify">수정</span>
-                                        <span class="commentModifyOk d-none"
-                                              data-value="${commentDTO.seq_comment}">수정완료</span>
+                                        <span class="commentModifyOk d-none" data-value="${commentDTO.seq_comment}">수정완료</span>
                                         <span class="commentDelete" data-value="${commentDTO.seq_comment}">삭제</span>
                                     </div>
                                 </c:if>
                             </div>
-                            <input type="text" class="comment_content form-control" name="comment_content"
-                                   value="${commentDTO.comment_content}" readonly>
+                            <input type="text" class="comment_content form-control" name="comment_content" value="${commentDTO.comment_content}" readonly>
                         </div>
 
                         <%--</c:if>--%>
@@ -370,10 +351,8 @@
             <div class="row commentWrite">
                 <div class="col">
                     <%-- ${loginSession.member_nickname} 로그인 세션으로 넣어줄것--%>
-                    <textarea id="comment_content" name="comment_content" placeholder="내용을 입력해주세요"
-                              class="form-control"></textarea>
-                    <button type="button" id="commentBtn" class="btn btn-outline-light"
-                            style="background-color: #cfb988;">댓글 등록
+                    <textarea id="comment_content" name="comment_content" placeholder="내용을 입력해주세요" class="form-control"></textarea>
+                    <button type="button" id="commentBtn" class="btn">댓글 등록
                     </button>
                 </div>
                 <div class="col d-none">
@@ -384,9 +363,9 @@
     </div>
     <div class="row btns">
         <div class="col">
-            <button type="button" id="listBtn" class="btn btn-outline-light" style="background-color: #cfb988;">목록
+            <button type="button" id="listBtn" class="btn">목록
             </button>
-            <button type="button" id="writeBtn" class="btn btn-outline-light" style="background-color: #cfb988;">글쓰기
+            <button type="button" id="writeBtn" class="btn">글쓰기
             </button>
         </div>
     </div>
@@ -423,8 +402,6 @@
                 console.log(e);
             }
         });
-
-        document.querySelector("#comment_content").value="";
     })
     // 목록 버튼
     $("#listBtn").click(function () {
@@ -514,8 +491,8 @@
                         nick.classList.add("nick");
                         nick.innerHTML = e.querySelector("comment_nickname").innerHTML;
 
-                        let date = document.createElement("span");
-                        date.innerHTML = elapsedTime(e.querySelector("comment_date").innerHTML);
+                        let date = document.createElement("span")
+                        date.innerHTML = e.querySelector("comment_date").innerHTML;
 
                         let commentBtn = document.createElement("div");
                         commentBtn.classList.add("commentBtn");
@@ -556,53 +533,13 @@
 
                     }
                 )
-                document.querySelector(".comment-title> span").innerHTML = 'Comment('+item.length+')';
+                document.querySelector("comment-title> span").innerHTML = 'Comment('+item.length+')';
             },
             error: (error) => {
                 console.log(error);
             }
         })
     }
-
-
-    let date = document.querySelectorAll('.comment_Date');
-    date.forEach(date=>{
-        date.innerText = elapsedTime(date.innerText);
-    })
-
-    /* 댓글 단지 소요시간 나타내주는 함수 */
-    function elapsedTime(date) {
-        const start = new Date(date);
-        const end = new Date(); // 현재 날짜
-
-        const diff = (end - start); // 경과 시간
-
-        const times = [
-            {time: "분", milliSeconds: 1000 * 60},
-            {time: "시간", milliSeconds: 1000 * 60 * 60},
-            {time: "일", milliSeconds: 1000 * 60 * 60 * 24},
-            {time: "개월", milliSeconds: 1000 * 60 * 60 * 24 * 30},
-            {time: "년", milliSeconds: 1000 * 60 * 60 * 24 * 365},
-        ].reverse();
-
-        // 년 단위부터 알맞는 단위 찾기
-        for (let i = 0; i < times.length; i++) {
-            const betweenTime = Math.floor(diff / times[i].milliSeconds);
-            // 큰 단위는 0보다 작은 소수 단위 나옴
-            if (betweenTime > 0) {
-                return betweenTime + ' ' + times[i].time + ' 전';
-            }
-        }
-    }
-
-    let comment_date = document.querySelectorAll(".comment .date");
-    comment_date.forEach(
-        e => {
-            e.innerHTML = elapsedTime(e.innerHTML);
-        }
-    )
-
-
 </script>
 </body>
 </html>
