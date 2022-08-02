@@ -276,16 +276,18 @@
 			<div class="row">
 				<div class="col d-none d-sm-block">
 					<div class="card-deck">
-						<c:forEach items="${list}" var="list" begin="0" end="2">
-						<div class="card cardImg">
-							<a href="/board/detailPost?nowPage=1&seq_board=${list.seq_board}&seq_category=1&small_category=2"><img class="card-img-top" src="/files/${list.files_sys}"
-								alt="Card image cap"></a>
-							<div class="card-body">
-								<h4 class="card-title"><i class="fa-solid fa-quote-left"></i>&nbsp;${list.board_title}&nbsp;<i class="fa-solid fa-quote-right"></i></h4>
-								
+						<c:if test="${!empty list}" >
+							<c:forEach items="${list}" var="list" begin="0" end="2">
+							<div class="card cardImg col-4">
+								<a href="/board/detailPost?nowPage=1&seq_board=${list.seq_board}&seq_category=${list.small_category}&small_category=${list.seq_category}"><img class="card-img-top" src="/files/${list.files_sys}"
+									alt="Card image cap"></a>
+								<div class="card-body">
+									<h4 class="card-title"><i class="fa-solid fa-quote-left"></i>&nbsp;${list.board_title}&nbsp;<i class="fa-solid fa-quote-right"></i></h4>
+								</div>
 							</div>
-						</div>
 						</c:forEach>
+						</c:if>
+						
 					</div>
 				</div>
 
