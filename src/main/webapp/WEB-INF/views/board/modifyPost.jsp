@@ -224,7 +224,7 @@
         height: 28px;
     }
     #title{
-        width: 50vw;
+        width: 100%;
         font-size: 13px;
         padding-left: 5px;
     }
@@ -236,10 +236,18 @@
         width: 100px;
         font-size: 13px;
     }
-    #categoryBox, #titleBox{
+    #categoryBox{
         border: 1px solid lightgray; 
-        display: inline-block; 
         border-radius: 2px;
+        display: inline-flex;
+    	width: 105px;
+    }
+    
+    #titleBox{
+    	border: 1px solid lightgray; 
+        border-radius: 2px;
+        display: block;
+    	width: 100%;
     }
 
     #writeBox{
@@ -285,15 +293,16 @@
                             </c:forEach>
                         </select>
                     </span>
+                    <c:if test="${loginSession.member_grade eq 4}" >
+                    	<div class="d-inline-block">
+                        	<p style="margin-left: 30px;">
+                            	<input type="checkbox" id="notice" name="notice" value="y" style="vertical-align: middle;">&nbsp;&nbsp;공지 상단 고정
+                        	</p>
+                        </div>
+                    </c:if>
                     <span id="titleBox">
                         <input type="text" id="title" name="board_title" placeholder="제목" value="${dto.board_title}" />
                     </span>
-
-                    <c:if test="${loginSession.member_grade eq 4}" >
-                        <p style="display: inline-block; margin-left: 30px;">
-                            <input type="checkbox" id="notice" name="notice" value="y">&nbsp;&nbsp;공지 상단 고정
-                        </p>
-                    </c:if>
 
                     <br><br>
                     <input type="hidden" id="imgSrc" name="imgSrc[]">
@@ -302,9 +311,10 @@
                 </form>
             </div>
 
-            <div class="col mt-5">
-                <button type="button" class="btn btn-primary" id="registerBtn">등록</button>
+            <div class="col d-flex justify-content-end mt-5">
                 <button type="button" class="btn btn-light" id="cancleBtn">돌아가기</button>
+                <button type="button" class="btn btn-primary" id="registerBtn">등록</button>
+                <div class="d-md-none" style="width: 12%;"> </div>
             </div>
         </div>
 

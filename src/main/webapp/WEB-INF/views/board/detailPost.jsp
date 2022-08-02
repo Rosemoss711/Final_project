@@ -286,6 +286,42 @@
                 z-index: 999;
                 cursor: pointer;
             }
+            
+            /* 반응형 */
+            .contentSm {
+            	overflow-y: scroll;
+            }
+            table {
+            	table-layout: fixed;
+            }
+            
+            table .titleTd, .smContentRow {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+            }
+            
+            .smContentRow {
+            	padding: 0px;
+            	font-size: 12px;
+            	color: grey;
+            }
+            
+            .searchBoxSm {
+            	border: 1px solid lightgray; 
+                display: inline-block; 
+                border-radius: 2px;
+                height: 28px;
+            }
+            
+            #seachSelectSm {
+            	border: 1px solid lightgray;
+            }
+            
+            #searchInputSm {
+            	 position: absolute; 
+            	 border: 1px solid lightgray;
+            }
         </style>
 
         <body>
@@ -329,18 +365,22 @@
                 </div>
 
                 <div class="row mt-3 mb-5"> <!-- 게시물 내용 -->
-                    <div class="col" style="margin: 10px 10vw 10px 10vw; font-size: 13px;">
+                    <div class="col d-none d-md-block" style="margin: 10px 10vw 10px 10vw; font-size: 13px;">
+                        <c:out value="${post.board_content}" escapeXml="false" />
+                    </div>
+                    <!-- 반응형 -->
+                    <div class="col d-md-none contentSm" style="margin: 10px 10vw 10px 10vw; font-size: 13px;">
                         <c:out value="${post.board_content}" escapeXml="false" />
                     </div>
                 </div>
 
                 <div class="row mb-4 mt-5" style="margin: 0 10vw 0 10vw;">
-                    <div class="col pb-3" style="text-align: center; border-bottom: 1px solid lightgray; margin: 0 12px 0 12px;">
+                    <div class="col d-flex justify-content-center pb-3" style="border-bottom: 1px solid lightgray; margin: 0 12px 0 12px;">
                         <button type="button" id="listBtn">목록으로 </button>
                     </div>
                 </div>
 
-                <div class="row" style="margin: 0 10vw 0 10vw;" id>
+                <div class="row" style="margin: 0 10vw 0 10vw;">
                     <c:if test="${loginSession.member_id eq post.member_id || loginSession.member_grade eq 4}" >
                         <div class="col"> <!-- 게시물 수정 삭제 버튼 -->
                             <button type="button" id="removePost"><i class="fa-solid fa-xmark"></i>  삭제</button>
@@ -379,14 +419,13 @@
                     </c:choose>
                 </div>
 
-                
                 <!-- 댓글 쓰는거 인풋 히든으로 글번호 보내줌 -->
                 <div class="row mt-4" id="replyWrite" style="margin: 0 10vw 0 10vw;">
                     <div class="col-12"> 
                         <label for="comment_content" style="margin-bottom: 10px;">
                             <strong>댓글 쓰기</strong> </label>
                     </div>
-                    <div class="col-11">
+                    <div class="col-10">
                         <form id="commentForm">
                             <input type="hidden" id="seq_board" name="seq_board" value="${post.seq_board}">
                             <c:choose>
@@ -400,11 +439,10 @@
                             </c:choose>
                         </form>
                     </div>
-                    <div class="col-1"  style="text-align: center; padding: 0; ">
+                    <div class="col-2" style="text-align: center; padding: 0; ">
                         <button type="button" id="registerBtn">등록</button>
                     </div>
                 </div>
-
                 <div class="row mt-3">
                     <div class="col" style="margin: 0 10vw 0 10vw;"> <!-- 이하부터는 board.jsp 그대로 출력하는거라서 주석 안달음 -->
                         <h5 style="display: inline-block; font-size: 17;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}"><strong>${etcMap.bigCategory}</strong> </a></h5>
@@ -418,7 +456,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col" style="margin: 0 10vw 0 10vw;">
+                    <div class="col d-none d-md-block" style="margin: 0 10vw 0 10vw;">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -453,13 +491,13 @@
                                                     </c:choose> </a></td>
                                                     <c:choose>
                                                         <c:when test="${etcMap.search_type eq null}">
-                                                                <td><a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                                <td class="titleTd"><a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
                                                                 <c:if test="${dto.CM_COUNT != 0}" >
                                                                 <span style="font-size: 6px; font-weight: bold;">&nbsp;&nbsp;${dto.CM_COUNT}</span>
                                                                 </c:if> </td>
                                                         </c:when>
                                                         <c:otherwise>
-                                                                <td><a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                                <td class="titleTd"><a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
                                                                 <c:if test="${dto.CM_COUNT != 0}" >
                                                                 <span style="font-size: 6px; font-weight: bold;">&nbsp;&nbsp;${dto.CM_COUNT}</span>
                                                                 </c:if> </td>
@@ -472,30 +510,27 @@
                                         </c:forEach>
                                    </c:otherwise>
                                 </c:choose>
-                                
                             </tbody>
                         </table>
                     </div>
                 </div>
-                
-
-                <div class="row">
+                <div class="row d-none d-md-flex">
                     <div class="col" style="margin: 0 10vw 0 10vw;">
                         <form action="/board/toBoard" method="get">
-                        <span class="searchBox">
-                            <input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
-                            <button type="submit" id="searchBtn" value="${etcMap.category}" name="seq_category"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </span>
-                        <span class="searchBox">
-                            <select name="search_type" id="search_type">
-                                <option value="board_title">제목</option>
-                                <option value="board_content">내용</option>
-                                <option value="writer_nickname">닉네임</option>
-                            </select>
-                        </span>
-                        <c:if test="${small_category != 0}" >
-                            <input type="hidden" name="small_category" value="${etcMap.small_category}">
-                        </c:if>
+                        	<span class="searchBox">
+                            	<input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
+                            	<button type="submit" id="searchBtn" value="${etcMap.category}" name="seq_category"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        	</span>
+                        	<span class="searchBox">
+                            	<select name="search_type" id="search_type">
+                                	<option value="board_title">제목</option>
+                                	<option value="board_content">내용</option>
+                                	<option value="writer_nickname">닉네임</option>
+                            	</select>
+                        	</span>
+                        	<c:if test="${small_category != 0}" >
+                            	<input type="hidden" name="small_category" value="${etcMap.small_category}">
+                        	</c:if>
                         </form>
                     </div>
                     <c:if test="${not empty loginSession}" >
@@ -504,9 +539,106 @@
                         </div>
                     </c:if>
                 </div>
-
-                <div class="page_wrap mb-5">
-                    <div  class="page_nation">	
+				<%-- sm사이즈 --%>
+                <div class="col d-md-none" style="padding: 0 10vw 0 10vw;">
+                    <table class="table table-hover">
+                        <thead style="border-top: 1px solid lightgray;"></thead>
+                        <tbody>
+                            <c:choose>
+                               <c:when test="${empty list}">
+                                <tr>
+                                    <td colspan="5">등록 된 글이 없습니다.</td>
+                                </tr>
+                               </c:when>
+                               <c:otherwise>
+                                    <c:forEach items="${list}" var="dto">
+                                        <tr>
+                                            <td> 
+                                            	<div class="col d-flex">
+                                                    <!-- 검색어가 존재하는지에 대한 여부에 따라 타이틀에 넘겨주는 정보를 달리함 이렇게 안하고 편하게 갈 수 잇엇을거 같은데 실수한듯 돌이키기는 좀 그럼 -->
+                                                    <c:choose> 
+                                                        <c:when test="${etcMap.search_type eq null}">
+                                                        	<div class="col titleTd smContentHigh text-start">
+                                                        		<i class="fa-regular fa-comment-dots"></i>&nbsp;
+                                                        		<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="col titleTd smContentHigh">
+                                                            	<i class="fa-regular fa-comment-dots"></i>
+                                                            	<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                 </div>
+                                                 <div class="col d-flex">
+                                                 	<div class="col-2 smContentRow">
+                                                		<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${dto.SEQ_CATEGORY}&category_name=${etcMap.category_name}"> <!-- 카테고리 번호에 따라서 탭 뿌려주기 대분류는 공지로 변환 -->
+                                                    		<c:choose>
+                                                       			<c:when test="${dto.SEQ_CATEGORY eq etcMap.category}">
+                                                        			공지
+                                                       			</c:when>
+                                                       			<c:otherwise>
+                                                        			${dto.CATEGORY_NAME}
+                                                       			</c:otherwise>
+                                                    		</c:choose> 
+                                                    	</a>
+                                                    </div>
+                                                    <span style="color: #dee2e6;">|</span>
+                                                    <div class="col-3 smContentRow">${dto.WRITER_NICKNAME}</div>
+                                                    <span style="color: #dee2e6;">|</span>
+                                                	<div class="col-2 smContentRow"><fmt:formatDate value="${dto.WRITTEN_DATE}" pattern="yy.MM.dd"/></div>
+                                                	<span style="color: #dee2e6;">|</span>
+                                                	<div class="col-2 smContentRow">
+                                                		댓글&nbsp;:&nbsp;
+                                                		<c:choose>
+                                                			<c:when test="${dto.CM_COUNT != 0}">
+                                                				<span style="font-size: 6px; font-weight: bold;">${dto.CM_COUNT}</span>
+                                                			</c:when>
+                                                			<c:otherwise>
+                                                				<span style="font-size: 6px; font-weight: bold;">0</span>
+                                                			</c:otherwise>
+                                                		</c:choose>
+                                                    </div>
+                                                    <span style="color: #dee2e6;">|</span>
+                                                	<div class="col-2 smContentRow">조회수&nbsp;:&nbsp;${dto.VIEW_COUNT}</div>
+                                                </div>
+                                            	</td>
+                                        	</tr>
+                                    	</c:forEach>
+                                	</c:otherwise>
+                            	</c:choose>
+                            </tbody>
+                    	</table>
+                    </div>
+                	<div class="row d-md-none">
+                    <!-- 검색박스부분 -->
+                    <div class="col" style="padding-left: 10vw;">
+                        <form action="/board/toBoard" method="get">
+                        	<span class="searchBoxSm" id="seachSelectSm">
+                            	<select name="search_type" id="search_type">
+                                	<option value="board_title">제목</option>
+                                	<option value="board_content">내용</option>
+                                	<option value="writer_nickname">닉네임</option>
+                            	</select>
+                            	<c:if test="${small_category != 0}" >
+                            		<input type="hidden" name="small_category" value="${etcMap.small_category}">
+                        		</c:if>
+                        	</span>
+                        	<span class="searchBoxSm" id="searchInputSm">
+                            	<input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}" style="width:100px;">
+                            	<button type="submit" id="searchBtn" value="${etcMap.category}" name="seq_category"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        	</span>
+                        </form>
+                    </div>
+                    <c:if test="${not empty loginSession}" >
+                        <div class="col" style="padding-right: 10vw;">
+                            <button type="button" id="write" ><i class="fa-solid fa-pen"></i>  쓰기</button>
+                        </div>
+                    </c:if>
+                </div>
+                <div class="page_wrap mb-5 mt-5">
+                    <div class="page_nation">	
                         <c:choose>
                            <c:when test="${etcMap.search_type eq null}">
                                 <c:if test="${paging.startPage!=1}" >
@@ -543,10 +675,8 @@
                         </c:choose>
                     </div>
                 </div>
-
-                	<!-- footer -->
+                <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-
             </div>
 
             <!--top버튼-->

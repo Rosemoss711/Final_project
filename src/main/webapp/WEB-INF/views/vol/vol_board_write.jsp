@@ -7,15 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
-
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>봉사 게시판</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -151,10 +149,16 @@
 
 
     </style>
-    <!--  jQuery, bootstrap -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <!--  jQuery, bootstrap
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+     -->
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           crossorigin="anonymous">
@@ -163,20 +167,14 @@
             rel="stylesheet" />
     <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"></script>
+	<!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-
     <!-- summernote css/js-->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
 <body>
-
+<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 <div class="content">
     <div class="content_header">
         <h3>봉사 게시판</h3>
@@ -232,7 +230,7 @@
         </div>
     </div>
 </div>
-
+<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 <script>
     let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
     document.querySelector("#vol_deadLine").value = date;
@@ -361,8 +359,8 @@
     );
 
 
+
 </script>
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 

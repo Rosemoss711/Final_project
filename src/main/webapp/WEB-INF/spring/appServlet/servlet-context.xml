@@ -78,6 +78,7 @@
 			
 			<mvc:exclude-mapping path="/miss/toMissing"/> <!-- 실종게시판 목록 -->
 			<mvc:exclude-mapping path="/miss/toDetail"/> <!-- 상세보기페이지 -->
+			<mvc:exclude-mapping path="/miss/search"/> <!-- 검색 -->
 			
 			<mvc:exclude-mapping path="/shelterAnimal/toShelterAnimal"/> <!-- 유기동물게시판 목록 -->
 			<mvc:exclude-mapping path="/shelterAnimal/toSearch"/> <!-- 검색 -->
@@ -87,9 +88,11 @@
 			
 			<mvc:exclude-mapping path="/supportBoard/lists"/> <!-- 후원게시판 목록 -->
 			<mvc:exclude-mapping path="/supportBoard/view"/> <!-- 상세보기페이지 -->
+			<mvc:exclude-mapping path="/supportBoard/search"/> <!-- 검색 -->
 			
 			<mvc:exclude-mapping path="/volBoard/lists"/> <!-- 봉사게시판 목록 -->
 			<mvc:exclude-mapping path="/volBoard/view"/> <!-- 상세보기페이지 -->
+			<mvc:exclude-mapping path="/volBoard/search"/> <!-- 검색 -->
 			
 			
 			<bean class="com.comme.utils.AuthLoginInterceptor"/>

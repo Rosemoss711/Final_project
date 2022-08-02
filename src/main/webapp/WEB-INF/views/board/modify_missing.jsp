@@ -86,6 +86,8 @@
 </head>
 
 <body>
+	<!-- header -->
+	<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 <div class="content">
     <div class="row board-title">
         <div class="col">

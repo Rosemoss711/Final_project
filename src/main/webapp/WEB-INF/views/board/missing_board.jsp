@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -34,16 +32,25 @@
 }
 /*실종 게시판 타이틀*/
 .title {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid lightgray;
 	display: flex;
-	align-items: center;
+	align-items: baseline;
+	color: rgb(207, 147, 111);
+	width: 97%;
 }
 
-/* 굴쓰기버튼 */
-.writeBtn {
-	background-color: #cfb988;
-	color: white;
-	padding: 1px 8px;
+/* 버튼 */
+.btn {
+	color: #cf936f;
+	border: 1px solid #cf936f;
+	padding: 3px 8px;
+   	font-size: small;
+    border-radius: 8px;
+}
+		
+.btn:hover {
+	color: #cf936f;
+	background-color: #fff0dd;
 }
 
 /* 검색 select */
@@ -148,28 +155,31 @@
 	display: block;
 	margin: 0 3px;
 	font-size: 20px;
-	color: #cf936f !important;
+	color: #cf936f;
 	text-decoration: none !important;
+	border: 1px solid white;
 }
 
 .page a:hover {
-	background-color: #f9f9f9;
-	color: #555;
-	border: 1px solid #aaa;
+	background-color: #cf936f;
+	color: white;
+	border: 1px solid #cf936f;
 	border-radius: 2px;
 }
 
 </style>
 </head>
 <body>
+	<!-- header -->
+	<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 	<div class="content">
 		<div class="row body justify-content-center">
 			<div class="row title">
 				<div class="col-5 d-none d-md-flex">
-					<h3>실종 게시판</h3>
+					<h5><strong>실종 게시판</strong></h5>
 				</div>
 				<div class="col d-md-none text-center">
-					<h3>실종 게시판</h3>
+					<h5><strong>실종 게시판</strong></h5>
 				</div>
 				<div class="col-12 col-md-7 searchDiv">
 				<form id="searchForm">
@@ -288,6 +298,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- footer -->
+	<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	<script>
 		// 글쓰기 버튼눌렀을때
 		$(".writeBtn").click(function(){
@@ -412,4 +424,3 @@
 	
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
