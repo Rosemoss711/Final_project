@@ -220,7 +220,7 @@
                                     </label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" class="form-control" id="business" name="member_brn" value="${loginSession.member_brn}">
+                                    <input type="text" class="form-control" id="business" name="member_brn" value="${loginSession.member_brn}" disabled>
                                 </div>
                             </div>
                         </c:if>
@@ -334,6 +334,10 @@
             $("#checkNickname").html("형식에 맞지않는 닉네임입니다. 다시 입력해주세요.");
             $("#checkNickname").css("color", "red");
             $("#nickname").val("");
+            return;
+        }else if('${loginSession.member_nickname}' == $("#nickname").val()){
+            $("#checkNickname").html("사용가능한 닉네임입니다.");
+            $("#checkNickname").css("color", "green");
             return;
         }
         // ajax로 중복값 검사
