@@ -129,13 +129,25 @@
 			</div>
 			<div class="col-2 d-md-none header-myIcon">
 				<c:choose>
-					<c:when test="${loginSession.member_grade eq '1'}">
+					<c:when test="${loginSession.member_grade eq '1' || '2'}">
 						<a href="/member/toMyPage"><i class="fa-solid fa-user-check userIconSm" id="logIn-Y" title="마이페이지"></i></a>
 						<i class="fa-solid fa-right-from-bracket logoutIcon" title="로그아웃" id="logoutM"></i>
+						<script>
+							document.getElementById("logoutM").onclick = function(){
+								alert("로그아웃 되었습니다.");
+								location.href="/member/logout";
+							}
+						</script>
 					</c:when>
 					<c:when test="${loginSession.member_grade eq '4'}">
 						<a href="/manager/memberList?curPage=1"><i class="fa-solid fa-user-check userIconSm" id="logIn-Y" title="마이페이지"></i></a>
 						<i class="fa-solid fa-right-from-bracket logoutIcon" title="로그아웃" id="logoutM"></i>
+						<script>
+							document.getElementById("logoutM").onclick = function(){
+								alert("로그아웃 되었습니다.");
+								location.href="/member/logout";
+							}
+						</script>
 					</c:when>
 					<c:otherwise>
 						<a href="/member/toLoginPage"><i class="fa-regular fa-user userIconSm"></i></a>

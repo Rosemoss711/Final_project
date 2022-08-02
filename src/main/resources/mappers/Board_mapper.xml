@@ -303,14 +303,13 @@
 
     <!-- 메인 노출할 게시글 조회수 순 -->
     <select id="mainContent" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap">
-        select a.*, b.*
+    	select a.*, (select /*+ INDEX_ASC(SEQ_FILE) */ files_sys from board_files 
+            where rownum = 1 and a.seq_board = seq_board) AS files_sys
         from (select /*+ INDEX_DESC(C SEQ_BOARD) */ c.seq_board, c.board_title, c.seq_category , c.view_count ,d.category_pk as small_category
               from board C, category D
               where c.seq_category = d.seq_category 
               and d.category_name LIKE '%'|| '봉사 후기' ||'%'
-              order by c.view_count desc) a,
-             BOARD_FILES b
+              order by c.view_count desc) a
         where rownum <![CDATA[<=]]> 3
-          and b.SEQ_BOARD(+) = a.seq_board
     </select>
 </mapper>

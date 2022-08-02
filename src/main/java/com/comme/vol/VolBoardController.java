@@ -61,7 +61,7 @@ public class VolBoardController {
 
         fileService.insert_file(seq_board, files_name, temp_files, path, "vol_files");
 
-        return "redirect:/volBoard/lists";
+        return "redirect:/volBoard/view?seq_board="+seq_board;
     }
 
     @GetMapping("/view")

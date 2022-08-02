@@ -260,7 +260,7 @@ ID, 성명, 비밀번호, 주소, 휴대폰번호, 이메일, 생년월일, 암�
                     </div>
                     <div class="col">
                         <input type="checkbox" id="checkPerinfo" class="cls-checkbox">
-                        <label for="checkPerinfo">&nbsp;개인정보 수집 및 이용 동의</label>
+                        <label for="checkPerinfo" style="position: absolute; display: contents;">&nbsp;개인정보 수집 및 이용 동의</label>
                     </div>
                 </div>
 

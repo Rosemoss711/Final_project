@@ -224,9 +224,8 @@
 
         @media screen and (max-width: 960px) {
             .content {
-                padding-right: 5px;
-                padding-left: 5px;
                 margin: 0 0 0 0;
+                padding : 0 1vw 0 1vw;
             }
             .content_header {
                 flex-direction: column;
@@ -297,7 +296,6 @@
                 grid-column: 1/3;
                 grid-row: 4/5;
                 text-align: start;
-                color: black;
             }
 
             .boardList > a:last-child > .board {

@@ -57,11 +57,11 @@ public class MissingBoardController {
 	@RequestMapping(value = "/search", produces="application/json; charset=utf-8") // 검색
 	public Map<String, Object> search(@RequestParam(value = "category") String category, @RequestParam(value = "keywordMissing") String keywordMissing, 
 			@RequestParam(value = "curPage", defaultValue = "1") int curPage) throws Exception {
-		System.out.println(category+ " : " + keywordMissing);
+//		System.out.println(category+ " : " + keywordMissing);
 		Map<String, Object> map = service.search(curPage, category, keywordMissing);
         map.put("category", category);
         map.put("keywordMissing", keywordMissing);
-		System.out.println(map);
+//		System.out.println(map);
         return map;
 	}
 
@@ -175,7 +175,7 @@ public class MissingBoardController {
 	public String toDeatil(int seq_board, Model model) throws Exception {
 		service.updateView_count(seq_board);
 		Map<String, Object> map= service.selectOne(seq_board);
-		System.out.println(map.toString());
+//		System.out.println(map.toString());
 
 		model.addAttribute("map", map);
 

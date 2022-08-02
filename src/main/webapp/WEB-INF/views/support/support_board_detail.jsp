@@ -132,7 +132,7 @@
         }
 
         .order_number2 #order_number {
-            width: 20px;
+            width: 50px;
         }
 
         .total {
@@ -180,7 +180,8 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
-            padding-top: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
             border-top: 1px solid var(--sil);
         }
 
@@ -205,6 +206,7 @@
 
             .content {
                 margin: 0 0 0 0;
+                padding : 0 10vw 0 10vw;
             }
 
         }
@@ -299,7 +301,7 @@
                     <div class="order_number2">
                         <div class="selection">
                             <button type="button" id="minus">-</button>
-                            <input type="number" id="order_number" name="order_number" required="required" min="1">
+                            <input type="number" id="order_number" name="order_number" required="required" min="1" max="9999">
                             <input type="hidden" id="price" name="price">
                             <input type="hidden" name="seq_board" value="${map.seq_board}">
                             <button type="button" id="plus">+</button>

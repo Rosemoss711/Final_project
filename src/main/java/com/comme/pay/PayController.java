@@ -34,7 +34,7 @@ public class PayController {
     @PostMapping("/insert")
     @ResponseBody
     public String insert(PayDTO payDTO) throws Exception {
-        logger.info(payDTO.toString());
+//        logger.info(payDTO.toString());
         payDTO.setMember_id(((MemberDTO)httpSession.getAttribute("loginSession")).getMember_id());
         int seq_pay = payService.insert(payDTO);
 

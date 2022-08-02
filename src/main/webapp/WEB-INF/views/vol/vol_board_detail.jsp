@@ -160,7 +160,7 @@
         }
 
         .boardList li button {
-            flex-basis: 45px;
+            flex-basis: 65px;
         }
 
         .boardList a {
@@ -186,6 +186,7 @@
         @media screen and (max-width: 960px) {
             .content {
                 margin: 0 0 0 0;
+                padding : 0 10vw 0 10vw;
             }
             .board_header .title {
                 grid-area: 1/1/2/7;
@@ -364,8 +365,13 @@
     let vol_count = "${map.vol_count}";
     let vol_accepted = "${map.accepted}";
 
+    console.log("데드"+deadLine);
+    console.log(date);
+    console.log(vol_count);
+    console.log(vol_accepted);
 
-    if(date < deadLine && vol_count < vol_accepted){
+
+    if(date < deadLine && vol_accepted < vol_count){
         document.querySelector("#volSubmit").disabled = false;
     }
     if(date > deadLine){
