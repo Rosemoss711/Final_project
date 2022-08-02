@@ -262,15 +262,6 @@ public class BoardController {
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
-		// 그냥 게시판 들어오는거랑 90% 이상 흡사하니까 위에 꺼 참조하면됌
-//		System.out.println("seq_category : " + seq_category);
-//		System.out.println("seq_board : " + seq_board);
-//		System.out.println("small_category : " + small_category);
-//		System.out.println("search_keyword : " + search_keyword);
-//		System.out.println("search_type : " + search_type);
-//		System.out.println("category_name : " + category_name);
-//		System.out.println("상세보기게시판접속");
-		
 		
 		if(small_category == null) {
 			small_category = "0";
@@ -334,10 +325,6 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "/registerComment") // 댓글 등록
 	public String registerComment(CommentDTO dto) throws Exception{
-//		System.out.println("seq_board : " + dto.getSeq_board());
-//		System.out.println("comment_content : " + dto.getComment_content());
-		
-		
 		String memberId = null;
 		String nickName = null;
 		if((session.getAttribute("loginSession")) != null) {
@@ -348,7 +335,6 @@ public class BoardController {
 		dto.setComment_id(memberId); // 나중에 세션값으로 세팅
 		dto.setComment_nickname(nickName); // 나중에 세션값으로 세팅
 		service.commentInsert(dto); // 댓글 디비에 저장
-//		System.out.println(dto.getSeq_comment());
 		return String.valueOf(dto.getSeq_comment());
 	}
 	

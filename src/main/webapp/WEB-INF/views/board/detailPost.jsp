@@ -376,6 +376,20 @@
             <!--top버튼-->
 	        <a id="topBtn"><img src="/resources/mainImg/DIEALRIGHT.png"></a>
         </body>
+        <script>
+            let nowPage = '${paging.nowPage}';
+            let etcMap =  {
+                search_type: '${etcMap.search_type}',
+                search_keyword: '${etcMap.search_keyword}',
+                category: '${etcMap.category}',
+                small_category: '${etcMap.small_category}',
+                bigCategory: '${etcMap.bigCategory}',
+                category_name: '${etcMap.category_name}',
+            }
+            let nickname = '${loginSession.member_nickname}';
+            let member_id = '${loginSession.member_id}';
+            let seq_board = '${post.seq_board}';
+        </script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/detailPost.js"></script>
 
         </html>
