@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -31,16 +29,25 @@
 
 /*실종 게시판 타이틀*/
 .title {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid lightgray;
 	display: flex;
-	align-items: center;
+	align-items: baseline;
+	color: rgb(207, 147, 111);
+	width: 97%;
 }
 
-/* 굴쓰기버튼 */
-.writeBtn {
-	background-color: #cfb988;
-	color: white;
-	padding: 1px 8px;
+/* 버튼 */
+.btn {
+	color: #cf936f;
+	border: 1px solid #cf936f;
+	padding: 3px 8px;
+   	font-size: small;
+    border-radius: 8px;
+}
+		
+.btn:hover {
+	color: #cf936f;
+	background-color: #fff0dd;
 }
 
 /* 검색 select */
@@ -99,29 +106,49 @@
 	text-decoration: none;
 }
 
+.card {
+	 width: 18rem;
+}
+
 .card p {
 	font-size: 0.8em;
 }
 
 .card .img {
-	height: 40%;
-	display: flex;
+	height: 50%;
+	/*display: flex;*/
 	justify-content: center;
 	align-items: center;
 }
+
+.missingContent img {
+	width: 100%;
+	height: 100%;
+}
+
 .cardMissing {
 	margin: 10px;
 }
 
+.card-body {
+	width: 100%;
+}
+
 #cardTitleMd {
 	font-weight: bold;
-	height: 50px;
-	display: flex;
+	height: 58px;
+	width: 100%;
     align-items: center;
+    margin: 15px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 #cardInfo p {
-	margin-bottom: 3px;
+	margin-bottom: 1px;
 }
 
 #cardInfo {
@@ -136,16 +163,35 @@
 	margin: 0px;
 }
 
-.missingContent img {
-	width: 100%;
-	height: auto;
+.imgSm {
+    align-items: center;
+}
+
+.imgSm img {
+	width: 130px;
+	height: 130px;
 }
 
 #cardTitleSm {
+	font-size: large;
 	font-weight: bold;
+    align-items: center;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin: 15px 0px;
+}
+
+#cardInfoSm {
+	font-size: 14px;
+}
+
+.cardInfoSmContainer {
 	display: flex;
     align-items: center;
-    height: 200px;
 }
 
 /* 페이징 */
@@ -159,14 +205,15 @@
 	display: block;
 	margin: 0 3px;
 	font-size: 20px;
-	color: #cf936f !important;
+	color: #cf936f;
 	text-decoration: none !important;
+	border: 1px solid white;
 }
 
 .page a:hover {
-	background-color: #f9f9f9;
-	color: #555;
-	border: 1px solid #aaa;
+	background-color: #cf936f;
+	color: white;
+	border: 1px solid #cf936f;
 	border-radius: 2px;
 }
 
@@ -177,14 +224,16 @@
 </style>
 </head>
 <body>
+	<!-- header -->
+	<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 	<div class="content margin">
 		<div class="row body justify-content-center">
-			<div class="row title">
+			<div class="row title mt-5">
 				<div class="col-5 d-none d-md-flex">
-					<h3>실종 게시판</h3>
+					<h5><strong>실종 게시판</strong></h5>
 				</div>
 				<div class="col d-md-none text-center">
-					<h3>실종 게시판</h3>
+					<h5><strong>실종 게시판</strong></h5>
 				</div>
 				<div class="col-12 col-md-7 searchDiv">
 				<form id="searchForm">
@@ -208,7 +257,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="row missingContent row-cols-xl-4 row-cols-lg-3 g-3">
+			<div class="row missingContent row-cols-xl-4 row-cols-lg-3 row-cols-md-2 g-3">
 				<c:if test="${map.list.size() == 0}">
 					<div class="col nomissing d-flex justify-content-center">
 						<p><strong>실종 동물이 없습니다.</strong></p>
@@ -216,18 +265,20 @@
 				</c:if>
 				<c:if test="${map.list.size() > 0}">
 					<c:forEach items="${map.list}" var="dto">
-						<div class="col-6 d-none d-md-flex justify-content-center">
-							<a href="/miss/toDetail?seq_board=${dto.seq_board}">
-								<div class="card" style="width: 12rem;">
-									<div class="img">
+						<div class="col-3 d-none d-md-flex justify-content-center" style="height: 26em;">
+							<div class="card">
+								<div class="img">
+									<a href="/miss/toDetail?seq_board=${dto.seq_board}">
 										<c:if test="${empty dto.files_sys}">
 											<img src="/resources/images/No_image.png">
 										</c:if>
 										<c:if test="${not empty dto.files_sys}">
 											<img src="/mbFile/${dto.files_sys}">
 										</c:if>
-									</div>
-									<div class="card-body">
+									</a>
+								</div>
+								<div class="card-body">
+									<a href="/miss/toDetail?seq_board=${dto.seq_board}">
 										<h6 class="card-title" id="cardTitleMd">${dto.board_title}</h6>
 										<div id="cardInfo">
 											<p>실종 지역&nbsp;:&nbsp;&nbsp;<strong>${dto.miss_area}</strong></p>
@@ -237,13 +288,17 @@
 											<c:set var="TextDate" value="${dto.written_date}" />
 											<p class="card-text">작&nbsp;성&nbsp;일&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;<strong>${fn:substring(TextDate, 0, 10)}</strong></p>
 										</div>
-									</div>
+									</a>
 								</div>
-							</a>
+							</div>
 						</div>
 						<div class="col-12 d-md-none m-0">
+							<div class="row">
+								<a href="/miss/toDetail?seq_board=${dto.seq_board}">
+								<span class="card-title" id="cardTitleSm">${dto.board_title}</span></a>
+							</div>
 							<div class="row resMissing">
-								<div class="col">
+								<div class="col imgSm d-flex">
 									<a href="/miss/toDetail?seq_board=${dto.seq_board}">
 									<c:if test="${empty dto.files_sys}">
                             			<img src="/resources/images/No_image.png">
@@ -252,14 +307,17 @@
                            		 		<img src="/mbFile/${dto.files_sys}">
                         			</c:if></a>
 								</div>
-								<div class="col">
-									<h4 class="card-title" id="cardTitleSm">${dto.board_title}</h4>
-									<p>실종 지역 : <strong>${dto.miss_area}</strong></p>
-									<p>동물 종류 : <strong>${dto.animal_kind}</strong></p>
-									<c:set var="TextValue" value="${dto.miss_date}" />
-									<p class="card-text">실종일 : <strong>${fn:substring(TextValue, 0, 10)}</strong></p>
-									<c:set var="TextDate" value="${dto.written_date}" />
-									<p class="card-text">작성일 : <strong>${fn:substring(TextDate, 0, 10)}</strong></p>
+								<div class="col cardInfoSmContainer">
+									<a href="/miss/toDetail?seq_board=${dto.seq_board}">
+										<div id="cardInfoSm">
+											<p>실종 지역 : <strong>${dto.miss_area}</strong></p>
+											<p>동물 종류 : <strong>${dto.animal_kind}</strong></p>
+											<c:set var="TextValue" value="${dto.miss_date}" />
+											<p class="card-text">실종일 : <strong>${fn:substring(TextValue, 0, 10)}</strong></p>
+											<c:set var="TextDate" value="${dto.written_date}" />
+											<p class="card-text">작성일 : <strong>${fn:substring(TextDate, 0, 10)}</strong></p>
+										</div>
+									</a>
 								</div>
 
 							</div>
@@ -306,6 +364,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- footer -->
+	<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 	<script>
 		// 글쓰기 버튼눌렀을때
 		$(".writeBtn").click(function(){
@@ -430,4 +490,3 @@
 	
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
