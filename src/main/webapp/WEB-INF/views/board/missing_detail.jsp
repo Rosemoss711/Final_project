@@ -51,6 +51,7 @@
         .writer {
             margin-top: 10px;
             font-size: 14px;
+            border-bottom: 1px solid var(--sil);
         }
         .writer span {
             display: block;
@@ -123,7 +124,7 @@
         }
 
         /* 댓글 타이틀 */
-        .comment-title, .board-title, .writer {
+        .comment-title, .board-title {
             border-bottom: 1px solid black;
         }
 
