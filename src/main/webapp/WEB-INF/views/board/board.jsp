@@ -21,7 +21,12 @@
             /* div {
                 border: 1px solid black;
             } */
-
+			
+			#head{
+            	text-decoration: none;
+                color: rgb(207, 147, 111);
+            }
+			
             ul {
                 list-style: none;
                 text-align: center;
@@ -43,6 +48,10 @@
             a:hover {
                 color: black;
             }
+            
+            table {
+            	table-layout: fixed;
+            }
 
             table td, tr{
                 font-size: 13px;
@@ -59,11 +68,6 @@
             	border-bottom: 2px solid rgb(207, 147, 111);
             }
             
-            #head{
-            	text-decoration: none;
-                color: rgb(207, 147, 111);
-            }
-
             .title:hover{
                 text-decoration: underline;
             }
@@ -121,9 +125,6 @@
                 padding: 5px;
                 font-size: 13px;
             }
-            i{
-                color: rgb(43, 133, 250);
-            }
 
             #search, #searchBtn, #search_type{
                 position: relative;
@@ -154,10 +155,6 @@
             }
             
             /* 반응형 */
-            table {
-            	table-layout: fixed;
-            }
-            
             table .titleTd, .smContentRow {
             	text-overflow: ellipsis;
     			overflow: hidden;
@@ -186,15 +183,22 @@
             	 border: 1px solid lightgray;
             }
 
+            .margin{
+                margin: 0 12vw 0 12vw;
+            }
+            
+            .fa-solid{
+                color: rgb(41, 184, 250);
+            }
+
         </style>
 
         <body>
-            <div>
-                
                 <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 
+            <div class="margin">
                 <div class="row mt-5">
-                    <div class="col" style="padding: 0 10vw 0 10vw;">
+                    <div class="col">
                         <h5 style="display: inline-block; font-size: 17;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}"><strong>${etcMap.bigCategory}</strong> </a></h5>
                         <ul style="display: inline-block; margin-bottom: 0;">
                             <li><a class="category" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${etcMap.category}&category_name=${etcMap.category_name}" id="${etcMap.category}">공지</a></li>
@@ -207,8 +211,8 @@
                 </div>
 
                 <!-- 게시물 뿌려주기 -->
-                <div class="row">
-                    <div class="col d-none d-md-block" style="padding: 0 10vw 0 10vw;">
+                <div class="col">
+                    <div class="col d-none d-md-block">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -268,7 +272,7 @@
                     </div>
                     <div class="row d-none d-md-flex">
                     	<!-- 검색박스부분 -->
-                    	<div class="col" style="padding: 0 10vw 0 10vw;">
+                    	<div class="col">
                         	<form action="/board/toBoard" method="get">
                         	<span class="searchBox">
                             	<input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
@@ -287,15 +291,15 @@
                         	</form>
                     	</div>
                     	<c:if test="${not empty loginSession}" >
-                        	<div class="col" style="padding: 0 10vw 0 10vw;">
+                        	<div class="col">
                             	<button type="button" id="write" ><i class="fa-solid fa-pen"></i>  쓰기</button>
                         	</div>
                     	</c:if>
                 	</div>
                 
                     <%-- sm사이즈 --%>
-                    <div class="col d-md-none" style="padding: 0 10vw 0 10vw;">
-                        <table class="table table-hover">
+                    <div class="col d-md-none">
+                        <table class="table tableSm table-hover">
                             <thead></thead>
                             <tbody>
                                 <c:choose>
@@ -369,7 +373,7 @@
                 </div>
                 <div class="row d-md-none">
                     <!-- 검색박스부분 -->
-                    <div class="col" style="padding-left: 10vw;">
+                    <div class="col">
                         <form action="/board/toBoard" method="get">
                         <span class="searchBoxSm" id="seachSelectSm">
                             <select name="search_type" id="search_type">
@@ -388,7 +392,7 @@
                         </form>
                     </div>
                     <c:if test="${not empty loginSession}" >
-                        <div class="col" style="padding-right: 10vw;">
+                        <div class="col">
                             <button type="button" id="write" ><i class="fa-solid fa-pen"></i>  쓰기</button>
                         </div>
                     </c:if>
@@ -428,11 +432,11 @@
                         </c:choose>
                     </div>
                 </div>
+            </div>
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 
-            </div>
 
             <!--top버튼-->
 	        <a id="topBtn"><img src="/resources/mainImg/DIEALRIGHT.png"></a>

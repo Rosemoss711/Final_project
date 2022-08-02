@@ -54,6 +54,11 @@
 
             #boardBox a{
                 color: black;
+                text-decoration: none;
+            }
+
+            #boardBox a:hover{
+                text-decoration: underline;
             }
 
             .written_date,
@@ -308,7 +313,8 @@
 
             if (referrer.indexOf('toMyPage') < 0 && referrer.indexOf('toShelterVolList') < 0 && referrer.indexOf('toMyBoard') < 0 && referrer.indexOf('toMyComment') < 0 &&
                 referrer.indexOf('toMySupport') < 0 && referrer.indexOf('toMyPay') < 0 && referrer.indexOf('memberList') < 0 && referrer.indexOf('toBlackList') < 0 && referrer.indexOf('toInquiryList') < 0
-                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0){
+                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0
+                && referrer.indexOf('toSignup_business') < 0 && referrer.indexOf('toSingup_general') < 0){
                 sessionStorage.setItem("referrer", document.referrer);
             }
 

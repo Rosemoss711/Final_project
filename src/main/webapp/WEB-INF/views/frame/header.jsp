@@ -116,9 +116,9 @@
 							</a>
 						</c:forEach>
 						<span>Volunteer</span>
-						<a href="/volBoard/lists"><span>봉사신청</span></a>
+						<a href="/volBoard/lists"><span>봉사 신청</span></a>
 						<span>Support</span>
-						<a href="/supportBoard/lists"><span>후원신청</span></a>
+						<a href="/supportBoard/lists"><span>후원 신청</span></a>
 					</div>
 				</div>
 				<span style="font-size: 20px; cursor: pointer" onclick="openNav()">&#9776;</span>
@@ -186,10 +186,7 @@
 			}
 		}
 		
-		document.getElementById("logout").onclick = function(){
-			alert("로그아웃 되었습니다.");
-			location.href = "/member/logout";
-		}
+
 	</script>
 </body>
 </html>

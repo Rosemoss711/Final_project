@@ -90,13 +90,13 @@ html {
 }
 #loginLabel, #mypageLabel, #logout {
 	cursor: pointer;
-	width: 80px;
+	width: 60px !important;
 	font-size: 13px;
 	text-align: end;
 }
 
 #mypageLabel, #logout {
-	width: 60px;
+	width: 70px;
 	margin: 0px;
 }
 #logout {
@@ -249,8 +249,13 @@ i {
 	font-size: larger;
     margin-top: 5px;
 }
+
 .logoutIcon {
 	float: right;
 	margin-top: 5px;
 	padding-left: 10px;
+}
+
+.mainP-Header label {
+	font-weight: normal !important;
 }

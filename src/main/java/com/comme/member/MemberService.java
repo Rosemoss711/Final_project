@@ -275,4 +275,16 @@ public class MemberService {
 	public BlackListDTO blackList(String member_id) throws Exception{
 		return dao.blackList(member_id);
 	}
+	
+	public Integer searchMoney(String member_id, String search_type, String search_keyword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("search_type", search_type);
+		map.put("member_id", member_id);
+		map.put("search_keyword", search_keyword);
+		return dao.searchMoney(map);
+	}
+	
+	public Integer searchMoney2(String member_id) {
+		return dao.searchMoney2(member_id);
+	}
 }

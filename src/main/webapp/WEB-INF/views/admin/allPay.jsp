@@ -171,13 +171,13 @@
                     <div class="col">
                         <ul id="profileTap">
                             <li><a href="/member/toMyPage">회원정보</a></li>
-                            <li><a href="/manager/memberList?curPage=1">전체 회원 목록</a></li>
-                            <li><a href="/manager/toBlackList?curPage=1">블랙리스트 관리</a></li>
-                            <li><a href="/manager/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
-                            <li><a href="/manager/toCategoryCM">카테고리 관리</a></li>
+                            <li><a href="/admin/memberList?curPage=1">전체 회원 목록</a></li>
+                            <li><a href="/admin/toBlackList?curPage=1">블랙리스트 관리</a></li>
+                            <li><a href="/admin/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
+                            <li><a href="/admin/toCategoryCM">카테고리 관리</a></li>
                             <li><a href="/member/toMyBoard">내 글</a></li>
                             <li><a href="/member/toMyComment">내 댓글</a></li>
-                            <li><a href="/manager/toAllPay">사용자 후원 내역 조회</a></li>
+                            <li><a href="/admin/toAllPay">사용자 후원 내역 조회</a></li>
                             <li><a href="#" id="return">돌아가기</a></li>
                         </ul>
                     </div>
@@ -239,7 +239,7 @@
                 <div class="row" id="searchBox">
                     <!-- 검색박스부분 -->
                     <div class="col">
-                        <form action="/manager/toAllPay" method="get">
+                        <form action="/admin/toAllPay" method="get">
                         <span class="searchBox">
                             <input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
                             <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -261,30 +261,30 @@
                         <c:choose>
                         <c:when test="${etcMap.search_type eq null}">
                                 <c:if test="${paging.startPage!=1}" >
-                                    <a id="first" href="/manager/toAllPay?nowPage=1">첫 페이지</a>
-                                    <a class="arrow left" href="/manager/toAllPay?nowPage=${paging.startPage-1}">&lt;</a>
+                                    <a id="first" href="/admin/toAllPay?nowPage=1">첫 페이지</a>
+                                    <a class="arrow left" href="/admin/toAllPay?nowPage=${paging.startPage-1}">&lt;</a>
                                 </c:if>	
                                 <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p" step="1">
-                                    <a href="/manager/toAllPay?nowPage=${p}"
+                                    <a href="/admin/toAllPay?nowPage=${p}"
                                         class="paging">${p}</a>
                                 </c:forEach>
                                 <c:if test="${paging.endPage != paging.lastPage}">
-                                    <a class="arrow right" href="/manager/toAllPay?nowPage=${paging.endPage+1}">&gt;</a>
-                                    <a id="last" href="/manager/toAllPay?nowPage=${paging.lastPage}">끝 페이지</a>
+                                    <a class="arrow right" href="/admin/toAllPay?nowPage=${paging.endPage+1}">&gt;</a>
+                                    <a id="last" href="/admin/toAllPay?nowPage=${paging.lastPage}">끝 페이지</a>
                                 </c:if>
                         </c:when>
                         <c:otherwise>
                                 <c:if test="${paging.startPage!=1}" >
-                                    <a id="first" href="/manager/toAllPay?nowPage=1&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">첫 페이지</a>
-                                    <a class="arrow left" href="/manager/toAllPay?nowPage=${paging.startPage-1}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">&lt;</a>
+                                    <a id="first" href="/admin/toAllPay?nowPage=1&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">첫 페이지</a>
+                                    <a class="arrow left" href="/admin/toAllPay?nowPage=${paging.startPage-1}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">&lt;</a>
                                 </c:if>	
                                 <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p" step="1">
-                                    <a href="/manager/toAllPay?nowPage=${p}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}"
+                                    <a href="/admin/toAllPay?nowPage=${p}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}"
                                         class="paging">${p}</a>
                                 </c:forEach>
                                 <c:if test="${paging.endPage != paging.lastPage}">
-                                    <a class="arrow right" href="/manager/toAllPay?nowPage=${paging.endPage+1}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">&gt;</a>
-                                    <a id="last" href="/manager/toAllPay?nowPage=${paging.lastPage}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">끝 페이지</a>
+                                    <a class="arrow right" href="/admin/toAllPay?nowPage=${paging.endPage+1}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">&gt;</a>
+                                    <a id="last" href="/admin/toAllPay?nowPage=${paging.lastPage}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}">끝 페이지</a>
                                 </c:if>
                         </c:otherwise>
                         </c:choose>
@@ -315,21 +315,19 @@
                 }
             };
 
-            let payMoney = document.querySelectorAll('.payMoney');
-            let totalMoney = 0;
-            payMoney.forEach(e=>{
-                totalMoney += parseInt(e.getAttribute('data-value'));
-            })
-
-            if('${etcMap.searchMoney}'){
-                document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+            if(document.getElementById('totalMoney')){
+                if('${etcMap.searchMoney}'){
+                    document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+                }
             }
+            
             
             let referrer = document.referrer;
 
             if (referrer.indexOf('toMyPage') < 0 && referrer.indexOf('toShelterVolList') < 0 && referrer.indexOf('toMyBoard') < 0 && referrer.indexOf('toMyComment') < 0 &&
                 referrer.indexOf('toMySupport') < 0 && referrer.indexOf('toMyPay') < 0 && referrer.indexOf('memberList') < 0 && referrer.indexOf('toBlackList') < 0 && referrer.indexOf('toInquiryList') < 0
-                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0){
+                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0
+                && referrer.indexOf('toSignup_business') < 0 && referrer.indexOf('toSingup_general') < 0){
                 sessionStorage.setItem("referrer", document.referrer);
             }
 

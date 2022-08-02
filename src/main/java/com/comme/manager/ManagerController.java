@@ -21,7 +21,7 @@ import com.comme.utils.PagingVO;
 import com.google.gson.Gson;
 
 @Controller
-@RequestMapping(value = "/manager")
+@RequestMapping(value = "/admin")
 public class ManagerController {
 	@Autowired
 	private ManagerService service;
@@ -40,7 +40,7 @@ public class ManagerController {
 		model.addAttribute("mainCategory", boardService.mainCategory());
         model.addAttribute("inquiry", boardService.inquiryCategory());
 		
-		return "/manager/memberList";
+		return "admin/memberList";
 	}
 	
 	@ResponseBody
@@ -81,7 +81,7 @@ public class ManagerController {
 		model.addAttribute("category", category);
 		model.addAttribute("mainCategory", boardService.mainCategory());
         model.addAttribute("inquiry", boardService.inquiryCategory());
-		return "/manager/memberList";
+		return "admin/memberList";
 	}
 	
 	@RequestMapping(value="/toSearchGrade")
@@ -94,7 +94,7 @@ public class ManagerController {
 		model.addAttribute("member_grade", member_grade);
 		model.addAttribute("mainCategory", boardService.mainCategory());
         model.addAttribute("inquiry", boardService.inquiryCategory());
-		return "/manager/memberList";
+		return "/admin/memberList";
 	}
 	
 	@RequestMapping(value="/toBlackList")
@@ -106,7 +106,7 @@ public class ManagerController {
 		model.addAttribute("list", list);
 		model.addAttribute("mainCategory", boardService.mainCategory());
         model.addAttribute("inquiry", boardService.inquiryCategory());
-		return "/manager/memberList";
+		return "admin/memberList";
 	}
 	
 	@RequestMapping(value = "/toInquiryList") // 문의 신고 게시판 목록 띄워주기
@@ -174,14 +174,14 @@ public class ManagerController {
 		model.addAttribute("etcMap", etcMap); // 잡다한거 넘기는거
 		model.addAttribute("mainCategory", boardService.mainCategory()); // 상단바 카테고리
         model.addAttribute("inquiry", boardService.inquiryCategory()); // 상단바 문의 들어가기
-		return "/manager/InquiryList";
+		return "admin/InquiryList";
 	}
 	
 	@RequestMapping(value="/toCategoryCM")
 	public String toCategoryCM(Model model) throws Exception {
 		model.addAttribute("mainCategory", boardService.mainCategory());
         model.addAttribute("inquiry", boardService.inquiryCategory());
-		return "/manager/categoryCustom";
+		return "/admin/categoryCustom";
 	}
 	
 	
@@ -189,7 +189,7 @@ public class ManagerController {
 	public String addMainCategory(CategoryDTO dto) throws Exception{
 		System.out.println("category_name : " + dto.getCategory_name());
 		service.addMainCategory(dto);
-		return "redirect:/manager/toCategoryCM";
+		return "redirect:/admin/toCategoryCM";
 	}
 	
 	@ResponseBody
@@ -206,7 +206,7 @@ public class ManagerController {
 	public String deleteMainCategory(int seq_category) throws Exception{
 		System.out.println("seq_category : " + seq_category);
 		service.deleteCategory(seq_category);
-		return "redirect:/manager/toCategoryCM";
+		return "redirect:/admin/toCategoryCM";
 	}
 	
 	@ResponseBody
@@ -221,7 +221,7 @@ public class ManagerController {
 	public String mofidyMainCategory(CategoryDTO dto) throws Exception{
 		System.out.println("수정 할 category_name : " + dto.getCategory_name());
 		service.modifyCategory(dto);
-		return "redirect:/manager/toCategoryCM";
+		return "redirect:/admin/toCategoryCM";
 	}
 	
 	@ResponseBody
@@ -277,7 +277,7 @@ public class ManagerController {
 		model.addAttribute("list", service.userPayList(vo, search_type, search_keyword));
 		model.addAttribute("etcMap", etcMap);
 		
-		return "manager/allPay";
+		return "admin/allPay";
 	}
 	
 }

@@ -8,12 +8,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>봉사 게시판</title>
+    <title>봉사게시판 - Comme</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -147,7 +148,9 @@
             width: 60px;
         }
 
-
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
     <!--  jQuery, bootstrap
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -175,7 +178,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/frame/header.jsp"/>
-<div class="content">
+
+<div class="content margin">
     <div class="content_header">
         <h3>봉사 게시판</h3>
     </div>
@@ -222,12 +226,12 @@
                            oninput="this.setCustomValidity('')">
                 </label>
                 <textarea name="board_content" id="board_content"></textarea>
+            </div>
+            <div class="board_footer">
+                <button id="list" type="button">목록</button>
                 <button type="submit" id="write">작성</button>
             </div>
         </form>
-        <div class="board_footer">
-            <button id="list" type="button">목록</button>
-        </div>
     </div>
 </div>
 <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>

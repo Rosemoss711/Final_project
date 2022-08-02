@@ -182,13 +182,13 @@
                     <div class="col" style="padding: 0 13vw 0 13vw;">
                         <ul id="profileTap">
                             <li><a href="/member/toMyPage">회원정보</a></li>
-                            <li><a href="/manager/memberList?curPage=1">전체 회원 목록</a></li>
-                            <li><a href="/manager/toBlackList?curPage=1">블랙리스트 관리</a></li>
-                            <li><a href="/manager/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
-                            <li><a href="/manager/toCategoryCM">카테고리 관리</a></li>
+                            <li><a href="/admin/memberList?curPage=1">전체 회원 목록</a></li>
+                            <li><a href="/admin/toBlackList?curPage=1">블랙리스트 관리</a></li>
+                            <li><a href="/admin/toInquiryList?seq_category=${inquiry.seq_category}">문의/신고</a></li>
+                            <li><a href="/admin/toCategoryCM">카테고리 관리</a></li>
                             <li><a href="/member/toMyBoard">내 글</a></li>
                             <li><a href="/member/toMyComment">내 댓글</a></li>
-                            <li><a href="/manager/toAllPay">사용자 후원 내역 조회</a></li>
+                            <li><a href="/admin/toAllPay">사용자 후원 내역 조회</a></li>
                             <li><a href="#" id="return">돌아가기</a></li>
                         </ul>
                     </div>
@@ -404,7 +404,8 @@
 
             if (referrer.indexOf('toMyPage') < 0 && referrer.indexOf('toShelterVolList') < 0 && referrer.indexOf('toMyBoard') < 0 && referrer.indexOf('toMyComment') < 0 &&
                 referrer.indexOf('toMySupport') < 0 && referrer.indexOf('toMyPay') < 0 && referrer.indexOf('memberList') < 0 && referrer.indexOf('toBlackList') < 0 && referrer.indexOf('toInquiryList') < 0
-                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0){
+                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0
+                && referrer.indexOf('toSignup_business') < 0 && referrer.indexOf('toSingup_general') < 0){
                 sessionStorage.setItem("referrer", document.referrer);
             }
 

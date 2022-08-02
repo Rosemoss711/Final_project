@@ -215,6 +215,13 @@
                                         </c:forEach>
                                    </c:otherwise>
                                 </c:choose>
+
+
+                                <c:if test="${!empty list}" >
+                                    <tr style="border-top: 2px solid black;">
+                                        <td colspan="7" id="totalMoney">총 금액&nbsp; : &nbsp; &#8361;</td>
+                                    </tr>
+                                </c:if>
                                 
                             </tbody>
                         </table>
@@ -301,7 +308,8 @@
 
             if (referrer.indexOf('toMyPage') < 0 && referrer.indexOf('toShelterVolList') < 0 && referrer.indexOf('toMyBoard') < 0 && referrer.indexOf('toMyComment') < 0 &&
                 referrer.indexOf('toMySupport') < 0 && referrer.indexOf('toMyPay') < 0 && referrer.indexOf('memberList') < 0 && referrer.indexOf('toBlackList') < 0 && referrer.indexOf('toInquiryList') < 0
-                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0){
+                && referrer.indexOf('toCategoryCM') < 0 && referrer.indexOf('toAllPay') < 0 && referrer.indexOf('toCheckVol') < 0 && referrer.indexOf('toMyPayList') < 0
+                && referrer.indexOf('toSignup_business') < 0 && referrer.indexOf('toSingup_general') < 0){
                 sessionStorage.setItem("referrer", document.referrer);
             }
 
@@ -310,6 +318,12 @@
                 sessionStorage.removeItem("referrer"); 
                 location.href = referrer || '/';
             })
+
+            if(document.getElementById('totalMoney')){
+                if('${etcMap.searchMoney}'){
+                    document.getElementById('totalMoney').innerText += parseInt('${etcMap.searchMoney}').toLocaleString('en-US');
+                }
+            }
         </script>
 
         </html>

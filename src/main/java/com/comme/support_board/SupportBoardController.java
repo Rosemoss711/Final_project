@@ -60,7 +60,7 @@ public class SupportBoardController {
 
         fileService.insert_file(seq_board,files_name,temp_files,path,"support_files");
 
-        return "redirect:/supportBoard/lists";
+        return "redirect:/supportBoard/view?seq_board="+seq_board;
     }
     @GetMapping("/view")
     public String detail(@RequestParam(value = "seq_board") int seq_board, Model model) throws Exception {
@@ -88,12 +88,12 @@ public class SupportBoardController {
         return "pay/payment";
     }
 
-    @PostMapping("/delete")
-    public String delete(int seq_board, @RequestParam("file_name") List<String> file_name) throws Exception {
-        supportBoardService.delete(seq_board);
-        String path = httpSession.getServletContext().getRealPath("");
-        fileService.delete_file(file_name, path);
-
+    @PostMapping (value = "/delete")
+	public String delete(int seq_board /* , @RequestParam("file_name") List<String> file_name */) throws Exception {
+//        supportBoardService.delete(seq_board);
+//        String path = httpSession.getServletContext().getRealPath("");
+//        fileService.delete_file(file_name, path);
+    	supportBoardService.PostHide(seq_board);
         return "redirect:/supportBoard/lists";
     }
 

@@ -29,8 +29,6 @@
 
         .content {
             margin-top: 50px;
-            padding-left: 90px;
-            padding-right: 90px;
         }
 
         .board-title {
@@ -239,11 +237,15 @@
             gap: 20px;
             justify-content: flex-end;
         }
+
+        .margin{
+            margin: 0 12vw 0 12vw;
+        }
     </style>
 </head>
 <body>
-<div class="content">
-    <div class="row title-body">
+<div class="content margin">
+    <div class="row title-body mt-5">
         <div class="col-5 d-none d-md-flex">
 			<h5><strong>실종 게시판</strong></h5>
 		</div>
@@ -329,7 +331,7 @@
                             <div class="comment_header">
                                 <span class="nick">${commentDTO.comment_nickname}</span>
                                 <span>${commentDTO.comment_date}</span>
-                                <c:if test="${loginSession.member_id eq commentDTO.comment_id}">
+                                <c:if test="${loginSession.member_id eq commentDTO.comment_id|| loginSession.member_grade=='4'}">
                                     <div class="col commentBtn">
                                         <span class="commentModify">수정</span>
                                         <span class="commentModifyOk d-none" data-value="${commentDTO.seq_comment}">수정완료</span>
@@ -393,7 +395,6 @@
             },
             success: function (data) {
                 if (data === "success") {
-                    alert("댓글 등록에 성공했습니다.");
                     showComment();
                 }
             },
@@ -438,7 +439,6 @@
                 , success: function (data) {
                     console.log(data);
                     if (data === "success") {
-                        alert("댓글이 수정되었습니다.");
                         showComment();
                         <%--location.href = "/miss/toDetail?seq_board=" + ${map.MissingBoardDTO.seq_board};--%>
                     }
@@ -458,7 +458,6 @@
                     , type: "post"
                     , success: function (data) {
                         if (data === "success") {
-                            alert("댓글이 삭제되었습니다.");
                             showComment();
                         }
                     }, error: function (e) {
@@ -499,22 +498,25 @@
                         commentBtn.classList.add("commentBtn");
                         commentBtn.classList.add("col");
 
-                        let commentModify = document.createElement("span");
-                        commentModify.innerHTML = "수정"
-                        commentModify.classList.add("commentModify");
+                        if("${loginSession.member_id}"===e.querySelector("comment_id").innerHTML||${loginSession.member_grade == '4'}){
+                            let commentModify = document.createElement("span");
+                            commentModify.innerHTML = "수정"
+                            commentModify.classList.add("commentModify");
 
-                        let commentModifyOk = document.createElement("span");
-                        commentModifyOk.classList.add("commentModifyOk");
-                        commentModifyOk.classList.add("d-none");
-                        commentModifyOk.innerHTML = "수정완료"
-                        commentModifyOk.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
+                            let commentModifyOk = document.createElement("span");
+                            commentModifyOk.classList.add("commentModifyOk");
+                            commentModifyOk.classList.add("d-none");
+                            commentModifyOk.innerHTML = "수정완료"
+                            commentModifyOk.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
 
-                        let commentDelete = document.createElement("span");
-                        commentDelete.classList.add("commentDelete");
-                        commentDelete.innerHTML = "삭제"
-                        commentDelete.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
+                            let commentDelete = document.createElement("span");
+                            commentDelete.classList.add("commentDelete");
+                            commentDelete.innerHTML = "삭제"
+                            commentDelete.setAttribute("data-value", e.querySelector("seq_comment").innerHTML);
 
-                        commentBtn.append(commentModify, commentModifyOk, commentDelete);
+                            commentBtn.append(commentModify, commentModifyOk, commentDelete);
+
+                        }
                         comment_header.append(nick, date, commentBtn);
 
                         let input = document.createElement("input");
@@ -531,6 +533,7 @@
 
                     }
                 )
+                document.querySelector("comment-title> span").innerHTML = 'Comment('+item.length+')';
             },
             error: (error) => {
                 console.log(error);

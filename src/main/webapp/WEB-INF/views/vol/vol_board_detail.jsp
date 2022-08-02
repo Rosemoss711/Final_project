@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="/WEB-INF/views/frame/header.jsp"/>
+
 
 
 
@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>${map.board_title} - 봉사게시판</title>
     <style>
         :root {
             --sil: #d5d5d5;
@@ -35,10 +35,7 @@
         }
 
         .content {
-            margin-top : 50px;
-            padding-left: 90px;
-            padding-right: 90px;
-
+            margin: 0 12vw 0 12vw;
         }
 
         .content_header {
@@ -80,13 +77,13 @@
         }
 
         .board_header .written_date {
-            grid-area: 2/3/3/4;
+            grid-area: 2/3/3/7;
             color: var(--sil);
             font-size: 0.8em;
         }
 
         .board_header .view_count {
-            grid-area: 2/4/3/5;
+            grid-area: 2/9/3/11;
             color: var(--sil);
             font-size: 0.8em;
         }
@@ -163,7 +160,7 @@
         }
 
         .boardList li button {
-            flex-basis: 45px;
+            flex-basis: 65px;
         }
 
         .boardList a {
@@ -186,6 +183,33 @@
             width: 60px;
         }
 
+        @media screen and (max-width: 960px) {
+            .content {
+                margin: 0 0 0 0;
+                padding : 0 10vw 0 10vw;
+            }
+            .board_header .title {
+                grid-area: 1/1/2/7;
+            }
+
+            .board_header .nickname {
+                grid-area: 2/1/3/3;
+            }
+
+            .board_header .written_date {
+                grid-area: 2/3/3/6;
+            }
+            .board_header .view_count {
+                grid-area: 2/9/3/11;
+            }
+            .board_header #modify {
+                grid-area: 1/7/2/9;
+            }
+            .board_header #delete {
+                grid-area: 1/9/2/11;
+            }
+        }
+
     </style>
 </head>
 <link rel="stylesheet"
@@ -205,9 +229,9 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <body>
+    <jsp:include page="/WEB-INF/views/frame/header.jsp"/>
 
-
-    <div class="content">
+    <div class="content margin">
         <div class="content_header">
             <h3>봉사 게시판</h3>
         </div>
@@ -217,7 +241,7 @@
                 <span class="nickname"><c:out value="${map.writer_nickname}"/></span>
                 <span class="written_date"><fmt:formatDate value="${map.written_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                 <span class="view_count">조회수 <c:out value="${map.view_count}"/></span>
-                <c:if test="${loginSession.member_id eq map.member_id || map.member_grade=='4'}">
+                <c:if test="${loginSession.member_id eq map.member_id || loginSession.member_grade=='4'}">
                     <button type="button" id="modify">수정</button>
                     <button type="button" id="delete">삭제</button>
                     <script>
@@ -309,10 +333,24 @@
             </ul>
             <div class="board_footer">
                 <button id="list" type="button">목록</button>
-                <button id="write" type="button">글쓰기</button>
+                <c:if test="${loginSession.member_grade =='2'}">
+                    <button id="write" type="button">글쓰기</button>
+                    <script>
+                        document.querySelector("#write").addEventListener("click",()=>{
+                            let brn = "${loginSession.member_grade}";
+                            if(brn==="2"){
+                                location.href = "/volBoard/write"
+                            } else{
+                                alert("기관 회원만 이용할 수 있는 기능입니다.");
+                            }
+                        })
+                    </script>
+                </c:if>
             </div>
         </div>
     </div>
+
+    <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 
     <script>
 
@@ -324,7 +362,11 @@
     let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000);
     deadLine = new Date(deadLine);
 
-    if(date < deadLine){
+    let vol_count = "${map.vol_count}";
+    let vol_accepted = "${map.accepted}";
+
+
+    if(date < deadLine && vol_accepted < vol_count){
         document.querySelector("#volSubmit").disabled = false;
     }
     if(date > deadLine){
@@ -332,16 +374,15 @@
         document.querySelector("#tel").readOnly = true;
     }
 
+    if(vol_accepted>=vol_count) {
+        document.querySelector("#tel").value = "이미 모집이 완료된 봉사활동입니다";
+        document.querySelector("#tel").readOnly = true;
+    }
+
+
     document.querySelector("#list").addEventListener("click", e => location.href = "/volBoard/lists");
 
-    document.querySelector("#write").addEventListener("click",()=>{
-        let brn = "${loginSession.member_grade}";
-        if(brn==="2"){
-            location.href = "/volBoard/write"
-        } else{
-            alert("기관 회원만 이용할 수 있는 기능입니다.");
-        }
-    })
+
 
     //봉사활동 제출
     document.querySelector("#volSubmit").addEventListener("click", e => {
@@ -400,4 +441,4 @@
 </script>
 </body>
 </html>
-<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+

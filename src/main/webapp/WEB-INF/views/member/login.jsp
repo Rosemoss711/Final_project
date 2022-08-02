@@ -66,6 +66,10 @@
 	    width: 200px;
 	}
 
+	.margin{
+    margin: 0 12vw 0 12vw;
+	}
+
 </style>
 
 <body>
@@ -76,7 +80,7 @@
             <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
         </div>
 
-        <div class="body">
+        <div class="body margin">
             <div class="bodyTitle">
                 <div class="row">
                     <div class="col d-flex justify-content-center">
@@ -148,7 +152,8 @@
 
 	let referrer = document.referrer;
 
-	if (referrer.indexOf('toSignupPage') < 0 && referrer.indexOf('toFindIdPage') < 0 && referrer.indexOf('toFindPwPage') < 0 && referrer.indexOf('toLoginPage') < 0){
+	if (referrer.indexOf('toSignupPage') < 0 && referrer.indexOf('toFindIdPage') < 0 && referrer.indexOf('toFindPwPage') < 0 && 
+				referrer.indexOf('toLoginPage') < 0 && referrer.indexOf('toSignup_business') < 0 && referrer.indexOf('toSingup_general') < 0){
 			sessionStorage.setItem("referrer", document.referrer);
 	}
 

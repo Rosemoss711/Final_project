@@ -19,6 +19,8 @@ public interface SupportBoardDAO {
     int delete(int seq_board) throws Exception;
 
     int update(SupportBoardDTO supportBoardDTO) throws Exception;
+    
+    void PostHide(int seq_board) throws Exception;
 
     List<Map<String, Object>> search(@Param("start") int start, @Param("end") int end, @Param("category") String category, @Param("search") String search) throws Exception;
 }

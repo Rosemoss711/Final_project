@@ -1,7 +1,6 @@
 package com.comme.member;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +157,9 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/brnCheck") // 사업자번호 중복확인
     public String brnCheck(String member_brn) throws Exception {
-    	
+		System.out.println(member_brn);
+    	member_brn = member_brn.substring(0,3)+"-"+member_brn.substring(3,5)+"-"+member_brn.substring(5);
+		System.out.println(member_brn);
     	int rs = service.brnCheck(member_brn);
       
       if (rs == 0) {
@@ -167,7 +168,8 @@ public class MemberController {
     		return "nope";
     	}
     }
-
+    
+    @ResponseBody
     @RequestMapping(value = "/nicknameCheck") // 닉네임 중복확인
     public String nicknameCheck(String nickname) throws Exception {
     	int rs = service.nicknameCheck(nickname);
@@ -336,6 +338,7 @@ public class MemberController {
 		Map<String, Object> etcMap = new HashMap<>();
 		etcMap.put("search_keyword", search_keyword); // 검색 키워드
 		etcMap.put("search_type", search_type); // 검색 타입
+		etcMap.put("searchMoney", service.searchMoney(memberId, search_type, search_keyword));
 		
 		model.addAttribute("mainCategory", boardService.mainCategory());
 		model.addAttribute("inquiry", boardService.inquiryCategory());
@@ -369,6 +372,7 @@ public class MemberController {
 		model.addAttribute("inquiry", boardService.inquiryCategory());
 		model.addAttribute("paging", vo); // 페이징정보
 		model.addAttribute("list", service.myPayList(vo, memberId));
+		model.addAttribute("searchMoney", service.searchMoney2(memberId));
 		
 		return "member/myPayList";
 	}

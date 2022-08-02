@@ -222,6 +222,11 @@
         font-size: 17px;
     }
 
+	#categoryTitle a, #categoryTitle i {
+        text-decoration: none;
+        color: rgb(207, 147, 111);
+    }
+
     #title, select{
         position: relative;
         top: 0;
