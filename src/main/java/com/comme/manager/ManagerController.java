@@ -50,18 +50,18 @@ public class ManagerController {
 		BlackListDTO dto = service.selectId(member_id);
 		
 		if(blackListChk.equals("false")) { // 체크박스 해제상태일 때
-			System.out.println("해제");
+//			System.out.println("해제");
 			service.deleteBlackList(member_id);
 		}else { // 블랙리스트 체크박스 체크됐을 때
-			System.out.println("체크");
+//			System.out.println("체크");
 			if(dto == null) {
-				System.out.println("블랙 인서트");
+//				System.out.println("블랙 인서트");
 				service.insertBlackList(new BlackListDTO(member_id, blackListCtt, null));	
 			}else if(dto != null && !dto.getBlacklist_content().equals(blackListCtt)) {
-				System.out.println("블랙 업데이트");
+//				System.out.println("블랙 업데이트");
 				service.insertBlackList(new BlackListDTO(member_id, blackListCtt, null));	
 			}else {
-				System.out.println("블랙 저장 안함");				
+//				System.out.println("블랙 저장 안함");
 			}
 		}
 		
@@ -115,11 +115,11 @@ public class ManagerController {
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
 		// 하다보니까 변수명을 좀 그지같이 짯는데 요령껏 이해해주세요
-		System.out.println("seq_category : " + seq_category); // 대분류 카테고리
-		System.out.println("small_category : " + small_category); // 소분류 카테고리
-		System.out.println("search_keyword : " + search_keyword); // 검색 키워드
-		System.out.println("search_type : " + search_type); // 검색 타입
-		System.out.println("category_name : " + category_name); // 카테고리네임
+//		System.out.println("seq_category : " + seq_category); // 대분류 카테고리
+//		System.out.println("small_category : " + small_category); // 소분류 카테고리
+//		System.out.println("search_keyword : " + search_keyword); // 검색 키워드
+//		System.out.println("search_type : " + search_type); // 검색 타입
+//		System.out.println("category_name : " + category_name); // 카테고리네임
 		
 		if(small_category == null) { // 처음 그냥 대분류카테고리 누르고 들어오면 당연히 값이 없음
 			small_category = "0";
@@ -145,7 +145,7 @@ public class ManagerController {
 		}
 		
 		
-		System.out.println(total);
+//		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) { // 처음 게시판에 접속하면 얻게 되는 기본 페이지 값 cntPerPage 조절하면 몇개뿌릴지 선택가능함
 			nowPage = "1";
 			cntPerPage = "20";
@@ -187,7 +187,7 @@ public class ManagerController {
 	
 	@RequestMapping(value = "/addMainCategory") // 상위 카테고리 추가
 	public String addMainCategory(CategoryDTO dto) throws Exception{
-		System.out.println("category_name : " + dto.getCategory_name());
+//		System.out.println("category_name : " + dto.getCategory_name());
 		service.addMainCategory(dto);
 		return "redirect:/admin/toCategoryCM";
 	}
@@ -195,8 +195,8 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/addSubCategory") // 하위 카테고리 추가
 	public String addSubCategory(CategoryDTO dto) throws Exception{
-		System.out.println("category_name : " + dto.getCategory_name());
-		System.out.println("category_pk : " + dto.getCategory_pk());
+//		System.out.println("category_name : " + dto.getCategory_name());
+//		System.out.println("category_pk : " + dto.getCategory_pk());
 		service.addSubCategory(dto);
 		return String.valueOf(dto.getSeq_category());
 	}
@@ -204,7 +204,7 @@ public class ManagerController {
 	
 	@RequestMapping(value = "/deleteMainCategory") // 카테고리 삭제
 	public String deleteMainCategory(int seq_category) throws Exception{
-		System.out.println("seq_category : " + seq_category);
+//		System.out.println("seq_category : " + seq_category);
 		service.deleteCategory(seq_category);
 		return "redirect:/admin/toCategoryCM";
 	}
@@ -212,14 +212,14 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/deleteSubCategory") // 카테고리 삭제
 	public String deleteSubCategory(int seq_category) throws Exception{
-		System.out.println("seq_category : " + seq_category);
+//		System.out.println("seq_category : " + seq_category);
 		service.deleteCategory(seq_category);
 		return "yes";
 	}
 	
 	@RequestMapping(value = "/mofidyMainCategory") // 상위 카테고리 이름 수정
 	public String mofidyMainCategory(CategoryDTO dto) throws Exception{
-		System.out.println("수정 할 category_name : " + dto.getCategory_name());
+//		System.out.println("수정 할 category_name : " + dto.getCategory_name());
 		service.modifyCategory(dto);
 		return "redirect:/admin/toCategoryCM";
 	}
@@ -227,7 +227,7 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/mofidySubCategory") // 하위 카테고리 이름 수정
 	public String mofidySubCategory(CategoryDTO dto) throws Exception{
-		System.out.println("수정 할 category_name : " + dto.getCategory_name());
+//		System.out.println("수정 할 category_name : " + dto.getCategory_name());
 		service.modifyCategory(dto);
 		return "yes";
 	}
@@ -235,7 +235,7 @@ public class ManagerController {
 	@ResponseBody
 	@RequestMapping(value = "/selectCategory" , produces = "application/json; charset=UTF-8")
 	public String selectCategory(int seq_category, Model model) throws Exception{
-		System.out.println("seq_category : " + seq_category);
+//		System.out.println("seq_category : " + seq_category);
 		
 		 Gson gson = new Gson();
          String listJson = gson.toJson(service.selectCategory(seq_category)).toString();
@@ -248,8 +248,8 @@ public class ManagerController {
 			@RequestParam(value="nowPage", required=false)String nowPage,
 			@RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception{
 		
-		System.out.println("search_keyword : " + search_keyword);
-		System.out.println("search_type : " + search_type);
+//		System.out.println("search_keyword : " + search_keyword);
+//		System.out.println("search_type : " + search_type);
 		
 		int total = service.countPay(search_type, search_keyword); 
 		

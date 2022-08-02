@@ -45,11 +45,11 @@ public class BoardController {
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
 		// 하다보니까 변수명을 좀 그지같이 짯는데 요령껏 이해해주세요
-		System.out.println("seq_category : " + seq_category); // 대분류 카테고리
-		System.out.println("small_category : " + small_category); // 소분류 카테고리
-		System.out.println("search_keyword : " + search_keyword); // 검색 키워드
-		System.out.println("search_type : " + search_type); // 검색 타입
-		System.out.println("category_name : " + category_name); // 카테고리네임
+//		System.out.println("seq_category : " + seq_category); // 대분류 카테고리
+//		System.out.println("small_category : " + small_category); // 소분류 카테고리
+//		System.out.println("search_keyword : " + search_keyword); // 검색 키워드
+//		System.out.println("search_type : " + search_type); // 검색 타입
+//		System.out.println("category_name : " + category_name); // 카테고리네임
 		
 		if(small_category == null) { // 처음 그냥 대분류카테고리 누르고 들어오면 당연히 값이 없음
 			small_category = "0";
@@ -69,9 +69,9 @@ public class BoardController {
 		
 		int total = 0; // 뿌려줄 게시물의 총 개수 계산하는거 검색 유무에 따라서 뿌려줄 게시물에 개수가 달라짐 소분류 카테고리 처리 유무는 위에서 0으로 처리해서 매퍼에 예외처리해줫음
 		if(search_keyword == null) {
-			System.out.println(seq_category);
-			System.out.println(small_category);
-			System.out.println(category_name);
+//			System.out.println(seq_category);
+//			System.out.println(small_category);
+//			System.out.println(category_name);
 			total = service.countBoard(Integer.parseInt(seq_category), Integer.parseInt(small_category), category_name, memberId);
 		}else {
 			total = service.countBySearch(Integer.parseInt(seq_category), Integer.parseInt(small_category), category_name , memberId ,search_type, search_keyword);
@@ -153,11 +153,11 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "/registerBoard") // 글 작성 후 다시 게시판 목록으로
 	public int registerBoard(@RequestBody List<Map<String, Object>> jsonData) throws Exception {
-		System.out.println("jsonData : " + jsonData); // 한번이라도 업로드된 파일정보 + 폼데이타 폼 데이터는 마지막에 오브젝트로 변환하고 푸시해줫기 때문에 항상 마지막 인자값임
+//		System.out.println("jsonData : " + jsonData); // 한번이라도 업로드된 파일정보 + 폼데이타 폼 데이터는 마지막에 오브젝트로 변환하고 푸시해줫기 때문에 항상 마지막 인자값임
 		String[] imgSrc = ((String)jsonData.get(jsonData.size()-1).get("imgSrc[]")).split(","); // 게시물에 등록할때 남아잇는 파일의 정보를 구분자를 기준으로 잘라서 배열에 담아줌
-		for(int i = 0; i < imgSrc.length; i++) {
-			System.out.println("imgSrc : " + imgSrc[i]);
-		}
+//		for(int i = 0; i < imgSrc.length; i++) {
+//			System.out.println("imgSrc : " + imgSrc[i]);
+//		}
 		
 		String memberId = null;
 		String nickName = null;
@@ -186,13 +186,13 @@ public class BoardController {
 	@RequestMapping(value = "/modifyBoard") // 글 수정 작성 후 다시 게시판 목록으로
 	public int modifyBoard(@RequestBody List<Map<String, Object>> jsonData) throws Exception {
 		// 위에 글작성하는거랑 거의 비슷함 마지막만 다름
-		System.out.println("jsonData : " + jsonData);
+//		System.out.println("jsonData : " + jsonData);
 		String[] imgSrc = ((String)jsonData.get(jsonData.size()-1).get("imgSrc[]")).split(",");
-		if(imgSrc.length > 0) {
-			for(int i = 0; i < imgSrc.length; i++) {
-				System.out.println("imgSrc : " + imgSrc[i]);
-			}
-		}
+//		if(imgSrc.length > 0) {
+//			for(int i = 0; i < imgSrc.length; i++) {
+//				System.out.println("imgSrc : " + imgSrc[i]);
+//			}
+//		}
 		
 		String memberId = null;
 		String nickName = null;
@@ -227,7 +227,7 @@ public class BoardController {
 		JsonObject jsonObject = new JsonObject();
 		
 		String fileRoot = session.getServletContext().getRealPath("files");	//저장될 외부 파일 경로
-		System.out.println(fileRoot);
+//		System.out.println(fileRoot);
 		File file = new File(fileRoot);
 		if(!file.exists()) { // 디렉토리 존재여부 확인 후 폴더 생성
 			file.mkdir();
@@ -263,13 +263,13 @@ public class BoardController {
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) throws Exception {
 		
 		// 그냥 게시판 들어오는거랑 90% 이상 흡사하니까 위에 꺼 참조하면됌
-		System.out.println("seq_category : " + seq_category);
-		System.out.println("seq_board : " + seq_board);
-		System.out.println("small_category : " + small_category);
-		System.out.println("search_keyword : " + search_keyword);
-		System.out.println("search_type : " + search_type);
-		System.out.println("category_name : " + category_name);
-		System.out.println("상세보기게시판접속");
+//		System.out.println("seq_category : " + seq_category);
+//		System.out.println("seq_board : " + seq_board);
+//		System.out.println("small_category : " + small_category);
+//		System.out.println("search_keyword : " + search_keyword);
+//		System.out.println("search_type : " + search_type);
+//		System.out.println("category_name : " + category_name);
+//		System.out.println("상세보기게시판접속");
 		
 		
 		if(small_category == null) {
@@ -294,7 +294,7 @@ public class BoardController {
 			total = service.countBySearch(Integer.parseInt(seq_category), Integer.parseInt(small_category), category_name , memberId ,search_type, search_keyword);
 		}
 		
-		System.out.println(total);
+//		System.out.println(total);
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "20";
@@ -334,8 +334,8 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "/registerComment") // 댓글 등록
 	public String registerComment(CommentDTO dto) throws Exception{
-		System.out.println("seq_board : " + dto.getSeq_board());
-		System.out.println("comment_content : " + dto.getComment_content());
+//		System.out.println("seq_board : " + dto.getSeq_board());
+//		System.out.println("comment_content : " + dto.getComment_content());
 		
 		
 		String memberId = null;
@@ -348,14 +348,14 @@ public class BoardController {
 		dto.setComment_id(memberId); // 나중에 세션값으로 세팅
 		dto.setComment_nickname(nickName); // 나중에 세션값으로 세팅
 		service.commentInsert(dto); // 댓글 디비에 저장
-		System.out.println(dto.getSeq_comment());
+//		System.out.println(dto.getSeq_comment());
 		return String.valueOf(dto.getSeq_comment());
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/deleteComment") // 댓글 삭제
 	public String deleteComment(String seq_comment) throws Exception{
-		System.out.println("삭제 요청 한 댓글 번호 : " + seq_comment);
+//		System.out.println("삭제 요청 한 댓글 번호 : " + seq_comment);
 		service.deleteComment(Integer.parseInt(seq_comment));
 		return "yes";
 	}
@@ -363,16 +363,16 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "/modifyComment") // 댓글 수정 요청
 	public String modifyComment(CommentDTO dto) throws Exception{
-		System.out.println("수정 요청 한 댓글 번호 : " + dto.getSeq_comment());
-		System.out.println("수정 한 댓글 내용 : " + dto.getComment_content());
+//		System.out.println("수정 요청 한 댓글 번호 : " + dto.getSeq_comment());
+//		System.out.println("수정 한 댓글 내용 : " + dto.getComment_content());
 		service.updateComment(dto); // 수정요청온 내용으로 댓글 업데이트
 		return "yes";
 	}
 	
 	@RequestMapping(value = "/deletePost") // 게시물 삭제
 	public String deletePost(String seq_board, String seq_category, String category_name) throws Exception{
-		System.out.println("삭제 요청 한 글번호 : " + seq_board);
-		System.out.println("삭제 요청 한 글의 대분류 카테고리 : " + seq_category);
+//		System.out.println("삭제 요청 한 글번호 : " + seq_board);
+//		System.out.println("삭제 요청 한 글의 대분류 카테고리 : " + seq_category);
 		
 		// 삭제하려는 글번호로 저장된 파일 db 데이터들 불러와서 싹 삭제함
 		List<FileDTO> deleteFiles = fileService.deleteFileList(Integer.parseInt(seq_board));

@@ -365,6 +365,11 @@
     let vol_count = "${map.vol_count}";
     let vol_accepted = "${map.accepted}";
 
+    console.log("데드"+deadLine);
+    console.log(date);
+    console.log(vol_count);
+    console.log(vol_accepted);
+
 
     if(date < deadLine && vol_accepted < vol_count){
         document.querySelector("#volSubmit").disabled = false;

@@ -97,6 +97,13 @@
             text-align: center;
         }
 
+        .card a {
+            color : black;
+        }
+        .card a:hover {
+            text-decoration: none;
+        }
+
         .fa-solid {
             font-size: medium;
             vertical-align: super;

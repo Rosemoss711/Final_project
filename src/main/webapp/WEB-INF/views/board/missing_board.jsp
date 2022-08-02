@@ -84,7 +84,7 @@
 }
 /* 실종 동물이 없을경우 */
 .nomissing {
-	font-size: 100px;
+	font-size: 1.2em;
 }
 /* 실종 카드 */
 .card {
@@ -132,6 +132,13 @@
 	padding: 10px;
 	border-bottom: 1px solid #ced4da;
 }
+
+.resMissing div[class='col']:first-child {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .resMissing p {
 	margin: 0px;
 }
@@ -145,7 +152,7 @@
 	font-weight: bold;
 	display: flex;
     align-items: center;
-    height: 200px;
+    height: 70px;
 }
 
 /* 페이징 */
@@ -172,6 +179,10 @@
 
 .margin{
     margin: 0 12vw 0 12vw;
+}
+
+.noResult {
+	width: 1000px;
 }
 
 </style>
@@ -210,8 +221,8 @@
 			</div>
 			<div class="row missingContent row-cols-xl-4 row-cols-lg-3 g-3">
 				<c:if test="${map.list.size() == 0}">
-					<div class="col nomissing d-flex justify-content-center">
-						<p><strong>실종 동물이 없습니다.</strong></p>
+					<div class="col nomissing">
+						<p class = "noResult">실종 동물이 없습니다</p>
 					</div>
 				</c:if>
 				<c:if test="${map.list.size() > 0}">

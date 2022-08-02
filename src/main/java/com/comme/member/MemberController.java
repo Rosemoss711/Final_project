@@ -57,7 +57,7 @@ public class MemberController {
     @RequestMapping(value="/logout") // 로그아웃
     public String logout(HttpServletRequest request) throws Exception{
     	session.invalidate();
-    	System.out.println("로그아웃");
+//    	System.out.println("로그아웃");
     	String referer = request.getHeader("Referer");
     	return "redirect:"+ referer;
     }
@@ -67,7 +67,7 @@ public class MemberController {
     	String memberId = (((MemberDTO)session.getAttribute("loginSession")).getMember_id());
     	service.deleteMember(memberId);
     	session.invalidate();
-    	System.out.println("회원탈퇴");
+//    	System.out.println("회원탈퇴");
     	return "redirect:/";
     }
 
@@ -157,9 +157,7 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/brnCheck") // 사업자번호 중복확인
     public String brnCheck(String member_brn) throws Exception {
-		System.out.println(member_brn);
     	member_brn = member_brn.substring(0,3)+"-"+member_brn.substring(3,5)+"-"+member_brn.substring(5);
-		System.out.println(member_brn);
     	int rs = service.brnCheck(member_brn);
       
       if (rs == 0) {
@@ -223,8 +221,8 @@ public class MemberController {
     @ResponseBody
     @RequestMapping(value = "/findToPhone" , produces = "application/json; charset=UTF-8") // 아이디찾기 (전화번호)
     public String findToPhone(String member_phone, HttpServletResponse response) throws Exception {
-        System.out.println(member_phone);
-        System.out.println(service.findToPhone(member_phone));
+//        System.out.println(member_phone);
+//        System.out.println(service.findToPhone(member_phone));
         if (service.findToPhone(member_phone).size() < 1) {
         	response.setStatus( HttpServletResponse.SC_BAD_REQUEST  );
         }
@@ -414,7 +412,7 @@ public class MemberController {
 		String memberId = (((MemberDTO)session.getAttribute("loginSession")).getMember_id());
 		
 		int total = service.countVolList(memberId, search_type, search_keyword); // 뿌려 줄 댓글의 총 갯수
-		System.out.println("total : " + total);
+//		System.out.println("total : " + total);
 		
 		if (nowPage == null && cntPerPage == null) { // 처음 게시판에 접속하면 얻게 되는 기본 페이지 값 cntPerPage 조절하면 몇개뿌릴지 선택가능함
 			nowPage = "1";
@@ -449,7 +447,7 @@ public class MemberController {
 		String memberId = (((MemberDTO)session.getAttribute("loginSession")).getMember_id());
 		
 		int total = service.countUserVol(memberId, search_type, search_keyword); // 뿌려 줄 댓글의 총 갯수
-		System.out.println("total : " + total);
+//		System.out.println("total : " + total);
 		
 		if (nowPage == null && cntPerPage == null) { // 처음 게시판에 접속하면 얻게 되는 기본 페이지 값 cntPerPage 조절하면 몇개뿌릴지 선택가능함
 			nowPage = "1";

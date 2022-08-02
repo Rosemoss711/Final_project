@@ -28,8 +28,6 @@
 
         .content {
             margin-top: 50px;
-            padding-left: 90px;
-            padding-right: 90px;
         }
 
         .board-title {
@@ -67,7 +65,7 @@
         }
 
         .writer > span:nth-child(3) {
-            grid-area: 1/8/2/9;
+            grid-area: 1/8/2/10;
             color: var(--sil);
         }
 
@@ -242,6 +240,26 @@
         .margin{
             margin: 0 12vw 0 12vw;
         }
+
+        @media screen and (max-width: 960px) {
+            .writer {
+                grid-template-rows: repeat(2, 1fr);
+            }
+            .writer > span:first-child {
+                grid-area: 1/1/2/4;
+            }
+            .writer > span:nth-child(3) {
+                grid-area: 2/1/3/4;
+            }
+            .writer > span:nth-child(2) {
+                grid-area: 2/5/3/10;
+                text-align: right;
+            }
+            .writer > div:nth-child(4){
+                grid-area: 1/7/2/10;
+            }
+
+        }
     </style>
 </head>
 <body>
@@ -329,7 +347,7 @@
                         <div class="comment">
                             <div class="comment_header">
                                 <span class="nick">${commentDTO.comment_nickname}</span>
-                                <span>${commentDTO.comment_date}</span>
+                                <span class="date">${commentDTO.comment_date}</span>
                                 <c:if test="${loginSession.member_id eq commentDTO.comment_id|| loginSession.member_grade=='4'}">
                                     <div class="col commentBtn">
                                         <span class="commentModify">수정</span>
@@ -405,6 +423,8 @@
                 console.log(e);
             }
         });
+
+        document.querySelector("#comment_content").value="";
     })
     // 목록 버튼
     $("#listBtn").click(function () {
@@ -494,8 +514,8 @@
                         nick.classList.add("nick");
                         nick.innerHTML = e.querySelector("comment_nickname").innerHTML;
 
-                        let date = document.createElement("span")
-                        date.innerHTML = e.querySelector("comment_date").innerHTML;
+                        let date = document.createElement("span");
+                        date.innerHTML = elapsedTime(e.querySelector("comment_date").innerHTML);
 
                         let commentBtn = document.createElement("div");
                         commentBtn.classList.add("commentBtn");
@@ -536,13 +556,53 @@
 
                     }
                 )
-                document.querySelector("comment-title> span").innerHTML = 'Comment('+item.length+')';
+                document.querySelector(".comment-title> span").innerHTML = 'Comment('+item.length+')';
             },
             error: (error) => {
                 console.log(error);
             }
         })
     }
+
+
+    let date = document.querySelectorAll('.comment_Date');
+    date.forEach(date=>{
+        date.innerText = elapsedTime(date.innerText);
+    })
+
+    /* 댓글 단지 소요시간 나타내주는 함수 */
+    function elapsedTime(date) {
+        const start = new Date(date);
+        const end = new Date(); // 현재 날짜
+
+        const diff = (end - start); // 경과 시간
+
+        const times = [
+            {time: "분", milliSeconds: 1000 * 60},
+            {time: "시간", milliSeconds: 1000 * 60 * 60},
+            {time: "일", milliSeconds: 1000 * 60 * 60 * 24},
+            {time: "개월", milliSeconds: 1000 * 60 * 60 * 24 * 30},
+            {time: "년", milliSeconds: 1000 * 60 * 60 * 24 * 365},
+        ].reverse();
+
+        // 년 단위부터 알맞는 단위 찾기
+        for (let i = 0; i < times.length; i++) {
+            const betweenTime = Math.floor(diff / times[i].milliSeconds);
+            // 큰 단위는 0보다 작은 소수 단위 나옴
+            if (betweenTime > 0) {
+                return betweenTime + ' ' + times[i].time + ' 전';
+            }
+        }
+    }
+
+    let comment_date = document.querySelectorAll(".comment .date");
+    comment_date.forEach(
+        e => {
+            e.innerHTML = elapsedTime(e.innerHTML);
+        }
+    )
+
+
 </script>
 </body>
 </html>
