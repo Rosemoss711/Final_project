@@ -44,6 +44,20 @@
                 color: white;
                 text-decoration: none;
             }
+            
+            table {
+            	table-layout: fixed;
+            }
+            
+            .contentSm {
+            	text-align: start;
+            }
+            
+            .contentSm div {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+            }
 
             #boardInfo{
                 font-size: 15px;
@@ -189,7 +203,7 @@
                         <h3>
                             <span id="boardInfo"><i class="fa-solid fa-book"></i>  &nbsp;후원 내역 조회</span>
                         </h3>
-
+						<div class="d-none d-md-block">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -232,6 +246,58 @@
                                 </c:if>
                             </tbody>
                         </table>
+                        </div>
+                        <div class="d-md-none">
+                        <table class="table table-hover">
+                            <thead style="border-top: 1px solid lightgray;">
+                                <tr>
+                                    <th scope="col" class="col-1">후원 목록</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:choose>
+                                   <c:when test="${empty list}">
+                                    <tr>
+                                        <td colspan="7">후원 내역이 없습니다.</td>
+                                    </tr>
+                                   </c:when>
+                                
+                                   <c:otherwise>
+                                        <c:forEach items="${list}" var="dto">
+                                            <tr>
+                                            	<td>
+                                            		<div class="contentSm d-flex">
+                                                		<div class="col-4 seq_pay">결제번호&nbsp;:&nbsp;${dto.SEQ_PAY}</div>
+                                                		<span style="color: #dee2e6;">|&nbsp;</span>
+                                                		<div class="col-4 "><a class="tap" href="/supportBoard/view?nowPage=1&seq_board=${dto.SEQ_BOARD}">글번호&nbsp;:&nbsp;${dto.SEQ_BOARD}</a></div>
+                                                		<span style="color: #dee2e6;">|&nbsp;</span>
+                                                		<div class="col-5 pay_date">결제일&nbsp;:&nbsp;<fmt:formatDate value="${dto.PAY_DATE}" pattern="yy-MM-dd"/></div>
+                                                	</div>	
+                                                	<div class="contentSm d-flex">
+                                                		<div class="col-6 member_id">보호소명&nbsp;:&nbsp;${dto.WRITER_NICKNAME}</div>
+                                                		<span style="color: #dee2e6;">|&nbsp;</span>
+                                                		<div class="col-6 member_id">보호소ID&nbsp;:&nbsp;${dto.SHELTER_ID}</div>
+                                            		</div>
+                                                	<div class="contentSm d-flex">
+                                                		<div class="col-6 member_id">회원ID&nbsp;:&nbsp;${dto.MEMBER_ID}</div>
+                                                		<span style="color: #dee2e6;">|&nbsp;</span>
+                                                		<div data-value="${dto.PAY_MONEY}" class="col-6 payMoney">&#8361;<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.PAY_MONEY}" /></div>
+                                                		
+                                                	</div>
+                                            	</td>
+                                            </tr>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
+
+                                <c:if test="${fn:length(etcMap.search_keyword) > '0' && !empty list}" >
+                                    <tr style="border-top: 2px solid black;">
+                                        <td colspan="7" id="totalMoney">총 금액&nbsp; : &nbsp; &#8361;</td>
+                                    </tr>
+                                </c:if>
+                            </tbody>
+                        </table>
+                        </div>
                     </div>
                 </div>
 
@@ -256,7 +322,7 @@
                     </div>
                 </div>
 
-                <div class="page_wrap mb-5">
+                <div class="page_wrap mb-5 mt-2">
                     <div  class="page_nation">	
                         <c:choose>
                         <c:when test="${etcMap.search_type eq null}">

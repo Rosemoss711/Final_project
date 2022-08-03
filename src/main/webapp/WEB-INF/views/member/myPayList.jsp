@@ -66,6 +66,16 @@
             .seq_pay{
                 color: #777;
             }
+            
+            .table{
+            	table-layout: fixed;
+            }
+            
+            #titleTd, .seq_Board, .seq_board, .seq_pay, .pay_date {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+            }
 
             th.col-2.profileTap{
                 background-color: #f9f9f9;
@@ -214,7 +224,7 @@
                                             <tr>
                                                 <td class="seq_pay">${dto.SEQ_PAY}</td>
                                                 <td class="seq_board">${dto.SEQ_BOARD}</td>
-                                                <td><a class="tap" href="/supportBoard/view?nowPage=1&seq_board=${dto.SEQ_BOARD}">${dto.BOARD_TITLE}</a></td>
+                                                <td id="titleTd"><a class="tap" href="/supportBoard/view?nowPage=1&seq_board=${dto.SEQ_BOARD}">${dto.BOARD_TITLE}</a></td>
                                                 <td>&#8361;<fmt:formatNumber type="number" maxFractionDigits="3" value="${dto.PAY_MONEY}" /></td>
                                                 <td class="pay_date"><fmt:formatDate value="${dto.PAY_DATE}" pattern="yyyy-MM-dd"/></td>
                                             </tr>
@@ -266,6 +276,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	            <!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
             </div>
 

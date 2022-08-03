@@ -44,10 +44,11 @@
             border-bottom: 1px solid var(--sil);
         }
 
-        .content_header h3 {
+        .content_header h5 {
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #cf936f;
         }
 
         #search_form {
@@ -324,7 +325,12 @@
 
     <div class="content margin">
         <div class="content_header">
-            <h3>후원 게시판</h3>
+            <div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
+				<h5><strong>후원 게시판</strong></h5>
+			</div>
+			<div class="col d-md-none text-center mt-2 mb-2">
+				<h5><strong>후원 게시판</strong></h5>
+			</div>
             <form action="/supportBoard/search" id="search_form">
                 <label for="category"></label>
                 <select name="category" id="category">
@@ -426,6 +432,8 @@
     </div>
 
 </body>
+<!-- 탑버튼 -->
+<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 <script>
 
 

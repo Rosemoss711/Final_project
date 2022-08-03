@@ -36,6 +36,24 @@
         margin-top: 20px;
         margin-botton: 5px;
     }
+    
+    /* 버튼 */
+    #btn-signup {
+    	border: 1px solid rgb(207, 147, 111);
+    	color: rgb(207, 147, 111);
+    	padding: 3px 10px;
+    	border-radius: 30px;
+    }
+    
+    #btn-signup:hover {
+    	background-color: #7bc3ac;
+    	color: white;
+    	border: 1px solid #7bc3ac;
+    }
+    
+    .btn-secondary {
+    	
+    }
 
     /* 버튼 간 간격 */
     #btn-cancel {
@@ -103,7 +121,7 @@
                                 <input type="text" class="form-control" id="id" name="member_id">
                             </div>
                             <div class="col-2">
-                                <button type="button" id="idCheckBtn" class="btn btn-secondary">중복확인</button>
+                                <button type="button" id="idCheckBtn" class="btn btnCheck btn-secondary">중복확인</button>
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
@@ -149,8 +167,8 @@
                             <div class="col-7">
                                 <input type="text" class="form-control" id="nickname" name="member_nickname">
                             </div>
-														<div class="col-2">
-                                <button type="button" id="nicknameCheck" class="btn btn-secondary">중복확인</button>
+								<div class="col-2">
+                                <button type="button" id="nicknameCheck" class="btn btnCheck btn-secondary">중복확인</button>
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
@@ -198,7 +216,7 @@
                                 <input type="text" class="form-control" id="email" name="member_email">
                             </div>
                             <div class="col-2">
-                                <button type="button" id="emailCheckBtn" class="btn btn-secondary">중복확인</button>
+                                <button type="button" id="emailCheckBtn" class="btn btnCheck btn-secondary">중복확인</button>
                             </div>
 
                         </div>
@@ -211,7 +229,7 @@
                         <div class="row cls-btnRow">
                             <div class="col d-flex justify-content-center">
                             	<!-- <button class="btn btn-secondary" id="btn-cancel">취소</button> -->
-                                <button type="button" class="btn btn-warning" id="btn-signup">회원가입</button>
+                                <button type="button" class="btn" id="btn-signup">회원가입</button>
                             </div>
                         </div>
                     </div>

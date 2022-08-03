@@ -140,6 +140,7 @@ body{
 	outline: none !important;
 	box-shadow: none;
 }
+
 </style>
 <body>
 	<!-- header -->
@@ -286,6 +287,8 @@ body{
 	</div>
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	<!-- 탑버튼 -->
+	<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 	<script>	
     	$(".nav-link").on("click", function(){ // 축종탭 이벤트
         	$(".nav-link").removeClass("active");

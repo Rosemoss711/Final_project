@@ -70,7 +70,11 @@
             th.col-2.profileTap{
                 background-color: #f9f9f9;
             }
-
+            
+            td {
+            	vertical-align: middle;
+            }
+			
             .searchBox{
                 border: 1px solid lightgray; 
                 display: inline-block; 
@@ -279,6 +283,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	            <!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
             </div>
 

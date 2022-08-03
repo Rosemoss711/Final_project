@@ -43,12 +43,16 @@
             a:hover {
                 color: black;
             }
+            
+            table {
+            	table-layout: fixed;	
+            }
 
             table td, tr{
                 font-size: 13px;
                 text-align: center;
             }
-
+            
             td a, #head{
                 text-decoration: none;
                 color: black;
@@ -170,7 +174,23 @@
                 color: white;
                 text-decoration: none;
             }
+            
+            /* 반응형 */
+            table .titleTd, .smContentRow {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+            }
+            
+            .smContentRow {
+            	padding: 0px;
+            	font-size: 12px;
+            	color: grey;
+            }
 
+			.margin{
+                margin: 0 12vw 0 12vw;
+            }
         </style>
 
         <body>
@@ -193,9 +213,9 @@
                         </ul>
                     </div>
                 </div>
-
+				<div class="margin">
                 <div class="row mt-5">
-                    <div class="col" style="padding: 0 13vw 0 13vw;">
+                    <div class="col">
                         <h5 style="display: inline-block; font-size: 17;"><a id="head" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&category_name=${etcMap.category_name}"><strong>${etcMap.bigCategory}</strong> </a></h5>
                         <ul style="display: inline-block; margin-bottom: 0;">
                             <li><a class="category" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${etcMap.category}&category_name=${etcMap.category_name}" id="${etcMap.category}">공지</a></li>
@@ -209,7 +229,7 @@
 
                 <!-- 게시물 뿌려주기 -->
                 <div class="row">
-                    <div class="col" style="padding: 0 13vw 0 13vw;">
+                    <div class="col d-none d-md-block">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -267,9 +287,80 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                
-
+                	<%-- sm사이즈 --%>
+                    <div class="col d-md-none">
+                        <table class="table tableSm table-hover">
+                            <thead></thead>
+                            <tbody>
+                                <c:choose>
+                                   <c:when test="${empty list}">
+                                    <tr>
+                                        <td colspan="5">등록 된 글이 없습니다.</td>
+                                    </tr>
+                                   </c:when>
+                                   <c:otherwise>
+                                        <c:forEach items="${list}" var="dto">
+                                            <tr>
+                                                <td> 
+                                                	<div class="col d-flex">
+                                                		
+                                                    <!-- 검색어가 존재하는지에 대한 여부에 따라 타이틀에 넘겨주는 정보를 달리함 이렇게 안하고 편하게 갈 수 잇엇을거 같은데 실수한듯 돌이키기는 좀 그럼 -->
+                                                    <c:choose> 
+                                                        <c:when test="${etcMap.search_type eq null}">
+                                                        	<div class="col titleTd smContentHigh text-start">
+                                                        		<i class="fa-regular fa-comment-dots"></i>&nbsp;
+                                                        		<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="col titleTd smContentHigh">
+                                                            	<i class="fa-regular fa-comment-dots"></i>
+                                                            	<a href="/board/detailPost?nowPage=${paging.nowPage}&seq_board=${dto.SEQ_BOARD}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}" class="title">${dto.BOARD_TITLE}</a> 
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    </div>
+                                                    <div class="col d-flex">
+                                                    	<div class="col-2 smContentRow">
+                                                			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${etcMap.category}&small_category=${dto.SEQ_CATEGORY}&category_name=${etcMap.category_name}"> <!-- 카테고리 번호에 따라서 탭 뿌려주기 대분류는 공지로 변환 -->
+                                                    			<c:choose>
+                                                       				<c:when test="${dto.SEQ_CATEGORY eq etcMap.category}">
+                                                        				공지
+                                                       				</c:when>
+                                                       				<c:otherwise>
+                                                        				${dto.CATEGORY_NAME}
+                                                       				</c:otherwise>
+                                                    			</c:choose> 
+                                                    		</a>
+                                                    	</div>
+                                                    	<span style="color: #dee2e6;">|</span>
+                                                    	<div class="col-3 smContentRow">${dto.WRITER_NICKNAME}</div>
+                                                    	<span style="color: #dee2e6;">|</span>
+                                                		<div class="col-2 smContentRow"><fmt:formatDate value="${dto.WRITTEN_DATE}" pattern="yy.MM.dd"/></div>
+                                                		<span style="color: #dee2e6;">|</span>
+                                                		<div class="col-2 smContentRow">
+                                                			댓글&nbsp;:&nbsp;
+                                                			<c:choose>
+                                                				<c:when test="${dto.CM_COUNT != 0}">
+                                                					<span style="font-size: 6px; font-weight: bold;">${dto.CM_COUNT}</span>
+                                                				</c:when>
+                                                				<c:otherwise>
+                                                					<span style="font-size: 6px; font-weight: bold;">0</span>
+                                                				</c:otherwise>
+                                                			</c:choose>
+                                                        </div>
+                                                        <span style="color: #dee2e6;">|</span>
+                                                		<div class="col-2 smContentRow">조회수&nbsp;:&nbsp;${dto.VIEW_COUNT}</div>
+                                                	</div>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
+                            </tbody>
+                        </table>
+                    </div>
+				</div>
                 <div class="row">
                     <!-- 검색박스부분 -->
                     <div class="col" style="padding: 0 13vw 0 13vw;">
@@ -332,7 +423,7 @@
                         </c:choose>
                     </div>
                 </div>
-
+</div>
                 	<!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
 

@@ -15,8 +15,8 @@
 
 	/* 바디부분 패딩 */
 	.body {
-		padding-left: 10%;
-		padding-right: 10%;
+		padding-left: 5%;
+		padding-right: 5%;
 		padding-top: 5%;
 		padding-bottom: 5%;
 	}
@@ -70,18 +70,29 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 /* input 줄간격 */
 .cls-inputRow {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.pwInput {
+	width: 300px;
 }
 
 /* input 옆 버튼 */
 .cls-inputBtn {
-    width: 100%;
+    border: 1px solid white;
+    background-color: white;
+    padding: 3px 9px;
+    align-items: center;
+}
+
+.cls-inputBtn:hover {
+    border: 1px solid #edd19f;
 }
 
 #btnChangePw,
 #returnBtn2{
 	width: 116px;
-	margin-right: 10px;
 }
 
 .margin{
@@ -99,7 +110,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             <div class="bodyTitle">
                 <div class="row">
                     <div class="col d-flex justify-content-center">
-                        <h1>비밀번호 찾기</h1>
+                        <h3 style="margin: 0px;">비밀번호 찾기</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -117,8 +128,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                                 <div class="col-9">
                                     <input type="text" class="form-control cls-input" id="email" name="member_email" placeholder="이메일을 입력하세요">
                                 </div>
-                                <div class="col-3">
-                                    <button type="button" class="btn btn-warning cls-inputBtn" id="submit">전송</button>
+                                <div class="col-3 d-flex">
+                                    <button type="button" class="btn cls-inputBtn" id="submit">전송</button>
                                     <div class="spinner-border d-none" id="spinner" role="status"></div>
                                 </div>
                             </div>
@@ -126,16 +137,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                                 <div class="col-9">
                                     <input type="number" class="form-control cls-input" id="proof" placeholder="인증번호를 입력하세요" readonly>
                                 </div>
-                                <div class="col-3">
-                                    <button type="button" class="btn btn-warning cls-inputBtn" id="proofOk" disabled>확인</button>
+                                <div class="col-3 d-flex">
+                                    <button type="button" class="btn cls-inputBtn" id="proofOk" disabled>확인</button>
                                 </div>
                             </div>
 
-														<div class="row buttonRow">
-																<div class="col d-flex justify-content-center">
-																		<button type="button" class="btn btn-light" id="returnBtn">돌아가기</button>
-																</div>
-														</div>
+							<div class="row buttonRow">
+								<div class="col d-flex justify-content-center">
+									<button type="button" class="btn btn-light" id="returnBtn">돌아가기</button>
+								</div>
+							</div>
                             <div class="row">
                             	<div class="col d-none">
                             		<input type="text" id="proofNum">
@@ -145,32 +156,24 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                     </div>
                 </div>
 
-				<div class="row newPw d-none">
+				<div class="row newPw justify-content-center d-none">
 				
 					<div class="row cls-inputRow">
-						<div class="col-4 align-self-center">
-							<label for="pw">
-								<span class="cls-labelTitle">새로운 비밀번호</span>
-							</label>
-						</div>
-                        <div class="col-8">
-                            <input type="password" class="form-control" id="pw" name="member_pw">
-                        </div>
+						<label for="pw" style="text-align: center;">
+							<span class="cls-labelTitle">새로운 비밀번호</span>
+						</label>
+                        <input type="password" class="form-control pwInput" id="pw" name="member_pw">
 					</div>
 					<div class="row cls-inputRow">
-						<div class="col-4 align-self-center">
-							<label for="pw2">
-								<span class="cls-labelTitle">새로운 비밀번호 확인</span>
-							</label>
-						</div>
-                        <div class="col-8">
-                            <input type="password" class="form-control" id="pw2">
-                        </div>
+						<label for="pw2" style="text-align: center;">
+							<span class="cls-labelTitle">새로운 비밀번호 확인</span>
+						</label>
+                        <input type="password" class="form-control pwInput" id="pw2">
 					</div>
 					<div class="row buttonRow">
 	                    <div class="col d-flex justify-content-center">
-	                        <button type="button" class="btn btn-light" id="btnChangePw">비밀번호 변경</button>
-													<button type="button" class="btn btn-light" id="returnBtn2">돌아가기</button>
+	                        <button type="button" class="btn" id="btnChangePw" style="margin-right: 10px;">비밀번호 변경</button>
+							<button type="button" class="btn" id="returnBtn2">돌아가기</button>
 	                    </div>
 	                </div>
 				</div>

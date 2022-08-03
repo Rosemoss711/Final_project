@@ -255,6 +255,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	            <!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
             </div>
 

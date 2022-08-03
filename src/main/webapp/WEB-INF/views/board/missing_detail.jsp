@@ -210,21 +210,21 @@
         }
 
         .nick {
-            color: #cfb988;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 14px;
         }
 
         /* 댓글 닉네임 인풋창 */
         input[readonly].classname {
             background-color: transparent;
             border: 0;
-            font-size: 20px;
+            font-size: 15px;
         }
 
         input[readonly].comment_content {
             background-color: transparent;
             border: 0;
+            font-size: 14px;
         }
 
         .comment_header {
@@ -246,7 +246,7 @@
 <body>
 <div class="content margin">
     <div class="row title-body mt-5">
-        <div class="col-5 d-none d-md-flex">
+        <div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
 			<h5><strong>실종 게시판</strong></h5>
 		</div>
 		<div class="col d-md-none text-center">

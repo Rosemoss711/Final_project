@@ -66,7 +66,22 @@
             .view_count{
                 color: #777;
             }
-
+            
+            .table{
+            	table-layout: fixed;
+            }
+            
+            .titleTd, .seqBoard, .replyCnt, .view_count, .written_date {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+    			text-align: start;
+            }
+            
+			.categoryName {
+				float: left;
+			}
+			
             th.col-2.profileTap{
                 background-color: #f9f9f9;
             }
@@ -160,7 +175,6 @@
         </style>
 
         <body>
-            <div>
                 <!-- header -->
                 <jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 
@@ -204,7 +218,7 @@
                         <h3>
                             <span id="boardInfo"><i class="fa-solid fa-book"></i>  &nbsp;내 글 보기</span>
                         </h3>
-
+						<div class="col d-none d-md-block">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -251,7 +265,7 @@
                                                        </c:otherwise>
                                                     </c:choose> </a></td>
 
-                                                <td>
+                                                <td id="titleTd">
                                                 <c:choose>
                                                    <c:when test="${dto.CATEGORY_NAME eq '문의'}">
                                                    <a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.BOARD_TITLE}</a>
@@ -277,12 +291,88 @@
                                 
                             </tbody>
                         </table>
+                        </div>
+                        <%-- sm사이즈 --%>
+                        <table class="table d-md-none table-hover">
+                            <thead style="border-top: 1px solid lightgray;">
+                                <tr>
+                                    <th scope="col" class="col-1">내 글 목록</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:choose>
+                                   <c:when test="${empty list}">
+                                    <tr>
+                                        <td colspan="5">등록 된 글이 없습니다.</td>
+                                    </tr>
+                                   </c:when>
+                                   <c:otherwise>
+                                        <c:forEach items="${list}" var="dto">
+                                            <tr class="smContentRow">
+                                                <td class="seq_board">
+                                                	<div class="col-3 categoryName">
+                                                		<c:choose>
+                                                   			<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                    			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}&category_name=${dto.CATEGORY_NAME}"> 
+                                                   			</c:when>
+                                                    		<c:when test="${dto.CATEGORY_PK eq null}" >
+                                                    			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.SEQ_CATEGORY}&small_category=${dto.SEQ_CATEGORY}"> 
+                                                    		</c:when>
+                                                   			<c:otherwise>
+                                                    			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}"> 
+                                                   			</c:otherwise>
+                                                		</c:choose>
+                                                    	<c:choose>
+                                                       		<c:when test="${dto.CATEGORY_PK eq null}">
+                                                        		공지
+                                                       		</c:when>
+                                                       		<c:otherwise>
+                                                        		${dto.CATEGORY_NAME}
+                                                       		</c:otherwise>
+                                                    	</c:choose> </a></div>
+                                                	<div class="col titleTd">
+                                                	<span style="color: #dee2e6;">|</span>
+                                                		<c:choose>
+                                                   			<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.BOARD_TITLE}</a>
+                                                   			</c:when>
+                                                   			<c:when test="${dto.CATEGORY_PK eq null}" >
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.SEQ_CATEGORY}">${dto.BOARD_TITLE}</a>
+                                                   			</c:when>
+                                                   			<c:otherwise>
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}">${dto.BOARD_TITLE}</a>
+                                                   			</c:otherwise>
+                                                		</c:choose>
+                                                	</div>
+                                                    <div class="smContentRow d-flex">
+                                                    	<div class="col-3 seqBoard">글번호&nbsp;:&nbsp;${dto.SEQ_BOARD}</div>
+														<span style="color: #dee2e6;">|</span>
+														<c:choose>
+                                                    	<c:when test="${dto.CM_COUNT != 0}" > <!-- 댓글 수 체크해서 0개 보다 많을 때만 게시물 옆에 추가해줌 -->
+                                                        	<div class="col-3 replyCnt"><span>댓글&nbsp;:&nbsp;${dto.CM_COUNT}</span></div>
+                                                    	</c:when> 
+                                                    	<c:otherwise>
+                                                    		<div class="col-3 replyCnt">댓글&nbsp;:&nbsp;0</div>
+                                                    	</c:otherwise>
+                                                    	</c:choose>
+                                                		<span style="color: #dee2e6;">|</span>
+                                                		<div class="col-3 view_count">조회수&nbsp;:&nbsp;${dto.VIEW_COUNT}</div>
+                                                		<span style="color: #dee2e6;">|</span>
+                                                		<div class="col-3 written_date"><fmt:formatDate value="${dto.WRITTEN_DATE}" pattern="yy-MM-dd"/></div>
+                                                	</div>
+                                            	</td>
+                                            </tr>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="row" id="searchBox">
                     <!-- 검색박스부분 -->
-                    <div class="col">
+                    <div class="col mb-2">
                         <form action="/member/toMyBoard" method="get">
                         <span class="searchBox">
                             <input type="text" name="search_keyword" id="search" value="${etcMap.search_keyword}">
@@ -335,8 +425,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
-
-            </div>
+				<!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
         </body>
         <script>
