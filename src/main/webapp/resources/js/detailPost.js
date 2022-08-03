@@ -5,7 +5,7 @@ const noticeTr = document.querySelectorAll('tr');
 
 /* 머무는 페이지 표시 */
 for (let i = 0; i < active.length; i++) {
-  if (active[i].innerText == '${paging.nowPage}') {
+  if (active[i].innerText == nowPage) {
     active[i].style.cssText =
       'background-color: #f9f9f9; color: #555; border: 1px solid #aaa; border-radius: 2px';
   }
@@ -13,7 +13,7 @@ for (let i = 0; i < active.length; i++) {
 
 /* 머물고 잇는 소분류 카테고리 표시 */
 for (let i = 0; i < category.length; i++) {
-  if (category[i].id == '${small_category}') {
+  if (category[i].id == etcMap.small_category) {
     category[i].style.cssText = 'text-decoration: underline; color: black';
   }
 }
@@ -28,28 +28,73 @@ for (let i = 0; i < tap.length; i++) {
 document.addEventListener('click', function (e) {
   if (e.target.id == 'write') {
     // 글작성
-    if ('${etcMap.search_type}' == '') {
+    if (etcMap.search_type) {
       location.href =
-        '/board/toWrite?nowPage=${paging.nowPage}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}';
+        '/board/toWrite?nowPage=' +
+        nowPage +
+        '&seq_category=' +
+        etcMap.category +
+        '&small_category=' +
+        etcMap.small_category +
+        '&category_name=' +
+        etcMap.category_name;
     } else {
       location.href =
-        '/board/toWrite?nowPage=${paging.nowPage}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}';
+        '/board/toWrite?nowPage=' +
+        nowPage +
+        '&seq_category=' +
+        etcMap.category +
+        '&small_category=' +
+        etcMap.small_category +
+        '&category_name=' +
+        etcMap.category_name +
+        '&search_type=' +
+        etcMap.search_type +
+        '&search_keyword=' +
+        etcMap.search_keyword;
     }
   } else if (e.target.id == 'removePost') {
     // 글삭제
     let check = confirm('해당 게시물을 삭제하시겠습니까?');
     if (check) {
       location.href =
-        '/board/deletePost?seq_board=${post.seq_board}&seq_category=${etcMap.category}&category_name=${etcMap.category_name}';
+        '/board/deletePost?seq_board=' +
+        seq_board +
+        '&seq_category=' +
+        etcMap.category +
+        '&category_name=' +
+        etcMap.category_name;
     }
   } else if (e.target.id == 'modifyPost') {
     // 글수정
-    if ('${etcMap.search_type}' == '') {
+    if (etcMap.search_type) {
       location.href =
-        '/board/toModifyBoard?nowPage=${paging.nowPage}&seq_board=${post.seq_board}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&category_name=${etcMap.category_name}';
+        '/board/toModifyBoard?nowPage=' +
+        nowPage +
+        '&seq_board=' +
+        seq_board +
+        '&seq_category=' +
+        etcMap.category +
+        '&small_category=' +
+        etcMap.small_category +
+        '&category_name=' +
+        etcMap.category_name;
     } else {
       location.href =
-        '/board/toModifyBoard?nowPage=${paging.nowPage}&seq_board=${post.seq_board}&seq_category=${etcMap.category}&small_category=${etcMap.small_category}&search_type=${etcMap.search_type}&search_keyword=${etcMap.search_keyword}&category_name=${etcMap.category_name}';
+        '/board/toModifyBoard?nowPage=' +
+        nowPage +
+        '&seq_board=' +
+        seq_board +
+        '&seq_category=' +
+        etcMap.category +
+        '&small_category=' +
+        etcMap.small_category +
+        '&category_name=' +
+        etcMap.category_name +
+        '&search_type=' +
+        etcMap.search_type +
+        '&search_keyword=' +
+        etcMap.search_keyword;
     }
   }
 });
@@ -118,11 +163,6 @@ document.addEventListener('click', function (e) {
     textarea.append(content[0].innerText);
     div.append(p1, textarea, button2);
     e.target.closest('div').after(div.get(0));
-
-    // 댓글 개수 표시
-    let commentNum = document.querySelectorAll('.commentBox');
-    document.getElementById('commentNum').innerText = commentNum.length;
-    document.getElementById('commentNum2').innerText = commentNum.length;
   } else if (e.target.id == 'comment_close') {
     // 댓글 닫기 버튼 누르면 수정눌러서 나온 입력창이 다시 사라짐
     e.target.closest('div').remove();
@@ -142,12 +182,12 @@ document.addEventListener('click', function (e) {
         content.getElementsByClassName('comment_content')[0].innerText =
           document.getElementById('modify_content').value;
 
+        e.target.closest('div').remove();
+
         // 댓글 개수 표시
         let commentNum = document.querySelectorAll('.commentBox');
         document.getElementById('commentNum').innerText = commentNum.length;
         document.getElementById('commentNum2').innerText = commentNum.length;
-
-        e.target.closest('div').remove();
       },
       error: function (e) {
         console.log(e);
@@ -164,7 +204,7 @@ document.addEventListener('click', function (e) {
 
 // 댓글 등록 이벤트
 document.getElementById('registerBtn').addEventListener('click', function () {
-  if (!'${loginSession.member_id}') {
+  if (!member_id) {
     alert('로그인 후 이용 부탁드립니다.');
     return;
   }
@@ -196,9 +236,7 @@ document.getElementById('registerBtn').addEventListener('click', function () {
       }
 
       let div = $('<div>').attr('class', 'col-12 commentBox');
-      let p1 = $('<p>')
-        .attr('class', 'comment_Nk')
-        .append('${loginSession.member_nickname}');
+      let p1 = $('<p>').attr('class', 'comment_Nk').append(nickname);
       let p2 = $('<p>')
         .attr('class', 'comment_content')
         .append($('#comment_content').val());
@@ -285,7 +323,7 @@ $(window).scroll(function () {
   }
 });
 
-const select = '${etcMap.search_type}';
+const select = etcMap.search_type;
 const option = document.querySelectorAll('#search_type option');
 option.forEach(option => {
   if (option.value === select) {
