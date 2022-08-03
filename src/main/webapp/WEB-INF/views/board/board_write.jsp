@@ -222,11 +222,6 @@
         font-size: 17px;
     }
 
-	#categoryTitle a, #categoryTitle i {
-        text-decoration: none;
-        color: rgb(207, 147, 111);
-    }
-
     #title, select{
         position: relative;
         top: 0;
@@ -257,8 +252,8 @@
     #titleBox{
         border: 1px solid lightgray; 
         border-radius: 2px;
-        display: block;
-    	width: 100%;
+        display: inline-block;
+    	width: 50%;
     }
 
     #writeBox{
@@ -303,6 +298,9 @@
                             </c:forEach>
                         </select>
                     </span>
+                    <span id="titleBox">
+                        <input type="text" id="title" name="board_title" placeholder="제목" value="" />
+                    </span>
                     <c:if test="${loginSession.member_grade eq 4}" >
                     	<div class="d-inline-block">
                         	<p style="margin-left: 30px;">
@@ -310,9 +308,7 @@
                         	</p>
                         </div>
                     </c:if>
-                    <span id="titleBox">
-                        <input type="text" id="title" name="board_title" placeholder="제목" value="" />
-                    </span>
+                    
                     
                     <br><br>
                     <input type="hidden" id="imgSrc" name="imgSrc[]">
