@@ -32,7 +32,7 @@ public class VolBoardController {
     private BoardService boardService;
 
     Logger logger = LoggerFactory.getLogger(VolBoardController.class);
-
+    //목록
     @GetMapping("/lists")
     public String volBoard(@RequestParam(value = "curPage", defaultValue = "1") int curPage, Model model) throws Exception {
 
@@ -42,7 +42,7 @@ public class VolBoardController {
         model.addAttribute("map", map);
         return "vol/vol_board_list";
     }
-
+    //글쓰기페이지
     @GetMapping("/write")
     public String write(Model model) throws Exception {
         model.addAttribute("mainCategory", boardService.mainCategory());
@@ -64,6 +64,7 @@ public class VolBoardController {
         return "redirect:/volBoard/view?seq_board="+seq_board;
     }
 
+    //상세보기페이지
     @GetMapping("/view")
     public String detail(@RequestParam(value = "seq_board") int seq_board, Model model) throws Exception {
         volBoardService.plusViewCount(seq_board);
@@ -88,7 +89,7 @@ public class VolBoardController {
 
         return "redirect:/volBoard/lists";
     }
-
+    //수정페이지
     @GetMapping("/modify")
     public String toModify(@RequestParam("seq_board") int seq_board, Model model) throws Exception {
 

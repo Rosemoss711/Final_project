@@ -21,7 +21,7 @@ public class FileController {
     private HttpSession httpSession;
     @Autowired
     private FileService fileService;
-
+    //임시이미지 업로드
     @PostMapping(value="/vol_img", produces = "application/json")
     @ResponseBody
     public String uploadVol_summernoteImg(MultipartFile file) throws Exception {
@@ -30,7 +30,7 @@ public class FileController {
         JsonObject jsonObject = fileService.upload_summernoteFile(realpath, file, path);
         return jsonObject.toString();
     }
-
+    //임시 이미지 업로드
     @PostMapping(value="/support_img", produces = "application/json")
     @ResponseBody
     public String uploadSupport_SummernoteImg(MultipartFile file) throws Exception {

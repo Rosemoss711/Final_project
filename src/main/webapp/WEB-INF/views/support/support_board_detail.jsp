@@ -132,7 +132,8 @@
         }
 
         .order_number2 #order_number {
-            width: 50px;
+            width: 55px;
+            text-align: right;
         }
 
         .total {

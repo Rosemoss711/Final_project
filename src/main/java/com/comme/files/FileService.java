@@ -64,7 +64,7 @@ public class FileService implements FileDAO {
 //            System.out.println(file_sys);
             insert_file(new FileDTO(0,seq_board,path,null, file_sys), table_name);
         }
-
+        //테이블에 저장 안하는 임시 파일들 삭제
         for(String temp : temp_files){
             if(!list.contains(temp)){
                 File file = new File(path+File.separator+temp);
