@@ -152,7 +152,8 @@
                     <h3>
                         <span id="profileInfo"><i class="fa-solid fa-list"></i>  &nbsp;카테고리 관리</span>
                     </h3>
-                    <div class="col-6">
+
+                    <div class="col-12 col-lg-6">
                         <table class="table">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -185,7 +186,7 @@
                         </table>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-12 col-lg-6">
                         <table class="table">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
