@@ -7,6 +7,7 @@
 	<!-- 실종게시판 댓글 -->
 	<select id="selectByMc" parameterType="int" resultType="CommentDTO">
 		select * from missing_comment where seq_board = #{seq_board}
+		order by 1
 	</select>
 	<!-- 실종게시판 댓글 갯수 -->
 	<select id="selectCount" parameterType="int" resultType="int">

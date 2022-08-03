@@ -59,12 +59,12 @@ public class FileService implements FileDAO {
         for(String filename : list){
             int idx = filename.lastIndexOf(File.separator);
             path += filename.substring(1, idx);
-            System.out.println(path);
+//            System.out.println(path);
             String file_sys = filename.substring(idx+1);
-            System.out.println(file_sys);
+//            System.out.println(file_sys);
             insert_file(new FileDTO(0,seq_board,path,null, file_sys), table_name);
         }
-
+        //테이블에 저장 안하는 임시 파일들 삭제
         for(String temp : temp_files){
             if(!list.contains(temp)){
                 File file = new File(path+File.separator+temp);
@@ -80,7 +80,7 @@ public class FileService implements FileDAO {
         List<String> list = convertFileUrlToPath.convertTofullPath(file_name);
         for(String temp : list){
             File file = new File(path+File.separator+temp);
-            logger.info("삭제파일" + file);
+//            logger.info("삭제파일" + file);
             if(file.exists()) {
                 file.delete();
             }
@@ -103,7 +103,7 @@ public class FileService implements FileDAO {
                 delete_file(fileDTO.getSeq_file(), table_name);
 
                 File file = new File(path+File.separator+fileDTO.getFiles_sys());
-                System.out.println(file);
+//                System.out.println(file);
                 if(file.exists()) {
                     file.delete();
                 }

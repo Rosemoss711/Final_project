@@ -62,7 +62,8 @@
         }
 
         .board_header span {
-            display: block;
+            display: flex;
+            align-items: center;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -84,18 +85,19 @@
         }
 
         .board_header .view_count {
-            grid-area: 2/9/3/11;
+            grid-area: 2/10/3/11;
             color: var(--sil);
             font-size: 0.8em;
+            text-align: end;
         }
 
         .board_header #modify {
-            grid-area: 2/9/3/10;
+            grid-area: 1/9/2/10;
             border: none;
         }
 
         .board_header #delete {
-            grid-area: 2/10/3/11;
+            grid-area: 1/10/2/11;
             border: none;
         }
 
@@ -368,6 +370,7 @@
     let date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000);
     deadLine = new Date(deadLine);
 
+    // 봉사활동 정원 확인
     let vol_count = "${map.vol_count}";
     let vol_accepted = "${map.accepted}";
 

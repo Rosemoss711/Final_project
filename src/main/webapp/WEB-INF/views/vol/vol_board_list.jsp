@@ -297,7 +297,6 @@
                 grid-column: 1/3;
                 grid-row: 4/5;
                 text-align: start;
-                color: black;
             }
 
             .boardList > a:last-child > .board {

@@ -29,7 +29,8 @@
     <select id="selectList" resultType="org.apache.commons.collections4.map.CaseInsensitiveMap" parameterType="int">
         <![CDATA[
         select b.*,
-               (select nvl(count(SEQ_BOARD), 0) from VOL_SUBMIT where SEQ_BOARD = b.SEQ_BOARD) as cur,
+               (select nvl(count(SEQ_BOARD), 0) from VOL_SUBMIT where SEQ_BOARD = b.SEQ_BOARD
+                                                                and VOL_STATUS = 'Y') as cur,
                (select FILES_SYS
                 from (select *
                       from VOL_FILES

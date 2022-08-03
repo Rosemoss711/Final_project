@@ -281,6 +281,7 @@
             }
         } 
 
+        //배열로 이미지 넘기기
         let arr = [];
         imgs.forEach(e => {
             let uri = decodeURI(e.src);

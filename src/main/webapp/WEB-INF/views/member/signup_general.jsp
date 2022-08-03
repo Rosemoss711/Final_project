@@ -65,6 +65,18 @@
     	margin-top: 30px;
     }
 
+    @media screen and (max-width: 677px){
+        .cls-inputRow button {
+            margin-top: 5px;
+        }
+        .body {
+            padding: 0 0 0 0;
+        }
+        #phone1 {
+            padding: .375rem 1.0rem .375rem .75rem;
+        }
+    }
+
 </style>
 <body>
     <div class="">
@@ -95,99 +107,117 @@
                     <div class="col-9">
                     
                         <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="name">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">이름(실명)</span>
                                 </label>        
                             </div>
-                            <div class="col-9">
+                            <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="name" name="member_name">
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
-                        	<div class="col-3"></div>
-                        	<div class="col-9"><span id="checkName"></span></div>
+                        	<div class="col-12 col-sm-3"></div>
+                        	<div class="col-12 col-sm-6"><span id="checkName"></span></div>
                         </div>
                         
-                        <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                        <div class="row cls-inputRow justify-content-end justify-content-sm-start">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="id">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">아이디</span>
                                 </label>        
                             </div>
-                            <div class="col-7">
+                            <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="id" name="member_id">
                             </div>
-                            <div class="col-2">
-                                <button type="button" id="idCheckBtn" class="btn btnCheck btn-secondary">중복확인</button>
+                            <div class="col-sm-3 col-5">
+                                <button type="button" id="idCheckBtn" class="btn btn-secondary">중복확인</button>
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
-                        	<div class="col-3"></div>
-                        	<div class="col-9"><span id="checkId"></span></div>
+                        	<div class="col-12 col-sm-3"></div>
+                        	<div class="col-12 col-sm-6"><span id="checkId"></span></div>
                         </div>
 
                         <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="pw">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">비밀번호</span>
                                 </label>        
                             </div>
-                            <div class="col-9">
+                            <div class="col-12 col-sm-3">
                                 <input type="password" class="form-control" id="pw" name="member_pw">
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
-                        	<div class="col-3"></div>
-                        	<div class="col-9"><span id="checkPw"></span></div>
+                        	<div class="col-12 col-sm-3"></div>
+                        	<div class="col-12 col-sm-6"><span id="checkPw"></span></div>
                         </div>
 
                         <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="pw2">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">비밀번호 확인</span>
                                 </label>        
                             </div>
-                            <div class="col-9">
+                            <div class="col-12 col-sm-6">
                                 <input type="password" class="form-control" id="pw2">
                             </div>
                         </div>
 
-                        <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                        <div class="row cls-inputRow justify-content-end justify-content-sm-start">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="nickname">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">닉네임</span>
                                 </label>        
                             </div>
-                            <div class="col-7">
+                            <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="nickname" name="member_nickname">
                             </div>
-								<div class="col-2">
-                                <button type="button" id="nicknameCheck" class="btn btnCheck btn-secondary">중복확인</button>
+                            <div class="col-sm-3 col-5">
+                                <button type="button" id="nicknameCheck" class="btn btn-secondary">중복확인</button>
                             </div>
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
-                        	<div class="col-3"></div>
-                        	<div class="col-9"><span id="checkNickname"></span></div>
+                        	<div class="col-12 col-sm-3"></div>
+                        	<div class="col-12 col-sm-6"><span id="checkNickname"></span></div>
                         </div>
 
                         <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="phone">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">휴대전화 번호</span>
                                 </label>        
                             </div>
-                            <div class="col-9">
+                            <div class="col-12">
                                 <div class="row">
                                     <div class="col-4">
                                         <select class="form-select" id="phone1">
                                             <option value="010">010</option>
+                                            <option value="070">070</option>
+                                            <option value="02">02</option>
+                                            <option value="031">031</option>
+                                            <option value="032">032</option>
+                                            <option value="033">033</option>
+                                            <option value="041">041</option>
+                                            <option value="042">042</option>
+                                            <option value="043">043</option>
+                                            <option value="044">044</option>
+                                            <option value="051">051</option>
+                                            <option value="052">052</option>
+                                            <option value="053">053</option>
+                                            <option value="054">054</option>
+                                            <option value="055">055</option>
+                                            <option value="061">061</option>
+                                            <option value="062">062</option>
+                                            <option value="063">063</option>
+                                            <option value="064">064</option>
                                         </select>        
                                     </div>
                                     <div class="col-4">
@@ -205,24 +235,24 @@
                             </div>
                         </div>
                         
-                        <div class="row cls-inputRow">
-                            <div class="col-3 align-self-center">
+                        <div class="row cls-inputRow justify-content-end justify-content-sm-start">
+                            <div class="col-12 col-sm-3 align-self-center">
                                 <label for="email">
                                     <span class="cls-required">*</span>
                                     <span class="cls-labelTitle">이메일</span>
                                 </label>        
                             </div>
-                            <div class="col-7">
+                            <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="email" name="member_email">
                             </div>
-                            <div class="col-2">
-                                <button type="button" id="emailCheckBtn" class="btn btnCheck btn-secondary">중복확인</button>
+                            <div class="col-sm-3 col-5">
+                                <button type="button" id="emailCheckBtn" class="btn btn-secondary">중복확인</button>
                             </div>
 
                         </div>
                         <div class="row clsCheckInfo"> <!-- 입력안내문뜨는칸 -->
-                        	<div class="col-3"></div>
-                        	<div class="col-9"><span id="checkEmail"></span></div>
+                        	<div class="col-12 col-sm-3"></div>
+                        	<div class="col-12 col-sm-6"><span id="checkEmail"></span></div>
                         </div>
 
 

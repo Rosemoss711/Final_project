@@ -51,6 +51,7 @@
         .writer {
             margin-top: 10px;
             font-size: 14px;
+            border-bottom: 1px solid var(--sil);
         }
         .writer span {
             display: block;
@@ -123,7 +124,7 @@
         }
 
         /* 댓글 타이틀 */
-        .comment-title, .board-title, .writer {
+        .comment-title, .board-title {
             border-bottom: 1px solid black;
         }
 
@@ -492,7 +493,7 @@
                         nick.innerHTML = e.querySelector("comment_nickname").innerHTML;
 
                         let date = document.createElement("span")
-                        date.innerHTML = e.querySelector("comment_date").innerHTML;
+                        date.innerHTML = elapsedTime(e.querySelector("comment_date").innerHTML);
 
                         let commentBtn = document.createElement("div");
                         commentBtn.classList.add("commentBtn");
@@ -533,13 +534,51 @@
 
                     }
                 )
-                document.querySelector("comment-title> span").innerHTML = 'Comment('+item.length+')';
+                document.querySelector(".comment-title> span").innerHTML = 'Comment('+item.length+')';
             },
             error: (error) => {
                 console.log(error);
             }
         })
     }
+
+    /* 댓글 단지 시간 얼마나 걸렷는지 표시해주는거 */
+    let date = document.querySelectorAll('.comment_Date');
+    date.forEach(date=>{
+        date.innerText = elapsedTime(date.innerText);
+    })
+
+    /* 댓글 단지 소요시간 나타내주는 함수 */
+    function elapsedTime(date) {
+        const start = new Date(date);
+        const end = new Date(); // 현재 날짜
+
+        const diff = (end - start); // 경과 시간
+
+        const times = [
+            {time: "분", milliSeconds: 1000 * 60},
+            {time: "시간", milliSeconds: 1000 * 60 * 60},
+            {time: "일", milliSeconds: 1000 * 60 * 60 * 24},
+            {time: "개월", milliSeconds: 1000 * 60 * 60 * 24 * 30},
+            {time: "년", milliSeconds: 1000 * 60 * 60 * 24 * 365},
+        ].reverse();
+
+        // 년 단위부터 알맞는 단위 찾기
+        for(let i = 0; i < times.length; i++){
+            const betweenTime = Math.floor(diff / times[i].milliSeconds);
+            // 큰 단위는 0보다 작은 소수 단위 나옴
+            if (betweenTime > 0) {
+                return betweenTime + ' ' + times[i].time  + ' 전';
+            }
+        }
+
+        return "방금 전";
+    }
+
+    let cmtDate = document.querySelectorAll(".comment_header > span:nth-child(2)");
+    cmtDate.forEach(
+        e => e.innerHTML = elapsedTime(e.innerHTML)
+    )
 </script>
 </body>
 </html>

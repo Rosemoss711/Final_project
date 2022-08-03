@@ -304,6 +304,7 @@
 								</a>
 							</div>
 						</c:forEach>
+						
 					</div>
 				</div>
 			</div>
@@ -311,7 +312,7 @@
 				<!--비반응형 멀리서도 마음만은 늘 가까이~ 후원-->
 				<div class="col d-none d-sm-block mainContent-2">
 					<img src="/resources/mainImg/content-md-2.png">
-					<button id="shelterAnimalBtn" type="button" class="patron">
+					<button type="button" class="patron">
 						&nbsp;&nbsp; <strong>자세히 알아보기</strong> &nbsp;&nbsp;
 					</button>
 				</div>
@@ -400,15 +401,15 @@
 <!--top버튼-->
 <a id="topBtn"><img src="/resources/mainImg/DIEALRIGHT.png"></a>
 <script>
-    document.querySelector(".volunteer").addEventListener("click", () => {
-        location.href = "/volBoard/lists";
-    })
-    document.querySelector(".patron").addEventListener("click", () => {
-        location.href = "/supportBoard/lists";
-    })
-    document.querySelector(".adopt").addEventListener("click", () => {
-        location.href = "/shelterAnimal/toShelterAnimal?curPage=1";
-    })
+	let volunteer = document.querySelectorAll(".volunteer");
+	let patron = document.querySelectorAll(".patron");
+	let adopt = document.querySelectorAll(".adopt");;
+
+
+	volunteer.forEach(e=>e.addEventListener("click", e =>location.href = "/volBoard/lists"));
+	patron.forEach(e=>e.addEventListener("click", e =>location.href = "/supportBoard/lists"));
+	adopt.forEach(e=>e.addEventListener("click", e =>location.href = "/shelterAnimal/toShelterAnimal?curPage=1"));
+
 </script>
 
 </body>
