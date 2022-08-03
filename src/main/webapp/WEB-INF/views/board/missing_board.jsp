@@ -31,9 +31,9 @@
 .title {
 	border-bottom: 1px solid lightgray;
 	display: flex;
-	align-items: baseline;
 	color: rgb(207, 147, 111);
-	width: 97%;
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 /* 버튼 */
@@ -60,8 +60,8 @@
     border-radius: 8px;
 }
 .searchDiv{
- margin-top : 20px;
  margin-bottom : 10px;
+ padding-right: 25px;
 }
 /* 검색 input 창 감싸는 div */
 .shMissing {
@@ -198,23 +198,19 @@
 .page {
 	display: flex;
 	justify-content: center;
-	gap: 20px;
+	gap: 10px;
 }
 
 .page a {
 	display: block;
 	margin: 0 3px;
-	font-size: 20px;
+	font-size: 14px;
 	color: #cf936f;
 	text-decoration: none !important;
-	border: 1px solid white;
 }
 
 .page a:hover {
-	background-color: #cf936f;
-	color: white;
-	border: 1px solid #cf936f;
-	border-radius: 2px;
+	color: #cf936f;
 }
 
 .margin{
@@ -229,10 +225,10 @@
 	<div class="content margin">
 		<div class="row body justify-content-center">
 			<div class="row title mt-5">
-				<div class="col-5 d-none d-md-flex">
+				<div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
 					<h5><strong>실종 게시판</strong></h5>
 				</div>
-				<div class="col d-md-none text-center">
+				<div class="col d-md-none text-center mb-5">
 					<h5><strong>실종 게시판</strong></h5>
 				</div>
 				<div class="col-12 col-md-7 searchDiv">
@@ -366,6 +362,8 @@
 	</div>
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	<!-- 탑버튼 -->
+	<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 	<script>
 		// 글쓰기 버튼눌렀을때
 		$(".writeBtn").click(function(){
@@ -486,6 +484,7 @@
 				})
 			}
 		}
+		
 	</script>
 	
 </body>

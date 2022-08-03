@@ -51,6 +51,7 @@
 
         .content_header {
             border-bottom: 1px solid var(--sil);
+            color: #cf936f;
         }
 
         .board {
@@ -187,7 +188,12 @@
 
 <div class="content margin">
     <div class="content_header">
-        <h3>봉사 게시판</h3>
+        <div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
+			<h5><strong>봉사 게시판</strong></h5>
+		</div>
+		<div class="col d-md-none text-center mt-2 mb-2">
+			<h5><strong>봉사 게시판</strong></h5>
+		</div>
     </div>
     <div class="board">
         <form action="/volBoard/modify" id="form" method="post">

@@ -13,17 +13,17 @@
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 				integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 			<link rel="stylesheet"
-				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
-			<link rel="stylesheet"
 				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 			<script src="https://code.jquery.com/jquery-3.6.0.js"
 				integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 			<title>회원관리 - Comme</title>
 			<style>
 				#titleSpan {
-					font-size: 1.6em;
-					border-bottom: 2px solid rgb(207, 185, 136);
+					border-bottom: 1px solid lightgray;
 					font-weight: bold;
+					margin: 0px;
+    				text-align: start;
+    				padding-bottom: 5px;
 				}
 
 				.material-symbols-outlined {
@@ -41,19 +41,19 @@
 					padding: 3px 8px;
 				}
 
-				.btnSave,
-				.btnCancle{
-					margin-right: 10px;
-				}
-
-				#btnSearch {
-					padding: 0px;
+				.btnSave {
+					margin-bottom: 5px;
 				}
 
 				.btn:hover {
 					color: white;
 					background-color: rgb(207, 147, 111);
 					border: white;
+				}
+				
+				/*form-select*/
+				.form-select {
+					background-size: 10px 10px;
 				}
 
 				/* 검색창 */
@@ -62,7 +62,7 @@
 				}
 
 				#inputGroup {
-					width: 20em;
+					width: 17em;
 				}
 
 				#iconNote {
@@ -74,6 +74,7 @@
 					color: white;
 					background-color: rgb(207, 185, 136);
 					border: none;
+					padding: 0px;
 				}
 
 				.input-group>.form-select {
@@ -88,6 +89,11 @@
 					box-shadow: none;
 					border: 1px solid rgb(207, 147, 111);
 				}
+				
+				#selectKeyword {
+					height: 28px;
+					padding: 0px 20px 0px 5px;
+				}
 
 				option {
 					border: 1px solid #dee2e6 !important;
@@ -97,6 +103,7 @@
 					width: 40%;
 					border: 1px solid rgb(207, 185, 136);
 					font-size: 13px;
+					height: 28px;
 				}
 
 				#inputSearch:focus {
@@ -109,6 +116,13 @@
 				#btnSearch {
 					color: white;
 					background-color: rgb(207, 185, 136);
+					height: 28px;
+					width: 30px;
+					padding: 0px;
+				}
+				
+				#btnSearch:hover {
+					border-color: rgb(207, 185, 136);
 				}
 
 				#logoImg {
@@ -129,9 +143,6 @@
 					height: 99.2%;
 					display: none;
 					padding-right: 0;
-					/*transition-property: all;
-    transition-timing-function: ease;
-    transition-duration: 1s;*/
 				}
 
 				#btnNav1 {
@@ -220,6 +231,8 @@
 				#selectGrade {
 					border: 1px solid rgb(207, 147, 111);
 					font-weight: bold;
+					padding: 0px 5px;
+    				height: 28px;
 				}
 
 				#selectGrade:focus {
@@ -231,9 +244,11 @@
 
 				#selectGrade,
 				.selectGrade {
-					font-size: small;
-					width: 100px !important;
+					font-size: 12px;
+					width: 90px !important;
 					padding: 5px;
+					display: inline;
+					margin: 0px;
 				}
 
 				.selectGrade:focus {
@@ -245,7 +260,7 @@
 
 				.blackDate p {
 					margin: 0px;
-					font-size: small;
+					font-size: 12px;
 					line-height: 1.8;
 				}
 
@@ -253,6 +268,9 @@
 					width: 100%;
 					border: none;
 					text-align: center;
+					text-overflow: ellipsis;
+    				overflow: hidden;
+    				white-space: nowrap;
 				}
 
 				.form-check-input:checked {
@@ -349,23 +367,7 @@
 
 				<div class="row mt-5" id="sidNavWrapper">
 
-						<div class="col text-center">
-							<span id="titleSpan">
-								<c:choose>
-									<c:when test="${not empty list[0].member_sns}">
-										<span class="material-symbols-outlined">emoji_people</span>
-											전체 회원 리스트
-										<span class="material-symbols-outlined">accessibility_new</span>
-									</c:when>
-
-									<c:otherwise>
-										<span class="material-symbols-outlined">skull</span>
-											블랙 리스트
-										<span class="material-symbols-outlined">skull</span>
-									</c:otherwise>
-								</c:choose>
-							</span>
-						</div>
+						
 							
 
 							<form id="searchForm" action="/admin/toSearch" method="get">
@@ -387,6 +389,25 @@
 								</div>
 							</form>
 
+						<div class="col text-center">
+							<span>
+								<c:choose>
+									<c:when test="${not empty list[0].member_sns}">
+										<h5 id="titleSpan">
+											<span class="material-symbols-outlined" style="font-size: 20px;">emoji_people</span>
+											전체 회원 리스트
+										</h5>
+									</c:when>
+
+									<c:otherwise>
+										<h5 id="titleSpan">
+											<span class="material-symbols-outlined" style="font-size: 20px;">skull</span>
+											블랙 리스트
+										</h5>
+									</c:otherwise>
+								</c:choose>
+							</span>
+						</div>
 						<form id="list" action="/admin/toModify" method="get">
 
 								<table class="table align-middle text-center mt-2">
@@ -395,15 +416,22 @@
 											<th>ID</th>
 											<th class="d-none d-md-table-cell col-1">닉네임</th>
 											<th class="d-none d-md-table-cell col-1">이름</th>
-											<th>연락처</th>
+											<th class="d-none d-md-table-cell">연락처</th>
 											<th class="d-none d-lg-table-cell">이메일</th>
-											<th><select class="form-select" name="member_grade" id="selectGrade">
+											<c:choose>
+												<c:when test="${not empty list[0].member_sns}">
+													<th><select class="form-select" name="member_grade" id="selectGrade">
 													<option class="gradeOpt" id="gAll" value="0" selected>전체</option>
 													<option class="gradeOpt" id="gGeneral" value="1">일반 회원</option>
 													<option class="gradeOpt" id="gShelter" value="2">보호소 회원</option>
 													<option class="gradeOpt" id="gStandby" value="3">대기 회원</option>
 													<option class="gradeOpt" id="gManager" value="4">매니저</option>
 												</select></th>
+												</c:when>
+												<c:otherwise>
+													<th>회원등급</th>
+												</c:otherwise>
+											</c:choose>
 											<th class="d-none d-lg-table-cell col-1">사업자번호</th>
 											<th>블랙리스트</th>
 											<th class="col-1">버튼</th>
@@ -425,7 +453,7 @@
 														<td scope="row" class="member_id">${list.member_id}</td>
 														<td class="member_nickname d-none d-md-table-cell">${list.member_nickname}</td>
 														<td class="member_name d-none d-md-table-cell">${list.member_name}</td>
-														<td class="member_phone">${list.member_phone}</td>
+														<td class="member_phone d-none d-md-table-cell">${list.member_phone}</td>
 														<td class="member_email d-none d-lg-table-cell">${list.member_email}</td>
 														<td>
 															<select class="form-select selectGrade" name="member_grade1" disabled>
@@ -585,6 +613,8 @@
 
 			<!-- footer -->
 			<jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+			<!-- 탑버튼 -->
+			<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
 			<script>
 				const btnModify = document.querySelectorAll('.btnModify');

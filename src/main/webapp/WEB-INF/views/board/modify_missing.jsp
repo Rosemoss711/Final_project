@@ -117,7 +117,7 @@
 	<jsp:include page="/WEB-INF/views/frame/header.jsp"></jsp:include>
 <div class="content margin">
     <div class="row board-title mt-5">
-        <div class="col-5 d-none d-md-flex">
+        <div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
 			<h5><strong>실종 게시판</strong></h5>
 		</div>
 		<div class="col d-md-none text-center">

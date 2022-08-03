@@ -66,9 +66,30 @@
             .view_count{
                 color: #777;
             }
+            
+            .table{
+            	table-layout: fixed;
+            }
+            
+            .titleTdSm {
+            	text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+    			text-align: start;
+            }
 
             th.col-2.profileTap{
                 background-color: #f9f9f9;
+            }
+            
+            .smContentMd {
+            	text-align: start;
+            }
+            
+            .statusBtnSm {
+            	margin-left: 25px;
+            	padding: 1px 10px !important;
+            	border-radius: 20px !important;
             }
 
             .searchBox{
@@ -181,7 +202,7 @@
                         <h3>
                             <span id="boardInfo"><i class="fa-solid fa-list"></i>  &nbsp;봉사 신청 관리</span>
                         </h3>
-
+						<div class="col d-none d-md-block">
                         <table class="table table-hover">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
@@ -227,8 +248,57 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-
+                    <table class="table table-hover d-md-none">
+                            <thead style="border-top: 1px solid lightgray;">
+                                <tr>
+                                    <th scope="col" class="">봉사 신청 목록</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:choose>
+                                   <c:when test="${empty list}">
+                                    <tr>
+                                        <td colspan="7">봉사 신청 내역이 없습니다.</td>
+                                    </tr>
+                                   </c:when>
+                                
+                                   <c:otherwise>
+                                        <c:forEach items="${list}" var="dto">
+                                            <tr>
+                                            	<td>
+                                            	<div class="smContentHigh d-flex">
+                                                	<div class="col-3 seq_board">글번호&nbsp;:&nbsp;${dto.SEQ_BOARD}</div>
+                                                	<span style="color: #dee2e6;">|</span>
+                                                	<div class="col-9 titleTdSm"><a href="/volBoard/view?seq_board=${dto.SEQ_BOARD}">${dto.BOARD_TITLE}</a></div>
+                                                </div>
+                                                <div class="smContentMd">
+                                                	<div>신청인&nbsp;:&nbsp;${dto.WRITER_NAME}/${dto.WRITER_PHONE}</div>
+                                                	<div><span class="vol_count vol_countSm">정원&nbsp;:&nbsp;${dto.VOL_COUNT}</span>/<span class="select_count" data-value="${dto.SEQ_BOARD}">선발&nbsp;:&nbsp;${dto.SELECT_COUNT}</span>/신청&nbsp;:&nbsp;${dto.SIGNUP_COUNT}</div>
+                                                </div>
+                                                <div class="smContentRow d-flex">
+                                                	<div class="col-4 written_date">마감&nbsp;:&nbsp;<fmt:formatDate value="${dto.VOL_DEADLINE}" pattern="yy-MM-dd"/></div>
+                                                	<span style="color: #dee2e6;">|</span>
+                                                	<div class="col-4 vol_status"><c:choose>
+                                                    	<c:when test="${dto.VOL_STATUS eq 'N'}">
+                                                        	상태&nbsp;:&nbsp;대기
+                                                    	</c:when>
+                                                    	<c:otherwise>
+                                                        	상태&nbsp;:&nbsp;승인
+                                                    	</c:otherwise>
+                                                	</c:choose></div>
+                                                	<span style="color: #dee2e6;">|</span>
+                                                	<div><button type="button" class="status_btn statusBtnSm" value="${dto.SEQ_SUBMIT}">승인</button></div>
+                                            	</div>
+                                            	</td>
+                                            </tr>
+                                        </c:forEach>
+                                   </c:otherwise>
+                                </c:choose>
+                                
+                            </tbody>
+                        </table>
+                	</div>
+				</div>
                 <div class="row" id="searchBox">
                     <!-- 검색박스부분 -->
                     <div class="col">
@@ -248,7 +318,7 @@
                     </div>
                 </div>
 
-                <div class="page_wrap mb-5">
+                <div class="page_wrap mb-5 mt-2">
                     <div  class="page_nation">	
                         <c:choose>
                            <c:when test="${etcMap.search_type eq null}">
@@ -285,6 +355,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	            <!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
             </div>
 

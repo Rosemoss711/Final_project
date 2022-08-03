@@ -36,6 +36,24 @@
         margin-top: 20px;
         margin-botton: 5px;
     }
+    
+    /* 버튼 */
+    #btn-signup {
+    	border: 1px solid rgb(207, 147, 111);
+    	color: rgb(207, 147, 111);
+    	padding: 3px 10px;
+    	border-radius: 30px;
+    }
+    
+    #btn-signup:hover {
+    	background-color: #7bc3ac;
+    	color: white;
+    	border: 1px solid #7bc3ac;
+    }
+    
+    .btn-secondary {
+    	
+    }
 
     /* 버튼 간 간격 */
     #btn-cancel {
@@ -241,7 +259,7 @@
                         <div class="row cls-btnRow">
                             <div class="col d-flex justify-content-center">
                             	<!-- <button class="btn btn-secondary" id="btn-cancel">취소</button> -->
-                                <button type="button" class="btn btn-warning" id="btn-signup">회원가입</button>
+                                <button type="button" class="btn" id="btn-signup">회원가입</button>
                             </div>
                         </div>
                     </div>

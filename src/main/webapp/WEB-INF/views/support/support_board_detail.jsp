@@ -37,6 +37,7 @@
             align-items: flex-start;
             gap: 3px;
             border-bottom: 1px solid var(--sil);
+            color: #cf936f;
         }
 
         .title button {
@@ -96,7 +97,7 @@
         }
 
         .title {
-            height: 8%;
+            height: 15%;
             margin-top: 10px;
             margin-bottom: 10px;
             display: flex;
@@ -116,6 +117,7 @@
             border-bottom: 1px solid var(--sil);
             display: flex;
             align-items: center;
+            padding-left: 18px;
         }
 
         .order_number2 {
@@ -130,7 +132,7 @@
             border: none;
             color: white;
         }
-
+        
         .order_number2 #order_number {
             width: 55px;
             text-align: right;
@@ -161,6 +163,12 @@
             border-radius: 25px;
             background-color: var(--grey);
             color: #ffffff;
+        }
+        
+        .order button:hover {
+            background-color: #cfb988;
+            border: none;
+            color: white;
         }
 
         .info {
@@ -235,7 +243,12 @@
 
 <div class="content margin">
     <div class="content_header">
-        <h3>후원 게시판</h3>
+        <div class="col-5 d-none d-md-flex" style="align-items: flex-end; padding: 0px;">
+			<h5><strong>후원 게시판</strong></h5>
+		</div>
+		<div class="col d-md-none text-center mt-2 mb-2">
+			<h5><strong>후원 게시판</strong></h5>
+		</div>
     </div>
     <div class="board">
         <div class="board_header">
@@ -311,7 +324,7 @@
                     </div>
                 </div>
                 <div class="total">
-                    <span>총 상품금액</span>
+                    <span>총 후원금액</span>
                     <span id="total">원</span>
                 </div>
                 <div class="order">

@@ -43,6 +43,10 @@
                 color: white;
                 text-decoration: none;
             }
+            
+            table {
+            	table-layout: fixed;
+            }
 
             #commentInfo{
                 font-size: 15px;
@@ -65,7 +69,17 @@
             .seq_comment{
                 color: #777;
             }
-
+			
+			.commentList, .commentListSm {
+				text-overflow: ellipsis;
+    			overflow: hidden;
+    			white-space: nowrap;
+			}
+			
+			.commentListSm {
+				text-align: start;
+			}
+			
             th.col-2.profileTap{
                 background-color: #f9f9f9;
             }
@@ -203,60 +217,126 @@
                         <h3>
                             <span id="commentInfo"><i class="fa-solid fa-book"></i>  &nbsp;내 댓글 보기</span>
                         </h3>
+						<div class=" d-none d-md-block">
+                        	<table class="table table-hover">
+                            	<thead style="border-top: 1px solid lightgray;">
+                                	<tr>
+                                    	<th scope="col" class="col-2">번호</th>
+                                    	<th scope="col" class="col-2">대상 게시판</th>
+                                    	<th scope="col" class="col-6">내용</th>
+                                    	<th scope="col" class="col-2">날짜</th>
+                                	</tr>
+                            	</thead>
+                            	<tbody>
+                                	<c:choose>
+                                   		<c:when test="${empty list}">
+                                    		<tr>
+                                        		<td colspan="4">등록 된 댓글이 없습니다.</td>
+                                    		</tr>
+                                   		</c:when>
+                                
+                                   		<c:otherwise>
+                                        	<c:forEach items="${list}" var="dto">
+                                            	<tr>
+                                                	<td class="seq_comment">${dto.SEQ_COMMENT}</td>
+                                                	<td>
+                                                		<c:choose>
+                                                   			<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                    			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}&category_name=${dto.CATEGORY_NAME}"> 
+                                                   			</c:when>
+                                                
+                                                   			<c:otherwise>
+                                                    			<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}"> 
+                                                   			</c:otherwise>
+                                                		</c:choose>
 
-                        <table class="table table-hover">
+                                                    	<c:choose>
+                                                       		<c:when test="${dto.CATEGORY_PK eq null}">
+                                                        		공지
+                                                       		</c:when>
+                                                    
+                                                       		<c:otherwise>
+                                                        		${dto.CATEGORY_NAME}
+                                                       		</c:otherwise>
+                                                    	</c:choose> </a></td>
+
+                                                	<td class="commentList">
+                                                		<c:choose>
+                                                   			<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.COMMENT_CONTENT}</a>
+                                                   			</c:when>
+                                                
+                                                   			<c:otherwise>
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}">${dto.COMMENT_CONTENT}</a>
+                                                   			</c:otherwise>
+                                                		</c:choose></td>
+                                                	<td class="comment_date"><fmt:formatDate value="${dto.COMMENT_DATE}" pattern="yyyy-MM-dd"/></td>
+                                            	</tr>
+                                        	</c:forEach>
+                                   		</c:otherwise>
+                                	</c:choose>
+                                
+                            	</tbody>
+                        	</table>
+                        </div>
+                        <%-- sm사이즈 --%>
+                        <table class="table table-hover d-md-none">
                             <thead style="border-top: 1px solid lightgray;">
                                 <tr>
-                                    <th scope="col" class="col-2">번호</th>
-                                    <th scope="col" class="col-2">대상 게시판</th>
-                                    <th scope="col" class="col-6">내용</th>
-                                    <th scope="col" class="col-2">날짜</th>
+                                    <th scope="col">내 댓글 목록</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:choose>
                                    <c:when test="${empty list}">
                                     <tr>
-                                        <td colspan="4">등록 된 댓글이 없습니다.</td>
+                                        <td>등록 된 댓글이 없습니다.</td>
                                     </tr>
                                    </c:when>
                                 
                                    <c:otherwise>
                                         <c:forEach items="${list}" var="dto">
                                             <tr>
-                                                <td class="seq_comment">${dto.SEQ_COMMENT}</td>
                                                 <td>
-                                                <c:choose>
-                                                   <c:when test="${dto.CATEGORY_NAME eq '문의'}">
-                                                    <a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}&category_name=${dto.CATEGORY_NAME}"> 
-                                                   </c:when>
+                                                	<div class="commentListSm">
+                                                		<c:choose>
+                                                   			<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                   				<i class="fa-regular fa-flag"></i>&nbsp;
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.COMMENT_CONTENT}</a>
+                                                   			</c:when>
                                                 
-                                                   <c:otherwise>
-                                                    <a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}"> 
-                                                   </c:otherwise>
-                                                </c:choose>
+                                                   			<c:otherwise>
+                                                   				<i class="fa-regular fa-flag"></i>&nbsp;
+                                                   				<a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}">${dto.COMMENT_CONTENT}</a>
+                                                   			</c:otherwise>
+                                                		</c:choose></div>
+                                                	<div class="smContentRow d-flex">
+                                                		<div class="col-4">
+                                                			<c:choose>
+                                                   				<c:when test="${dto.CATEGORY_NAME eq '문의'}">
+                                                    				<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}&category_name=${dto.CATEGORY_NAME}"> 
+                                                   				</c:when>
+                                                
+                                                   				<c:otherwise>
+                                                    				<a class="tap" href="/board/toBoard?nowPage=1&seq_category=${dto.CATEGORY_PK}&small_category=${dto.SEQ_CATEGORY}"> 
+                                                   				</c:otherwise>
+                                                			</c:choose>
 
-                                                    <c:choose>
-                                                       <c:when test="${dto.CATEGORY_PK eq null}">
-                                                        공지
-                                                       </c:when>
+                                                    		<c:choose>
+                                                       			<c:when test="${dto.CATEGORY_PK eq null}">
+                                                        			공지
+                                                       			</c:when>
                                                     
-                                                       <c:otherwise>
-                                                        ${dto.CATEGORY_NAME}
-                                                       </c:otherwise>
-                                                    </c:choose> </a></td>
-
-                                                <td>
-                                                <c:choose>
-                                                   <c:when test="${dto.CATEGORY_NAME eq '문의'}">
-                                                   <a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}&category_name=${dto.CATEGORY_NAME}">${dto.COMMENT_CONTENT}</a>
-                                                   </c:when>
-                                                
-                                                   <c:otherwise>
-                                                   <a href="/board/detailPost?nowPage=1&seq_board=${dto.SEQ_BOARD}&seq_category=${dto.CATEGORY_PK}">${dto.COMMENT_CONTENT}</a>
-                                                   </c:otherwise>
-                                                </c:choose>
-                                                <td class="comment_date"><fmt:formatDate value="${dto.COMMENT_DATE}" pattern="yyyy-MM-dd"/></td>
+                                                       			<c:otherwise>
+                                                        			${dto.CATEGORY_NAME}
+                                                       			</c:otherwise>
+                                                    		</c:choose> </a></div>
+                                                    <span style="color: #dee2e6;">|</span>
+                                                	<div class="col-4 seq_comment">댓글번호&nbsp;:&nbsp;${dto.SEQ_COMMENT}</div>
+                                                	<span style="color: #dee2e6;">|</span>
+                                                	<div class="col-4 comment_date"><fmt:formatDate value="${dto.COMMENT_DATE}" pattern="yy-MM-dd"/></div>
+                                                </div>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                    </c:otherwise>
@@ -267,7 +347,7 @@
                     </div>
                 </div>
 
-                <div class="row" id="searchBox">
+                <div class="row mb-2" id="searchBox">
                     <!-- 검색박스부분 -->
                     <div class="col">
                         <form action="/member/toMyComment" method="get">
@@ -321,6 +401,8 @@
 
                 <!-- footer -->
 	            <jsp:include page="/WEB-INF/views/frame/footer.jsp"></jsp:include>
+	            <!-- 탑버튼 -->
+				<jsp:include page="/WEB-INF/views/frame/topButton.jsp"/>
 
             </div>
 

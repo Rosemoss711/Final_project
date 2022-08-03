@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/*top버튼*/
+#topBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.topBtn img {
+    width: 75px;
+ }

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,8 +16,6 @@
 
 	/* 바디부분 패딩 */
 	.body {
-		padding-left: 10%;
-		padding-right: 10%;
 		padding-top: 5%;
 		padding-bottom: 5%;
 	}
@@ -24,11 +23,6 @@
 /* 타이틀 수평선 hr */
 #hr {
     margin: 16px;
-}
-
-/* 줄간격 여백주기 */
-.bodyContent > .rowInput {
-    margin-top: 10px;
 }
 
 /* 백그라운드 컬러 */
@@ -42,11 +36,28 @@
     text-decoration: none;
 }
 
+/* 폰번호 인풋 */
+.phoneWrapper {
+	display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+#phone1, #phone2, #phone3 {
+	padding: 5px;
+	width: 70px;
+}
+.minus {
+	align-self: center;
+	margin: 0px 5px;
+	color: gray;
+}
+
 
 /* 찾기 너비 */
 .cls-findBox {
-    width: 400px;
+    width: 260px;
     margin-bottom: 25px;
+    text-align: start;
 }
 
 /* 휴대전화 인풋창에 화살표 안나오게 */ 
@@ -80,8 +91,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 #btnFindId,
 #returnBtn{
-    width: 200px;
-    margin-right: 10px;
+    width: 100px;
+    padding: 5px;
+    font-size: 14px;
 }
 
 .margin{
@@ -99,7 +111,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             <div class="bodyTitle">
                 <div class="row">
                     <div class="col d-flex justify-content-center">
-                        <h1>아이디 찾기</h1>
+                        <h3 style="margin: 0px;">아이디 찾기</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -111,7 +123,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
             <div class="bodyContent">
 
-                <div class="row rowInput margin">
+                <div class="row rowInput mt-5">
                     <div class="col d-flex justify-content-center">
                         <div class="cls-findBox">
                             <div class="row cls-label">
@@ -138,8 +150,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                                     <label for="findToPhone">&nbsp;가입한 휴대전화로 찾기</label>    
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-4">
+                            <div class="phoneWrapper">
+                                <div>
                                     <select class="form-select" id="phone1">
                                         <option value="010">010</option>
                                         <option value="070">070</option>
@@ -162,10 +174,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
                                         <option value="064">064</option>
                                     </select>        
                                 </div>
-                                <div class="col-4">
+                                <i class="fa-solid fa-minus minus"></i>
+                                <div>
                                     <input type="number" id="phone2" class="form-control" maxlength="4" oninput="maxLengthCheck(this)">
                                 </div>
-                                <div class="col-4">
+                                <i class="fa-solid fa-minus minus"></i>
+                                <div>
                                     <input type="number" id="phone3" class="form-control" maxlength="4" oninput="maxLengthCheck(this)">
                                 </div>
                             </div>
@@ -182,7 +196,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
                 <div class="row buttonRow margin">
                     <div class="col d-flex justify-content-center">
-                        <button type="button" class="btn btn-light" id="btnFindId">아이디 찾기</button>
+                        <button type="button" class="btn btn-light" id="btnFindId" style="margin-right: 55px;">아이디 &nbsp;찾기</button>
                         <button type="button" class="btn btn-light" id="returnBtn">돌아가기</button>
                     </div>
                 </div>
