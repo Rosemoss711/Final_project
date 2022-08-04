@@ -132,7 +132,7 @@
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="id" name="member_id">
                             </div>
-                            <div class="col-sm-3 col-5">
+                            <div class="col-sm-3 col-4">
                                 <button type="button" id="idCheckBtn" class="btn btn-secondary">중복확인</button>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     <span class="cls-labelTitle">비밀번호</span>
                                 </label>        
                             </div>
-                            <div class="col-12 col-sm-3">
+                            <div class="col-12 col-sm-6">
                                 <input type="password" class="form-control" id="pw" name="member_pw">
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="nickname" name="member_nickname">
                             </div>
-                            <div class="col-sm-3 col-5">
+                            <div class="col-sm-3 col-4">
                                 <button type="button" id="nicknameCheck" class="btn btn-secondary">중복확인</button>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                                     <span class="cls-labelTitle">휴대전화 번호</span>
                                 </label>        
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 col-sm-9">
                                 <div class="row">
                                     <div class="col-4">
                                         <select class="form-select" id="phone1">
@@ -245,7 +245,7 @@
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control" id="email" name="member_email">
                             </div>
-                            <div class="col-sm-3 col-5">
+                            <div class="col-sm-3 col-4">
                                 <button type="button" id="emailCheckBtn" class="btn btn-secondary">중복확인</button>
                             </div>
 
