@@ -220,7 +220,7 @@
                                     </label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="text" class="form-control" id="business" name="member_brn" value="${loginSession.member_brn}" disabled>
+                                    <input type="text" class="form-control" id="business" name="member_brn" value="${loginSession.member_brn}" readonly>
                                 </div>
                             </div>
                         </c:if>
